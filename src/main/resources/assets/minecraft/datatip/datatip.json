@@ -1,97 +1,229 @@
 {
+  "#minecraft:pickaxes": {
+    "color": "yellow",
+    "text": {
+      "en_us": [
+        "Common pickaxe info"
+      ],
+      "zh_cn": [
+        "所有镐子都显示这句话"
+      ]
+    }
+  },
+  "minecraft:bow": {
+    "nbt": {
+      "Damage": "0"
+    },
+    "text": {
+      "en_us": [
+        {
+          "text": "Full durability only",
+          "underlined": true
+        }
+      ],
+      "zh_cn": [
+        {
+          "text": "满耐久才显示",
+          "underlined": true
+        }
+      ]
+    }
+  },
   "minecraft:diamond": [
     "A shiny diamond",
     "Worth a fortune"
   ],
-  "minecraft:netherite_ingot": {
+  "minecraft:diamond_block": {
+    "color": "dark_red",
+    "conditions": {
+      "dimension": "minecraft:the_nether"
+    },
     "text": {
-      "zh_cn": [
-        "下界合金锭",
-        {"text": "不会被熔岩烧毁", "color": "dark_red", "bold": true}
-      ],
       "en_us": [
-        "Netherite Ingot",
-        {"text": "Immune to lava", "color": "dark_red", "bold": true}
+        "Only visible in the Nether"
+      ],
+      "zh_cn": [
+        "只在下界显示"
       ]
-    },
-    "color": "gold"
-  },
-  "minecraft:diamond_sword": {
-    "text": {
-      "zh_cn": [{"text": "削铁如泥", "color": "aqua"}],
-      "en_us": [{"text": "Cuts through iron like butter", "color": "aqua"}]
-    },
-    "shift": true,
-    "prepend": true
+    }
   },
   "minecraft:diamond_pickaxe": {
     "text": {
-      "zh_cn": ["耐久: {durability} / {max_durability}"],
-      "en_us": ["Durability: {durability} / {max_durability}"]
+      "en_us": [
+        "Durability: {durability} / {max_durability}"
+      ],
+      "zh_cn": [
+        "耐久: {durability} / {max_durability}"
+      ]
+    }
+  },
+  "minecraft:diamond_sword": {
+    "prepend": true,
+    "shift": true,
+    "text": {
+      "en_us": [
+        {
+          "color": "aqua",
+          "text": "Cuts through iron like butter"
+        }
+      ],
+      "zh_cn": [
+        {
+          "color": "aqua",
+          "text": "削铁如泥"
+        }
+      ]
     }
   },
   "minecraft:enchanted_golden_apple": {
-    "text": {
-      "zh_cn": [
-        {"text": "稀有食物", "color": "gold", "bold": true},
-        {"text": "生命恢复 IV", "color": "red", "italic": true},
-        {"text": "伤害吸收 IV", "color": "aqua", "italic": true}
-      ],
-      "en_us": [
-        {"text": "Rare food", "color": "gold", "bold": true},
-        {"text": "Regeneration IV", "color": "red", "italic": true},
-        {"text": "Absorption IV", "color": "aqua", "italic": true}
-      ]
-    },
     "color": "light_purple",
-    "shift": true
+    "shift": true,
+    "text": {
+      "en_us": [
+        {
+          "bold": true,
+          "color": "gold",
+          "text": "Rare food"
+        },
+        {
+          "color": "red",
+          "italic": true,
+          "text": "Regeneration IV"
+        },
+        {
+          "color": "aqua",
+          "italic": true,
+          "text": "Absorption IV"
+        }
+      ],
+      "zh_cn": [
+        {
+          "bold": true,
+          "color": "gold",
+          "text": "稀有食物"
+        },
+        {
+          "color": "red",
+          "italic": true,
+          "text": "生命恢复 IV"
+        },
+        {
+          "color": "aqua",
+          "italic": true,
+          "text": "伤害吸收 IV"
+        }
+      ]
+    }
   },
   "minecraft:nether_star": {
+    "color": "light_purple",
     "text": {
-      "zh_cn": [
-        {"text": "Boss 掉落", "bold": true},
-        {"text": "像素风标题", "font": "minecraft:alt"}
-      ],
       "en_us": [
-        {"text": "Boss drop", "bold": true},
-        {"text": "Pixel title", "font": "minecraft:alt"}
+        {
+          "bold": true,
+          "color": "#FFD700",
+          "text": "Boss drop"
+        },
+        {
+          "font": "minecraft:alt",
+          "text": "Pixel title"
+        }
+      ],
+      "zh_cn": [
+        {
+          "bold": true,
+          "color": "#FFD700",
+          "text": "Boss 掉落"
+        },
+        {
+          "font": "minecraft:alt",
+          "text": "像素风标题"
+        }
       ]
-    },
-    "color": "light_purple"
+    }
+  },
+  "minecraft:netherite_ingot": {
+    "color": "gold",
+    "text": {
+      "en_us": [
+        "Netherite Ingot",
+        {
+          "bold": true,
+          "color": "dark_red",
+          "text": "Immune to lava"
+        }
+      ],
+      "zh_cn": [
+        "下界合金锭",
+        {
+          "bold": true,
+          "color": "dark_red",
+          "text": "不会被熔岩烧毁"
+        }
+      ]
+    }
   },
   "minecraft:stone": {
     "text": {
-      "zh_cn": [{"text": "这是删除线", "strikethrough": true}],
-      "en_us": [{"text": "Strikethrough text", "strikethrough": true}]
+      "en_us": [
+        {
+          "strikethrough": true,
+          "text": "Strikethrough text"
+        }
+      ],
+      "zh_cn": [
+        {
+          "strikethrough": true,
+          "text": "这是删除线"
+        }
+      ]
     }
   },
-  "#minecraft:pickaxes": {
-    "text": {
-      "zh_cn": ["所有镐子都显示这句话"],
-      "en_us": ["Common pickaxe info"]
+  "minecraft:totem_of_undying": {
+    "color": "gold",
+    "conditions": {
+      "sneaking": true
     },
-    "color": "yellow"
-  },
-  "minecraft:diamond_block": {
+    "prepend": true,
+    "shift": true,
     "text": {
-      "zh_cn": ["只在下界显示"],
-      "en_us": ["Only visible in the Nether"]
-    },
-    "color": "dark_red",
-    "conditions": { "dimension": "minecraft:the_nether" }
-  },
-  "minecraft:bow": {
-    "text": {
-      "zh_cn": [{"text": "满耐久才显示这句话", "underlined": true}],
-      "en_us": [{"text": "Full durability only", "underlined": true}]
-    },
-    "nbt": { "Damage": "0" }
+      "en_us": [
+        {
+          "bold": true,
+          "color": "#FFD700",
+          "text": "Totem of Undying",
+          "underlined": true
+        },
+        {
+          "color": "red",
+          "italic": true,
+          "text": "Prevents fatal damage when held"
+        }
+      ],
+      "zh_cn": [
+        {
+          "bold": true,
+          "color": "#FFD700",
+          "text": "不死图腾",
+          "underlined": true
+        },
+        {
+          "color": "red",
+          "italic": true,
+          "text": "手持时免疫致命伤害"
+        }
+      ]
+    }
   },
   "staticlogistics:*": {
+    "color": "light_purple",
     "text": {
-      "zh_cn": ["静态物流物品"],
-      "en_us": ["Static Logistics item"]
-    },
-    "color": "light_purple"
+      "en_us": [
+        "Static Logistics item"
+      ],
+      "zh_cn": [
+        "静态物流物品"
+      ]
+    }
   }
 }

@@ -1,3 +1,3 @@
 @javax.annotation.ParametersAreNonnullByDefault
 @net.minecraft.MethodsReturnNonnullByDefault
-package org.magicteam.datatip.network;
+package org.magicteam.datatip.tooltip;

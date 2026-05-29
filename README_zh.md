@@ -131,3 +131,126 @@ JSON 驱动的自定义物品 tooltip。在资源包的 `assets/<模组id>/datat
 - 文件：`config/datatip.toml`
 - `enabled`：设为 `false` 关闭所有 DataTip 的 tooltip
 - 修改 JSON 后 `/reload` 或 F3+T 生效
+
+## 完整示例
+
+```json
+{
+  // 最简单：纯字符串数组
+  "minecraft:diamond": [
+    "一颗闪闪发光的钻石",
+    "据说很值钱"
+  ],
+
+  // 多语言 + 单行样式
+  "minecraft:netherite_ingot": {
+    "text": {
+      "zh_cn": [
+        "下界合金锭",
+        {"text": "不会被熔岩烧毁", "color": "dark_red", "bold": true}
+      ],
+      "en_us": [
+        "Netherite Ingot",
+        {"text": "Immune to lava", "color": "dark_red", "bold": true}
+      ]
+    },
+    "color": "gold"
+  },
+
+  // shift + prepend：按 Shift 才展开，放在物品名后面
+  "minecraft:diamond_sword": {
+    "text": {
+      "zh_cn": [{"text": "削铁如泥", "color": "aqua"}],
+      "en_us": [{"text": "Cuts through iron like butter", "color": "aqua"}]
+    },
+    "shift": true,
+    "prepend": true
+  },
+
+  // 变量：{durability} {max_durability} {count}
+  "minecraft:diamond_pickaxe": {
+    "text": {
+      "zh_cn": ["耐久: {durability} / {max_durability}"],
+      "en_us": ["Durability: {durability} / {max_durability}"]
+    }
+  },
+
+  // 粗体、斜体、shift — 多个条目可叠加
+  "minecraft:enchanted_golden_apple": {
+    "text": {
+      "zh_cn": [
+        {"text": "稀有食物", "color": "gold", "bold": true},
+        {"text": "生命恢复 IV", "color": "red", "italic": true},
+        {"text": "伤害吸收 IV", "color": "aqua", "italic": true}
+      ],
+      "en_us": [
+        {"text": "Rare food", "color": "gold", "bold": true},
+        {"text": "Regeneration IV", "color": "red", "italic": true},
+        {"text": "Absorption IV", "color": "aqua", "italic": true}
+      ]
+    },
+    "color": "light_purple",
+    "shift": true
+  },
+
+  // 粗体 + 自定义字体
+  "minecraft:nether_star": {
+    "text": {
+      "zh_cn": [
+        {"text": "Boss 掉落", "bold": true},
+        {"text": "像素风标题", "font": "minecraft:alt"}
+      ],
+      "en_us": [
+        {"text": "Boss drop", "bold": true},
+        {"text": "Pixel title", "font": "minecraft:alt"}
+      ]
+    },
+    "color": "light_purple"
+  },
+
+  // 删除线
+  "minecraft:stone": {
+    "text": {
+      "zh_cn": [{"text": "这是删除线", "strikethrough": true}],
+      "en_us": [{"text": "Strikethrough text", "strikethrough": true}]
+    }
+  },
+
+  // 标签匹配 — 所有带 #minecraft:pickaxes 标签的物品
+  "#minecraft:pickaxes": {
+    "text": {
+      "zh_cn": ["所有镐子都显示这句话"],
+      "en_us": ["Common pickaxe info"]
+    },
+    "color": "yellow"
+  },
+
+  // 条件：只在下界显示
+  "minecraft:diamond_block": {
+    "text": {
+      "zh_cn": ["只在下界显示"],
+      "en_us": ["Only visible in the Nether"]
+    },
+    "color": "dark_red",
+    "conditions": { "dimension": "minecraft:the_nether" }
+  },
+
+  // NBT 匹配：只匹配满耐久的（Damage = 0）
+  "minecraft:bow": {
+    "text": {
+      "zh_cn": [{"text": "满耐久才显示这句话", "underlined": true}],
+      "en_us": [{"text": "Full durability only", "underlined": true}]
+    },
+    "nbt": { "Damage": "0" }
+  },
+
+  // 通配符匹配 — 某个命名空间下的所有物品
+  "staticlogistics:*": {
+    "text": {
+      "zh_cn": ["静态物流物品"],
+      "en_us": ["Static Logistics item"]
+    },
+    "color": "light_purple"
+  }
+}
+```

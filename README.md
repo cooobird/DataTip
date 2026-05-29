@@ -130,4 +130,126 @@ Items are matched in order. Multiple rules can match the same item — they all 
 
 - File: `config/datatip.toml`
 - `enabled`: Set to `false` to disable all DataTip tooltips.
-- Changes to the JSON resource file take effect after `/reload` or F3+T.
+- Changes to JSON resource files take effect after `/reload` or F3+T.
+
+## Complete Example
+
+```json
+{
+  "minecraft:diamond": [
+    "A shiny diamond",
+    "Worth a fortune"
+  ],
+
+  // Multi-language with per-line styling
+  "minecraft:netherite_ingot": {
+    "text": {
+      "zh_cn": [
+        "下界合金锭",
+        {"text": "不会被熔岩烧毁", "color": "dark_red", "bold": true}
+      ],
+      "en_us": [
+        "Netherite Ingot",
+        {"text": "Immune to lava", "color": "dark_red", "bold": true}
+      ]
+    },
+    "color": "gold"
+  },
+
+  // shift + prepend: hidden until Shift, shown after item name
+  "minecraft:diamond_sword": {
+    "text": {
+      "zh_cn": [{"text": "削铁如泥", "color": "aqua"}],
+      "en_us": [{"text": "Cuts through iron like butter", "color": "aqua"}]
+    },
+    "shift": true,
+    "prepend": true
+  },
+
+  // Variables: {durability} {max_durability} {count}
+  "minecraft:diamond_pickaxe": {
+    "text": {
+      "zh_cn": ["耐久: {durability} / {max_durability}"],
+      "en_us": ["Durability: {durability} / {max_durability}"]
+    }
+  },
+
+  // Bold, italic, shift — multiple styled lines from different entries stack
+  "minecraft:enchanted_golden_apple": {
+    "text": {
+      "zh_cn": [
+        {"text": "稀有食物", "color": "gold", "bold": true},
+        {"text": "生命恢复 IV", "color": "red", "italic": true},
+        {"text": "伤害吸收 IV", "color": "aqua", "italic": true}
+      ],
+      "en_us": [
+        {"text": "Rare food", "color": "gold", "bold": true},
+        {"text": "Regeneration IV", "color": "red", "italic": true},
+        {"text": "Absorption IV", "color": "aqua", "italic": true}
+      ]
+    },
+    "color": "light_purple",
+    "shift": true
+  },
+
+  // Bold + custom font
+  "minecraft:nether_star": {
+    "text": {
+      "zh_cn": [
+        {"text": "Boss 掉落", "bold": true},
+        {"text": "像素风标题", "font": "minecraft:alt"}
+      ],
+      "en_us": [
+        {"text": "Boss drop", "bold": true},
+        {"text": "Pixel title", "font": "minecraft:alt"}
+      ]
+    },
+    "color": "light_purple"
+  },
+
+  // Strikethrough
+  "minecraft:stone": {
+    "text": {
+      "zh_cn": [{"text": "这是删除线", "strikethrough": true}],
+      "en_us": [{"text": "Strikethrough text", "strikethrough": true}]
+    }
+  },
+
+  // Tag match — all items with the #minecraft:pickaxes tag
+  "#minecraft:pickaxes": {
+    "text": {
+      "zh_cn": ["所有镐子都显示这句话"],
+      "en_us": ["Common pickaxe info"]
+    },
+    "color": "yellow"
+  },
+
+  // Condition: only in the Nether
+  "minecraft:diamond_block": {
+    "text": {
+      "zh_cn": ["只在下界显示"],
+      "en_us": ["Only visible in the Nether"]
+    },
+    "color": "dark_red",
+    "conditions": { "dimension": "minecraft:the_nether" }
+  },
+
+  // NBT match: only when undamaged (Damage = 0)
+  "minecraft:bow": {
+    "text": {
+      "zh_cn": [{"text": "满耐久才显示这句话", "underlined": true}],
+      "en_us": [{"text": "Full durability only", "underlined": true}]
+    },
+    "nbt": { "Damage": "0" }
+  },
+
+  // Wildcard match — all items from a namespace
+  "staticlogistics:*": {
+    "text": {
+      "zh_cn": ["静态物流物品"],
+      "en_us": ["Static Logistics item"]
+    },
+    "color": "light_purple"
+  }
+}
+```

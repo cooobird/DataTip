@@ -1,21 +1,18 @@
 package org.magicteam.datatip.tooltip;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.component.CustomData;
 import org.magicteam.datatip.data.TooltipEntry;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 找出所有匹配当前物品的规则。精确匹配和标签匹配会叠加显示。
+ * 找出所有匹配当前物品的规则。
  */
 public class TooltipMatcher {
 
@@ -46,17 +43,30 @@ public class TooltipMatcher {
         };
     }
 
+    // NBT 匹配——直接从数据组件取值，不依赖序列化后的 NBT 结构
     private static boolean nbtMatches(TooltipEntry e, ItemStack stack) {
         if (e.nbt() == null) return true;
-        CustomData cd = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
-        if (cd.isEmpty()) return false;
-        CompoundTag tag = cd.copyTag();
         for (var p : e.nbt().entrySet()) {
-            Tag t = tag.get(p.getKey());
-            if (t == null) return false;
             Object want = p.getValue();
             if (want == null) continue;
-            if (!t.getAsString().equals(want.toString())) return false;
+            String wantStr = want.toString();
+
+            String actual = switch (p.getKey()) {
+                case "Damage" -> String.valueOf(stack.getDamageValue());
+                case "Count" -> String.valueOf(stack.getCount());
+                case "RepairCost" -> String.valueOf(
+                    stack.getOrDefault(net.minecraft.core.component.DataComponents.REPAIR_COST, 0));
+                default -> {
+                    var cd = stack.getOrDefault(net.minecraft.core.component.DataComponents.CUSTOM_DATA,
+                        net.minecraft.world.item.component.CustomData.EMPTY);
+                    if (cd.isEmpty()) {
+                        yield null;
+                    }
+                    var tag = cd.copyTag();
+                    yield tag.contains(p.getKey()) ? tag.get(p.getKey()).getAsString() : null;
+                }
+            };
+            if (actual == null || !actual.equals(wantStr)) return false;
         }
         return true;
     }

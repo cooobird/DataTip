@@ -18,9 +18,7 @@ public class TooltipLoader {
     private List<TooltipEntry> entries = List.of();
     private boolean loaded;
 
-    /**
-     * 首次悬停时触发，后续直接跳过
-     */
+    // 首次悬停时触发，后续直接跳过
     public void loadIfNeeded(ResourceManager rm) {
         if (loaded) return;
         loaded = true;
