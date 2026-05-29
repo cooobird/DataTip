@@ -1,0 +1,27 @@
+modLoader = "javafml"
+loaderVersion = "[4,)"
+license = "GNU LGPL 3.0"
+
+[[mods]]
+modId = "datatip"
+version = "1.0-SNAPSHOT"
+displayName = "DataTip"
+authors = "cooobird"
+description = '''A JSON-driven tooltip mod. Define custom multi-line tooltips for any item via config/datatip.json, with auto-generated translation keys.'''
+
+[[mixins]]
+config = "datatip.mixins.json"
+
+[[dependencies.datatip]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.datatip]]
+modId = "minecraft"
+type = "required"
+versionRange = "[1.21.1,1.22)"
+ordering = "NONE"
+side = "BOTH"
