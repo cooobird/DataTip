@@ -1,3 +1,5 @@
 {
-    "tooltip.datatip.hold_shift": "Hold Shift to view detailed information"
+    "tooltip.datatip.hold_shift": "Hold %s to view detailed information",
+    "key.categories.datatip": "DataTip",
+    "key.datatip.show_tip": "Show Detailed Tooltip"
 }

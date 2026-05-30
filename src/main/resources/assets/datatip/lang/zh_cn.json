@@ -1,3 +1,5 @@
 {
-    "tooltip.datatip.hold_shift": "按住Shift键查看详细信息"
+    "tooltip.datatip.hold_shift": "按住%s查看详细信息",
+    "key.categories.datatip": "DataTip",
+    "key.datatip.show_tip": "显示详细提示"
 }

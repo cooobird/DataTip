@@ -9,9 +9,6 @@ displayName = "DataTip"
 authors = "cooobird"
 description = '''A JSON-driven tooltip mod. Define custom multi-line tooltips for any item via config/datatip.json, with auto-generated translation keys.'''
 
-[[mixins]]
-config = "datatip.mixins.json"
-
 [[dependencies.datatip]]
 modId = "neoforge"
 type = "required"
