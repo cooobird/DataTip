@@ -36,8 +36,7 @@ public class TooltipEventHandler {
 
         boolean anyShift = matched.stream().anyMatch(TooltipEntry::shift);
         if (anyShift && !isShowTipDown()) {
-            event.getToolTip().add(Component.translatable("tooltip.datatip.hold_shift",
-                    DatatipKeyMappings.SHOW_TIP.getTranslatedKeyMessage())
+            event.getToolTip().add(Component.translatable("tooltip.datatip.hold_shift", DatatipKeyMappings.SHOW_TIP.getTranslatedKeyMessage())
                 .withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC));
             return;
         }

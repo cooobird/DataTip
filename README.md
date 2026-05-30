@@ -39,7 +39,7 @@ An entry is the value under an item key. It can be a simple array of strings, or
 |--------------|--------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `text`       | object | —       | Maps language codes to line arrays. Single-line values can be a plain string instead of `["..."]`. Language codes follow Minecraft locales: `zh_cn`, `en_us`, `ja_jp`, `ko_kr`, `ru_ru`, etc. If the current language is not found, falls back to the first available language. |
 | `color`      | string | gray    | Default text color for all lines when not overridden per-line. Supports hex (`"#FF6600"`) and the 16 named Minecraft colors listed below.                                                                                                                                       |
-| `shift`      | bool   | false   | When `true`, the tooltip lines are hidden behind a "Hold Shift" hint. The content only appears when the player holds Shift. Useful for long descriptions that shouldn't clutter the default view.                                                                               |
+| `shift`      | bool   | false   | When `true`, the tooltip lines are hidden behind a "Hold key" hint. The content only appears when the player holds the configured key (default: Left Shift, rebindable in Controls → DataTip). Useful for long descriptions that shouldn't clutter the default view.            |
 | `prepend`    | bool   | false   | When `true`, custom lines are inserted right after the item name (before enchantments, attributes, etc.) instead of being appended at the very end of the tooltip.                                                                                                              |
 | `conditions` | object | —       | A set of requirements that must all be met for the tooltip to appear. See the Conditions section below.                                                                                                                                                                         |
 | `nbt`        | object | —       | If set, only items whose NBT data matches these key-value pairs will show the tooltip. Values are compared as strings. Example: `{"Damage": "0"}` matches an undamaged tool.                                                                                                    |
@@ -130,6 +130,7 @@ Items are matched in order. Multiple rules can match the same item — they all 
 
 - File: `config/datatip.toml`
 - `enabled`: Set to `false` to disable all DataTip tooltips.
+- The key for showing Shift-protected tooltips can be rebound in **Options → Controls → DataTip** (default: Left Shift).
 - Changes to JSON resource files take effect after `/reload` or F3+T.
 
 ## Complete Example

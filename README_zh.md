@@ -39,7 +39,7 @@ JSON 驱动的自定义物品 tooltip。在资源包的 `assets/<模组id>/datat
 |--------------|--------|-------|-------------------------------------------------------------------------------------------------------------------------------------------------|
 | `text`       | object | —     | 语言代码 → 行数组。单行不用套数组，直接写 `"text": {"zh_cn": "一行"}`。语言代码跟 Minecraft 一致：`zh_cn`、`en_us`、`ja_jp`、`ko_kr`、`ru_ru` 等。当前语言找不到时，自动 fallback 到第一个写了内容的语言。 |
 | `color`      | string | gray  | 所有行的默认颜色。支持十六进制（`"#FF6600"`）和下方列出的 16 种命名色。                                                                                                     |
-| `shift`      | bool   | false | `true` 时，tooltip 内容隐藏，显示"按住 Shift 查看详情"。按住 Shift 才展开。适合不想在默认视图占太多空间的长描述。                                                                        |
+| `shift`      | bool   | false | `true` 时，tooltip 内容隐藏，显示"按住按键查看详情"。按住配置的按键（默认左Shift，可在 选项→控制→DataTip 里修改）才展开。适合不想在默认视图占太多空间的长描述。                                                |
 | `prepend`    | bool   | false | `true` 时，自定义行插在物品名字后面、原版 tooltip（附魔、属性等）前面。`false` 时追加在 tooltip 最末尾。                                                                            |
 | `conditions` | object | —     | 一组必须全部满足的条件，不满足就不显示此条 tooltip。详见下方条件说明。                                                                                                         |
 | `nbt`        | object | —     | 设置了之后，只有 NBT 数据匹配的物品才显示。值按字符串比较。例如 `{"Damage": "0"}` 只匹配满耐久的工具。                                                                                 |
@@ -130,6 +130,7 @@ JSON 驱动的自定义物品 tooltip。在资源包的 `assets/<模组id>/datat
 
 - 文件：`config/datatip.toml`
 - `enabled`：设为 `false` 关闭所有 DataTip 的 tooltip
+- 展开隐藏 tooltip 的按键可在 **选项→控制→DataTip** 里自定义（默认左 Shift）
 - 修改 JSON 后 `/reload` 或 F3+T 生效
 
 ## 完整示例
