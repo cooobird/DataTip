@@ -15,6 +15,28 @@ JSON-driven custom item tooltips. Define tooltips in resource packs at `assets/<
 
 Put this in a resource pack at `assets/minecraft/datatip/datatip.json`, then hover a diamond in-game. That's it.
 
+The array shorthand has no language or style support. When you need those, wrap it in an object and use a `text` key:
+
+```json
+// No language, plain text → array shorthand
+"minecraft:diamond": ["A shiny diamond", "Worth a fortune"]
+
+// Color / style / multi-language → wrap in object
+"minecraft:diamond": {
+    "color": "gold",
+    "text": {
+        "zh_cn": ["闪闪发光", "很值钱"],
+        "en_us": ["A shiny diamond", "Worth a fortune"]
+    }
+}
+
+// No language but want color → text as array
+"minecraft:emerald": {
+    "color": "green",
+    "text": ["Emerald", "Used for trading"]
+}
+```
+
 ## Entry Fields
 
 An entry is the value under an item key. It can be a simple array of strings, or an object with options.
@@ -35,14 +57,14 @@ An entry is the value under an item key. It can be a simple array of strings, or
 }
 ```
 
-| Field        | Type   | Default | Description                                                                                                                                                                                                                                                                     |
-|--------------|--------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `text`       | object | —       | Maps language codes to line arrays. Single-line values can be a plain string instead of `["..."]`. Language codes follow Minecraft locales: `zh_cn`, `en_us`, `ja_jp`, `ko_kr`, `ru_ru`, etc. If the current language is not found, falls back to the first available language. |
-| `color`      | string | gray    | Default text color for all lines when not overridden per-line. Supports hex (`"#FF6600"`) and the 16 named Minecraft colors listed below.                                                                                                                                       |
-| `shift`      | bool   | false   | When `true`, the tooltip lines are hidden behind a "Hold key" hint. The content only appears when the player holds the configured key (default: Left Shift, rebindable in Controls → DataTip). Useful for long descriptions that shouldn't clutter the default view.            |
-| `prepend`    | bool   | false   | When `true`, custom lines are inserted right after the item name (before enchantments, attributes, etc.) instead of being appended at the very end of the tooltip.                                                                                                              |
-| `conditions` | object | —       | A set of requirements that must all be met for the tooltip to appear. See the Conditions section below.                                                                                                                                                                         |
-| `nbt`        | object | —       | If set, only items whose NBT data matches these key-value pairs will show the tooltip. Values are compared as strings. Example: `{"Damage": "0"}` matches an undamaged tool.                                                                                                    |
+| Field        | Type           | Default | Description                                                                                                                                                                                                                                                                                                                                                        |
+|--------------|----------------|---------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `text`       | object / array | —       | Two forms: **language object** — language code → line array, e.g. `{"zh_cn": ["Line 1"], "en_us": ["Line 1"]}`; falls back to the first available language. **shorthand array** — `["Line 1", "Line 2"]` for language-agnostic text that shows for all players. Single-line values can be a plain string: `"text": {"zh_cn": "One line"}` or `"text": "One line"`. |
+| `color`      | string         | gray    | Default text color for all lines when not overridden per-line. Supports hex (`"#FF6600"`) and the 16 named Minecraft colors listed below.                                                                                                                                                                                                                          |
+| `shift`      | bool           | false   | When `true`, the tooltip lines are hidden behind a "Hold key" hint. The content only appears when the player holds the configured key (default: Left Shift, rebindable in Controls → DataTip). Useful for long descriptions that shouldn't clutter the default view.                                                                                               |
+| `prepend`    | bool           | false   | When `true`, custom lines are inserted right after the item name (before enchantments, attributes, etc.) instead of being appended at the very end of the tooltip.                                                                                                                                                                                                 |
+| `conditions` | object         | —       | A set of requirements that must all be met for the tooltip to appear. See the Conditions section below.                                                                                                                                                                                                                                                            |
+| `nbt`        | object         | —       | If set, only items whose NBT data matches these key-value pairs will show the tooltip. Values are compared as strings. Example: `{"Damage": "0"}` matches an undamaged tool.                                                                                                                                                                                       |
 
 ### Color Values
 
@@ -131,7 +153,7 @@ Items are matched in order. Multiple rules can match the same item — they all 
 - File: `config/datatip.toml`
 - `enabled`: Set to `false` to disable all DataTip tooltips.
 - The key for showing Shift-protected tooltips can be rebound in **Options → Controls → DataTip** (default: Left Shift).
-- Changes to JSON resource files take effect after `/reload` or F3+T.
+- Changes to JSON resource files take effect after `/reload` or F3+T — no restart needed.
 
 ## Complete Example
 
@@ -141,6 +163,12 @@ Items are matched in order. Multiple rules can match the same item — they all 
     "A shiny diamond",
     "Worth a fortune"
   ],
+
+  // Array + color: text as array inside an object with metadata
+  "minecraft:emerald": {
+    "color": "green",
+    "text": ["Emerald", "Used for trading"]
+  },
 
   // Multi-language with per-line styling
   "minecraft:netherite_ingot": {

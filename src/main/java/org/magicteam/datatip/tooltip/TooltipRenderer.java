@@ -10,7 +10,7 @@ import org.magicteam.datatip.data.TooltipLine;
 
 public class TooltipRenderer {
 
-    public static Component render(TooltipLine line, ItemStack stack, TextColor fallbackColor) {
+    public static Component render(TooltipLine line, ItemStack stack, @Nullable TextColor fallbackColor) {
         String text = line.text() != null ? line.text() : "";
         text = expandVars(text, stack);
 
@@ -37,7 +37,7 @@ public class TooltipRenderer {
      * 支持十六进制 #FF6600 和命名色 gold/red/...
      */
     @Nullable
-    public static TextColor parseColor(String name) {
+    public static TextColor parseColor(@Nullable String name) {
         if (name == null || name.isEmpty()) return null;
         // 十六进制
         var tc = TextColor.parseColor(name);

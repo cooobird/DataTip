@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mojang.logging.LogUtils;
 import net.minecraft.server.packs.resources.ResourceManager;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
 import java.io.InputStreamReader;
@@ -18,11 +19,16 @@ public class TooltipLoader {
     private List<TooltipEntry> entries = List.of();
     private boolean loaded;
 
-    // 首次悬停时触发，后续直接跳过
     public void loadIfNeeded(ResourceManager rm) {
         if (loaded) return;
         loaded = true;
+        LOGGER.info("DataTip load triggered");
         load(rm);
+    }
+
+    public void markDirty() {
+        LOGGER.info("DataTip marked dirty");
+        loaded = false;
     }
 
     public void load(ResourceManager rm) {
@@ -54,9 +60,8 @@ public class TooltipLoader {
         return entries;
     }
 
+    @Nullable
     private static TooltipEntry parseEntry(String key, Object val) {
-        if (!(val instanceof Map<?, ?> m)) return null;
-
         TooltipEntry.MatchType type;
         String matchKey;
         if (key.startsWith("#")) {
@@ -70,6 +75,17 @@ public class TooltipLoader {
             matchKey = key;
         }
 
+        if (val instanceof List<?> list) {
+            ListMultimap<String, TooltipLine> lang = ArrayListMultimap.create();
+            for (TooltipLine line : parseTextValue(list)) {
+                lang.put("", line);
+            }
+            if (lang.isEmpty()) return null;
+            return new TooltipEntry(matchKey, type, lang, false, false, null, null, List.of());
+        }
+
+        if (!(val instanceof Map<?, ?> m)) return null;
+
         ListMultimap<String, TooltipLine> lang = ArrayListMultimap.create();
         if (m.get("text") instanceof Map<?, ?> textMap) {
             for (var te : textMap.entrySet()) {
@@ -77,6 +93,8 @@ public class TooltipLoader {
                 if (lk.isEmpty()) continue;
                 for (TooltipLine line : parseTextValue(te.getValue())) lang.put(lk, line);
             }
+        } else if (m.get("text") instanceof List<?> textList) {
+            for (TooltipLine line : parseTextValue(textList)) lang.put("", line);
         } else {
             for (var me : m.entrySet()) {
                 String k = me.getKey() != null ? me.getKey().toString() : "";
@@ -141,6 +159,7 @@ public class TooltipLoader {
         };
     }
 
+    @Nullable
     private static String str(Object v) {
         return v instanceof String s && !s.isEmpty() ? s : null;
     }

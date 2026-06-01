@@ -5,6 +5,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
+import org.magicteam.datatip.client.DataTipClientModEvents;
 import org.magicteam.datatip.config.DatatipConfig;
 import org.slf4j.Logger;
 
@@ -15,6 +16,7 @@ public class Datatip {
 
     public Datatip(IEventBus modEventBus, ModContainer modContainer) {
         modContainer.registerConfig(ModConfig.Type.COMMON, DatatipConfig.SPEC);
+        modEventBus.register(DataTipClientModEvents.class);
         LOGGER.info("DataTip loaded");
     }
 }

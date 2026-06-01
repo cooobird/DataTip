@@ -1,6 +1,7 @@
 package org.magicteam.datatip.data;
 
 import com.google.common.collect.ListMultimap;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +13,8 @@ public record TooltipEntry(
     ListMultimap<String, TooltipLine> langText,
     boolean shift,
     boolean prepend,
-    String defaultColor,
-    Map<String, Object> nbt,
+    @Nullable String defaultColor,
+    @Nullable Map<String, Object> nbt,
     List<Condition> conditions
 ) {
     public enum MatchType {EXACT, TAG, WILDCARD}
