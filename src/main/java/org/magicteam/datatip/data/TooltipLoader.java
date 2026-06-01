@@ -10,6 +10,7 @@ import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class TooltipLoader {
@@ -36,7 +37,7 @@ public class TooltipLoader {
 
         rm.listResources("datatip", p -> p.getPath().endsWith(".json"))
             .forEach((loc, res) -> {
-                try (var reader = new InputStreamReader(res.open())) {
+                try (var reader = new InputStreamReader(res.open(), StandardCharsets.UTF_8)) {
                     Map<String, Object> raw = GSON.fromJson(reader,
                         new com.google.gson.reflect.TypeToken<Map<String, Object>>() {
                         }.getType());
