@@ -1,9 +1,9 @@
-package org.magicteam.datatip.datagen;
+package com.cooobird.datatip.datagen;
 
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
-import org.magicteam.datatip.Datatip;
+import com.cooobird.datatip.Datatip;
 
 /**
  * 其他模组的 datagen 参照这里的写法，核心就是调 {@link TooltipBuilder}。

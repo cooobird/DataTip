@@ -1,4 +1,4 @@
-package org.magicteam.datatip.datagen;
+package com.cooobird.datatip.datagen;
 
 import java.util.*;
 

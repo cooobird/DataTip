@@ -1,4 +1,4 @@
-package org.magicteam.datatip.data;
+package com.cooobird.datatip.data;
 
 import org.jetbrains.annotations.Nullable;
 

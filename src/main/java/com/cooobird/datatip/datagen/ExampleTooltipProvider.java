@@ -1,4 +1,4 @@
-package org.magicteam.datatip.datagen;
+package com.cooobird.datatip.datagen;
 
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParser;

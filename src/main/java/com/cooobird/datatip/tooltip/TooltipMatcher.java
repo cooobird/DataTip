@@ -1,11 +1,11 @@
-package org.magicteam.datatip.tooltip;
+package com.cooobird.datatip.tooltip;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ItemStack;
-import org.magicteam.datatip.data.TooltipEntry;
+import com.cooobird.datatip.data.TooltipEntry;
 
 import java.util.ArrayList;
 import java.util.List;

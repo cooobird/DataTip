@@ -1,4 +1,4 @@
-package org.magicteam.datatip.event;
+package com.cooobird.datatip.event;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.ChatFormatting;
@@ -11,11 +11,11 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
-import org.magicteam.datatip.config.DatatipConfig;
-import org.magicteam.datatip.data.TooltipEntry;
-import org.magicteam.datatip.data.TooltipLoader;
-import org.magicteam.datatip.tooltip.TooltipMatcher;
-import org.magicteam.datatip.tooltip.TooltipRenderer;
+import com.cooobird.datatip.config.DatatipConfig;
+import com.cooobird.datatip.data.TooltipEntry;
+import com.cooobird.datatip.data.TooltipLoader;
+import com.cooobird.datatip.tooltip.TooltipMatcher;
+import com.cooobird.datatip.tooltip.TooltipRenderer;
 
 import java.util.ArrayList;
 import java.util.List;

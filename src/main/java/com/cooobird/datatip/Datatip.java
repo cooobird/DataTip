@@ -1,4 +1,4 @@
-package org.magicteam.datatip;
+package com.cooobird.datatip;
 
 import com.mojang.logging.LogUtils;
 import net.neoforged.bus.api.IEventBus;
@@ -6,8 +6,8 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
-import org.magicteam.datatip.config.DatatipConfig;
-import org.magicteam.datatip.event.TooltipEventHandler;
+import com.cooobird.datatip.config.DatatipConfig;
+import com.cooobird.datatip.event.TooltipEventHandler;
 import org.slf4j.Logger;
 
 import java.util.concurrent.CompletableFuture;

@@ -1,4 +1,4 @@
-package org.magicteam.datatip.tooltip;
+package com.cooobird.datatip.tooltip;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -6,7 +6,7 @@ import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
-import org.magicteam.datatip.data.TooltipLine;
+import com.cooobird.datatip.data.TooltipLine;
 
 public class TooltipRenderer {
 

@@ -1,4 +1,4 @@
-package org.magicteam.datatip.config;
+package com.cooobird.datatip.config;
 
 import net.neoforged.neoforge.common.ModConfigSpec;
 

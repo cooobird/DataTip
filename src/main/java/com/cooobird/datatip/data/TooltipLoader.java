@@ -1,4 +1,4 @@
-package org.magicteam.datatip.data;
+package com.cooobird.datatip.data;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
