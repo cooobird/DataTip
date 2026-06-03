@@ -9,7 +9,7 @@ displayName = "DataTip"
 authors = "cooobird"
 logoFile = "logo.png"
 logoBlur = false
-description = '''A JSON-driven tooltip mod. Define custom multi-line tooltips for any item via config/datatip.json, with auto-generated translation keys.'''
+description = '''JSON-driven custom item tooltips. Define rich, multi-language tooltips for any item via resource-pack JSON at assets/<namespace>/datatip/. Supports exact/tag/wildcard matching, NBT filtering, context conditions, rich text styling, and live variables.'''
 
 [[dependencies.datatip]]
 modId = "neoforge"
