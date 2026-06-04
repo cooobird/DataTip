@@ -127,18 +127,15 @@ public class TooltipLoader {
     private static List<TooltipLine> parseLines(List<?> list) {
         List<TooltipLine> r = new ArrayList<>();
         for (Object item : list) {
-            switch (item) {
-                case String s -> r.add(TooltipLine.of(s));
-                case Map<?, ?> lm -> {
-                    String text = str(lm.get("text"));
-                    if (text == null) text = "";
-                    r.add(new TooltipLine(text, str(lm.get("color")),
-                        (Boolean) lm.get("bold"), (Boolean) lm.get("italic"),
-                        (Boolean) lm.get("underlined"), (Boolean) lm.get("strikethrough"),
-                        str(lm.get("font"))));
-                }
-                case null, default -> {
-                }
+            if (item instanceof String s) {
+                r.add(TooltipLine.of(s));
+            } else if (item instanceof Map<?, ?> lm) {
+                String text = str(lm.get("text"));
+                if (text == null) text = "";
+                r.add(new TooltipLine(text, str(lm.get("color")),
+                    (Boolean) lm.get("bold"), (Boolean) lm.get("italic"),
+                    (Boolean) lm.get("underlined"), (Boolean) lm.get("strikethrough"),
+                    str(lm.get("font"))));
             }
         }
         return r;

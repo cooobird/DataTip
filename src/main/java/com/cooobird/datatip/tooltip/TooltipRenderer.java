@@ -1,12 +1,12 @@
 package com.cooobird.datatip.tooltip;
 
+import com.cooobird.datatip.data.TooltipLine;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
-import com.cooobird.datatip.data.TooltipLine;
 
 public class TooltipRenderer {
 
@@ -35,14 +35,14 @@ public class TooltipRenderer {
 
     /**
      * 支持十六进制 #FF6600 和命名色 gold/red/...
+     * 1.20.1: TextColor.parseColor() 直接返回 @Nullable TextColor
      */
     @Nullable
     public static TextColor parseColor(@Nullable String name) {
         if (name == null || name.isEmpty()) return null;
         // 十六进制
-        var tc = TextColor.parseColor(name);
-        if (tc.result() != null && tc.result().isPresent())
-            return tc.result().get();
+        TextColor tc = TextColor.parseColor(name);
+        if (tc != null) return tc;
         // 命名色
         return TextColor.fromLegacyFormat(switch (name.toLowerCase()) {
             case "black" -> net.minecraft.ChatFormatting.BLACK;
@@ -71,7 +71,7 @@ public class TooltipRenderer {
         if (line.underlined() != null && line.underlined()) s = s.withUnderlined(true);
         if (line.strikethrough() != null && line.strikethrough()) s = s.withStrikethrough(true);
         if (line.font() != null) {
-            var fontId = ResourceLocation.tryParse(line.font());
+            ResourceLocation fontId = ResourceLocation.tryParse(line.font());
             if (fontId != null) s = s.withFont(fontId);
         }
         return s;
