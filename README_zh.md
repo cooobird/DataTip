@@ -34,11 +34,11 @@ assets/example/datatip/equipment/weapons.json
 
 每个文件都是一个 JSON 对象，对象的键用于选择物品：
 
-| 选择器     | 示例                  | 含义                      |
-|---------|---------------------|-------------------------|
-| 精确物品 ID | `minecraft:diamond` | 匹配一个物品                  |
-| 物品标签    | `#minecraft:swords` | 匹配标签内的所有物品              |
-| 通配符     | `minecraft:*_sword` | `*` 匹配任意字符序列，`?` 匹配一个字符 |
+| 选择器      | 示例                | 含义                                   |
+|-------------|---------------------|----------------------------------------|
+| 精确物品 ID | `minecraft:diamond` | 匹配一个物品                           |
+| 物品标签    | `#minecraft:swords` | 匹配标签内的所有物品                   |
+| 通配符      | `minecraft:*_sword` | `*` 匹配任意字符序列，`?` 匹配一个字符 |
 
 标签选择器不能包含通配符。以 `_` 开头的顶层键和 `$schema` 会被当作元数据忽略。
 
@@ -99,9 +99,9 @@ DataTip 接入 Minecraft/Forge 的 Tooltip 流程，而不是替换原版 Toolti
 
 两个操作都注册在 Minecraft 控制设置的 DataTip 分类中，可以由玩家重新绑定：
 
-| 操作            | 默认键位    | 用途                        |
-|---------------|---------|---------------------------|
-| 显示详细提示        | 左 Shift | 显示带有 `"shift": true` 的节点  |
+| 操作              | 默认键位 | 用途                                       |
+|-------------------|----------|--------------------------------------------|
+| 显示详细提示      | 左 Shift | 显示带有 `"shift": true` 的节点            |
 | 滚动 Tooltip 内容 | 左 Ctrl  | Tooltip 超出视口时，按住该键并滚动鼠标滚轮 |
 
 滚动提示中的 `%s` 会替换为当前真实绑定的键名，并非写死为 Ctrl。即使多个节点被折叠，一个 Tooltip 也只显示一条合并后的 Shift
@@ -193,24 +193,24 @@ DataTip 接入 Minecraft/Forge 的 Tooltip 流程，而不是替换原版 Toolti
 
 所有内置内容类型都支持同一组通用修饰符。
 
-| 属性                                                    | 默认值       | 说明                                                                        |
-|-------------------------------------------------------|-----------|---------------------------------------------------------------------------|
-| `offsetX`、`offsetY`                                   | `0`       | 布局完成后的有符号 64 位 XY 位移                                                      |
-| `offsetZ`                                             | `0`       | 同一父节点内的有符号 64 位图层顺序                                                       |
-| `selfAlignX`                                          | `inherit` | `inherit`、`left`、`center`、`right`；`selfAlign` 是别名                         |
-| `selfAlignY`                                          | `inherit` | `inherit`、`top`、`center`、`bottom`                                         |
-| `margin`                                              | `0`       | 同时设置四个方向的外边距                                                              |
-| `marginTop`、`marginRight`、`marginBottom`、`marginLeft` | `margin`  | 各方向的有符号 64 位外边距                                                           |
-| `constraints`                                         | 无         | 可包含 `width`、`height`、`minWidth`、`minHeight`、`maxWidth`、`maxHeight`；值不得为负数 |
-| `scale`                                               | `1`       | 等比缩放简写                                                                    |
-| `scaleX`、`scaleY`                                     | `scale`   | 各轴正数缩放                                                                    |
-| `rotation`                                            | `0`       | 有限的旋转角度，单位为度                                                              |
-| `pivotX`、`pivotY`                                     | `0.5`     | `0` 到 `1` 的变换中心                                                           |
-| `opacity`                                             | `1`       | `0` 到 `1` 的不透明度                                                           |
-| `visible`                                             | `true`    | 为 `false` 时隐藏当前节点                                                         |
-| `overflow`                                            | `none`    | `none`、`wrap`、`scale_down`（也接受 `scale-down`）或 `clip`                      |
-| `shift`                                               | `false`   | 仅在配置的详情键按下时显示当前节点                                                         |
-| `conditions`                                          | `{}`      | 必须全部通过的条件                                                                 |
+| 属性                                                     | 默认值    | 说明                                                                                     |
+|----------------------------------------------------------|-----------|------------------------------------------------------------------------------------------|
+| `offsetX`、`offsetY`                                     | `0`       | 布局完成后的有符号 64 位 XY 位移                                                         |
+| `offsetZ`                                                | `0`       | 同一父节点内的有符号 64 位图层顺序                                                       |
+| `selfAlignX`                                             | `inherit` | `inherit`、`left`、`center`、`right`；`selfAlign` 是别名                                 |
+| `selfAlignY`                                             | `inherit` | `inherit`、`top`、`center`、`bottom`                                                     |
+| `margin`                                                 | `0`       | 同时设置四个方向的外边距                                                                 |
+| `marginTop`、`marginRight`、`marginBottom`、`marginLeft` | `margin`  | 各方向的有符号 64 位外边距                                                               |
+| `constraints`                                            | 无        | 可包含 `width`、`height`、`minWidth`、`minHeight`、`maxWidth`、`maxHeight`；值不得为负数 |
+| `scale`                                                  | `1`       | 等比缩放简写                                                                             |
+| `scaleX`、`scaleY`                                       | `scale`   | 各轴正数缩放                                                                             |
+| `rotation`                                               | `0`       | 有限的旋转角度，单位为度                                                                 |
+| `pivotX`、`pivotY`                                       | `0.5`     | `0` 到 `1` 的变换中心                                                                    |
+| `opacity`                                                | `1`       | `0` 到 `1` 的不透明度                                                                    |
+| `visible`                                                | `true`    | 为 `false` 时隐藏当前节点                                                                |
+| `overflow`                                               | `none`    | `none`、`wrap`、`scale_down`（也接受 `scale-down`）或 `clip`                             |
+| `shift`                                                  | `false`   | 仅在配置的详情键按下时显示当前节点                                                       |
+| `conditions`                                             | `{}`      | 必须全部通过的条件                                                                       |
 
 当内容类型自身也使用 `width` 或 `height` 时，应显式使用 `constraints` 对象：
 
@@ -260,24 +260,24 @@ DataTip 接入 Minecraft/Forge 的 Tooltip 流程，而不是替换原版 Toolti
 
 ## 内置内容类型
 
-| 类型           | 用途              |
-|--------------|-----------------|
+| 类型         | 用途                           |
+|--------------|--------------------------------|
 | `text`       | 字面文本、语言映射或翻译键文本 |
-| `cycle_text` | 整段文本按调色板循环变色    |
-| `spacer`     | 空白垂直间距          |
-| `divider`    | 实线、虚线或点线分隔符     |
-| `item`       | 物品堆图标           |
+| `cycle_text` | 整段文本按调色板循环变色       |
+| `spacer`     | 空白垂直间距                   |
+| `divider`    | 实线、虚线或点线分隔符         |
+| `item`       | 物品堆图标                     |
 | `atlas`      | 来自纹理、方块或物品的平面纹理 |
-| `block`      | 旋转的 3D 方块模型     |
-| `entity`     | 旋转的 3D 实体模型     |
-| `progress`   | 带样式的进度条         |
-| `vbox`       | 垂直子节点布局         |
-| `hbox`       | 水平子节点布局         |
-| `stack`      | 共用 XY 区域的叠放布局   |
-| `carousel`   | 定时切换的帧容器        |
-| `typewriter` | 逐字显示动画          |
-| `image`      | 纹理中的 UV 区域      |
-| `chart`      | 柱状图、折线图或饼图      |
+| `block`      | 旋转的 3D 方块模型             |
+| `entity`     | 旋转的 3D 实体模型             |
+| `progress`   | 带样式的进度条                 |
+| `vbox`       | 垂直子节点布局                 |
+| `hbox`       | 水平子节点布局                 |
+| `stack`      | 共用 XY 区域的叠放布局         |
+| `carousel`   | 定时切换的帧容器               |
+| `typewriter` | 逐字显示动画                   |
+| `image`      | 纹理中的 UV 区域               |
+| `chart`      | 柱状图、折线图或饼图           |
 
 ### 文本与本地化
 
@@ -333,15 +333,15 @@ DataTip 接入 Minecraft/Forge 的 Tooltip 流程，而不是替换原版 Toolti
 DataTip JSON 字符串和 `assets/<namespace>/lang/*.json` 的翻译值都支持 `\n` 显式换行；需要显示字面 `\n` 时写成
 `\\n`。现代解析器不接受旧 `trans` 属性；旧格式转换器会将其改写为 `translate`。
 
-| 文本属性                                         | 默认值     | 说明                                      |
-|----------------------------------------------|---------|-----------------------------------------|
-| `color`                                      | 配置默认值   | 命名颜色或 `#RRGGBB`                         |
-| `font`                                       | 原版字体    | 字体资源位置                                  |
-| `shadow`                                     | `true`  | 字体阴影                                    |
-| `align`                                      | `left`  | 在文本测量宽度内使用 `left`、`center` 或 `right` 对齐 |
-| `lineHeight`                                 | 配置/原版   | 行高；配置值 `0` 表示原版字体高度                     |
-| `maxWidth`                                   | `0`     | 可选的节点局部换行宽度                             |
-| `bold`、`italic`、`underlined`、`strikethrough` | `false` | 文本样式                                    |
+| 文本属性                                        | 默认值     | 说明                                                  |
+|-------------------------------------------------|------------|-------------------------------------------------------|
+| `color`                                         | 配置默认值 | 命名颜色或 `#RRGGBB`                                  |
+| `font`                                          | 原版字体   | 字体资源位置                                          |
+| `shadow`                                        | `true`     | 字体阴影                                              |
+| `align`                                         | `left`     | 在文本测量宽度内使用 `left`、`center` 或 `right` 对齐 |
+| `lineHeight`                                    | 配置/原版  | 行高；配置值 `0` 表示原版字体高度                     |
+| `maxWidth`                                      | `0`        | 可选的节点局部换行宽度                                |
+| `bold`、`italic`、`underlined`、`strikethrough` | `false`    | 文本样式                                              |
 
 可见的 `label` 和 `title` 属性可以使用字面字符串、语言映射、带样式的语言项或 `{"translate": "key"}`
 。变量会在测量前解析，所以换行尺寸与最终绘制文本保持一致。
@@ -371,32 +371,32 @@ DataTip JSON 字符串和 `assets/<namespace>/lang/*.json` 的翻译值都支持
 
 ### 布局容器
 
-| 类型      | 属性                                                      | 默认值                                 |
-|---------|---------------------------------------------------------|-------------------------------------|
-| `vbox`  | `children`、`gap`、`padding`、`align`（`left/center/right`） | `gap: 0`、`padding: 0`、`align: left` |
-| `hbox`  | `children`、`gap`、`padding`、`align`（`top/center/bottom`） | `gap: 0`、`padding: 0`、`align: top`  |
-| `stack` | `children`、`padding`、`horizontalAlign`、`verticalAlign`  | `padding: 0`，两个方向分别默认 `left/top`    |
+| 类型    | 属性                                                         | 默认值                                    |
+|---------|--------------------------------------------------------------|-------------------------------------------|
+| `vbox`  | `children`、`gap`、`padding`、`align`（`left/center/right`） | `gap: 0`、`padding: 0`、`align: left`     |
+| `hbox`  | `children`、`gap`、`padding`、`align`（`top/center/bottom`） | `gap: 0`、`padding: 0`、`align: top`      |
+| `stack` | `children`、`padding`、`horizontalAlign`、`verticalAlign`    | `padding: 0`，两个方向分别默认 `left/top` |
 
 容器尺寸由测量后的子节点、间距、内边距、外边距、尺寸约束和变换共同决定。偏移会移动视觉结果，同时仍会进入准备后的视口边界计算。
 
 ### 视觉节点
 
-| 类型       | 类型专属属性与默认值                                                                                                                                       |
-|----------|--------------------------------------------------------------------------------------------------------------------------------------------------|
-| `item`   | `item: minecraft:air`、`count: 1`、`size: 16`、`showCount: true`、`showDurability: true`、`showLabel: false`、可选 `label`、`labelColor: #FFFFFF`         |
-| `atlas`  | 来源优先级 `texture` → `block` → `item`；`width: 16`、`height: width`，可选 `size` 会同时覆盖宽高，可选 `label`                                                      |
-| `block`  | `block: minecraft:stone`、`size: 32`、`rotationSpeed: 0.5`、`autoRotate: true`、可选 `label`                                                           |
-| `entity` | `entity: minecraft:pig`、`size: 48`、`rotationSpeed: 1.0`、`autoRotate: true`、可选 `label`                                                            |
+| 类型     | 类型专属属性与默认值                                                                                                                                                   |
+|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `item`   | `item: minecraft:air`、`count: 1`、`size: 16`、`showCount: true`、`showDurability: true`、`showLabel: false`、可选 `label`、`labelColor: #FFFFFF`                      |
+| `atlas`  | 来源优先级 `texture` → `block` → `item`；`width: 16`、`height: width`，可选 `size` 会同时覆盖宽高，可选 `label`                                                        |
+| `block`  | `block: minecraft:stone`、`size: 32`、`rotationSpeed: 0.5`、`autoRotate: true`、可选 `label`                                                                           |
+| `entity` | `entity: minecraft:pig`、`size: 48`、`rotationSpeed: 1.0`、`autoRotate: true`、可选 `label`                                                                            |
 | `image`  | `texture: minecraft:textures/gui/icons.png`、`width: 64`、`height: 64`、`u: 0`、`v: 0`、`textureWidth: width`、`textureHeight: height`；位置和最终节点缩放使用通用变换 |
 
 `block` 与 `entity` 会保留声明的正方形布局尺寸，并计入旋转模型的视觉边界；它们只受最终物理 Tooltip 视口剪裁，不会被无关的中间矩形截断。
 
 ### 分隔符、间距与进度条
 
-| 类型         | 属性与默认值                                                                                                                                                                                                                                               |
-|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `spacer`   | `height: 4`                                                                                                                                                                                                                                          |
-| `divider`  | `color: #555555`、`thickness: 1`、`width: 0`、`marginTop: 2`、`marginBottom: 2`、`style: solid`（`solid/dashed/dotted`）、`widthMode: fill`（`fill/fixed/centered`）                                                                                           |
+| 类型       | 属性与默认值                                                                                                                                                                                                                                                          |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `spacer`   | `height: 4`                                                                                                                                                                                                                                                           |
+| `divider`  | `color: #555555`、`thickness: 1`、`width: 0`、`marginTop: 2`、`marginBottom: 2`、`style: solid`（`solid/dashed/dotted`）、`widthMode: fill`（`fill/fixed/centered`）                                                                                                  |
 | `progress` | `progress: 0`、`width: 100`、`height: 8`、`colorFg: #55FF55`、`colorBg: #333333`、可选 `colorFgLight`/`colorBgDark`、`style: gradient`（`flat/gradient/segmented/animated`）、`showLabel: false`、可选 `label`、`animated: false`、`animSpeed: 2`、`labelAlign: left` |
 
 ### 轮播与打字机
@@ -443,13 +443,13 @@ DataTip JSON 字符串和 `assets/<namespace>/lang/*.json` 的翻译值都支持
 
 可见文本和数值表达式都可以使用花括号变量，例如 `"耐久：{durability}/{max_durability}"`。
 
-| 分组  | 变量                                                                                                                                                                                    |
-|-----|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 物品  | `durability`、`max_durability`、`damage`、`count`、`item_name`、`item_id`、`durability_percent`、`enchantment_count`、`is_enchanted`、`rarity`、`max_stack_size`、`is_stackable`、`is_damageable` |
-| 玩家  | `player_health`、`player_max_health`、`player_hunger`、`player_experience`、`player_x`、`player_y`、`player_z`                                                                              |
-| 世界  | `game_time`、`is_day`、`is_raining`、`is_thundering`                                                                                                                                     |
-| 格式化 | `durability_bar`、`health_bar`                                                                                                                                                         |
-| NBT | `{nbt:path}` 读取物品 NBT 点分隔路径；列表索引可写成 `display.Lore[0]`                                                                                                                                 |
+| 分组   | 变量                                                                                                                                                                                              |
+|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 物品   | `durability`、`max_durability`、`damage`、`count`、`item_name`、`item_id`、`durability_percent`、`enchantment_count`、`is_enchanted`、`rarity`、`max_stack_size`、`is_stackable`、`is_damageable` |
+| 玩家   | `player_health`、`player_max_health`、`player_hunger`、`player_experience`、`player_x`、`player_y`、`player_z`                                                                                    |
+| 世界   | `game_time`、`is_day`、`is_raining`、`is_thundering`                                                                                                                                              |
+| 格式化 | `durability_bar`、`health_bar`                                                                                                                                                                    |
+| NBT    | `{nbt:path}` 读取物品 NBT 点分隔路径；列表索引可写成 `display.Lore[0]`                                                                                                                            |
 
 合成路径 `Damage`、`Count` 和 `RepairCost` 始终可用。其他路径读取当前物品栈标签，例如 `{nbt:display.Name}` 或
 `{nbt:display.Lore[0]}`。
@@ -467,23 +467,23 @@ DataTip JSON 字符串和 `assets/<namespace>/lang/*.json` 的翻译值都支持
 
 `conditions` 对象内的所有属性按 AND 组合。条件可以写在根节点或任意嵌套节点上。
 
-| 条件                               | 可接受的值                                   |
-|----------------------------------|-----------------------------------------|
-| `dimension`                      | 维度 ID                                   |
-| `biome`                          | 生物群系 ID 或 ID 数组                         |
-| `holding`                        | 物品 ID 或数组；检查主手和副手                       |
-| `sneaking`、`creative`、`survival` | 布尔值                                     |
-| `health`                         | 数字、比较字符串或百分比字符串                         |
-| `hunger`、`experience`、`level`    | 数字或比较字符串                                |
-| `time`                           | 数字，或 `day`、`night`、`noon`、`midnight`    |
-| `weather`                        | `clear`、`rain`、`thunder`                |
-| `light`                          | 数字/比较字符串，或 `dark`、`dim`、`bright`、`full` |
-| `altitude`                       | 数字，或使用 `>`、`>=`、`<`、`<=` 的比较字符串         |
-| `enchanted`                      | 布尔值                                     |
-| `damage`                         | 允许的当前物品损伤值上限                            |
-| `count`                          | 允许的物品堆数量下限                              |
-| `nbt`                            | 必须存在的 NBT 路径，或由路径及期望值组成的对象              |
-| `item_tag`                       | 物品标签 ID                                 |
+| 条件                               | 可接受的值                                          |
+|------------------------------------|-----------------------------------------------------|
+| `dimension`                        | 维度 ID                                             |
+| `biome`                            | 生物群系 ID 或 ID 数组                              |
+| `holding`                          | 物品 ID 或数组；检查主手和副手                      |
+| `sneaking`、`creative`、`survival` | 布尔值                                              |
+| `health`                           | 数字、比较字符串或百分比字符串                      |
+| `hunger`、`experience`、`level`    | 数字或比较字符串                                    |
+| `time`                             | 数字，或 `day`、`night`、`noon`、`midnight`         |
+| `weather`                          | `clear`、`rain`、`thunder`                          |
+| `light`                            | 数字/比较字符串，或 `dark`、`dim`、`bright`、`full` |
+| `altitude`                         | 数字，或使用 `>`、`>=`、`<`、`<=` 的比较字符串      |
+| `enchanted`                        | 布尔值                                              |
+| `damage`                           | 允许的当前物品损伤值上限                            |
+| `count`                            | 允许的物品堆数量下限                                |
+| `nbt`                              | 必须存在的 NBT 路径，或由路径及期望值组成的对象     |
+| `item_tag`                         | 物品标签 ID                                         |
 
 ```json
 {
@@ -514,17 +514,17 @@ DataTip JSON 字符串和 `assets/<namespace>/lang/*.json` 的翻译值都支持
 
 通用配置文件位于 `config/datatip-common.toml`。
 
-| 选项                        | 默认值         | 说明                                     |
-|---------------------------|-------------|----------------------------------------|
-| `enabled`                 | `true`      | 启用 DataTip 内容                          |
-| `default_color`           | `GRAY`      | 默认文本颜色预设；可选择原版颜色或 `CUSTOM`             |
-| `default_color_value`     | `#FFAAAAAA` | `default_color = CUSTOM` 时使用的自定义颜色     |
-| `default_line_height`     | `0`         | 默认行高；`0` 使用原版字体高度                      |
-| `max_width`               | `0`         | Tooltip 宽度覆盖值；`0` 使用自然宽度和原版屏幕适配限制      |
-| `shift_hint_color`        | `CUSTOM`    | 合并后的 Shift 提示颜色预设                      |
-| `shift_hint_color_value`  | `#FF888888` | `shift_hint_color = CUSTOM` 时使用的自定义颜色  |
-| `scroll_hint_color`       | `CUSTOM`    | 默认滚动提示颜色预设                             |
-| `scroll_hint_color_value` | `#FF888888` | `scroll_hint_color = CUSTOM` 时使用的自定义颜色 |
+| 选项                      | 默认值      | 说明                                                   |
+|---------------------------|-------------|--------------------------------------------------------|
+| `enabled`                 | `true`      | 启用 DataTip 内容                                      |
+| `default_color`           | `GRAY`      | 默认文本颜色预设；可选择原版颜色或 `CUSTOM`            |
+| `default_color_value`     | `#FFAAAAAA` | `default_color = CUSTOM` 时使用的自定义颜色            |
+| `default_line_height`     | `0`         | 默认行高；`0` 使用原版字体高度                         |
+| `max_width`               | `0`         | Tooltip 宽度覆盖值；`0` 使用自然宽度和原版屏幕适配限制 |
+| `shift_hint_color`        | `CUSTOM`    | 合并后的 Shift 提示颜色预设                            |
+| `shift_hint_color_value`  | `#FF888888` | `shift_hint_color = CUSTOM` 时使用的自定义颜色         |
+| `scroll_hint_color`       | `CUSTOM`    | 默认滚动提示颜色预设                                   |
+| `scroll_hint_color_value` | `#FF888888` | `scroll_hint_color = CUSTOM` 时使用的自定义颜色        |
 
 `max_width` 只是宽度覆盖值，并不允许 Tooltip 超出屏幕。最终宽度、换行、高度视口、位置、背景和边框仍然遵从原版 Tooltip 流程。
 
