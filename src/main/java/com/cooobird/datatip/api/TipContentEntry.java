@@ -18,6 +18,7 @@ import java.util.List;
  * @param prepend    是否插入到原版 tooltip 标题后
  * @param shiftHint  折叠内容存在时替换默认 Shift 提示的内容
  * @param scrollHint 内容溢出时替换默认滚动提示的内容
+ * @param showShiftHint 是否为此条目的折叠内容显示 Shift 提示
  */
 public record TipContentEntry(
     TipContent content,
@@ -25,8 +26,27 @@ public record TipContentEntry(
     boolean shift,
     boolean prepend,
     @Nullable TipContent shiftHint,
-    @Nullable TipContent scrollHint
+    @Nullable TipContent scrollHint,
+    boolean showShiftHint
 ) {
+    public TipContentEntry(
+        TipContent content,
+        List<ConditionChecker.Condition> conditions,
+        boolean shift,
+        boolean prepend,
+        @Nullable TipContent shiftHint,
+        @Nullable TipContent scrollHint,
+        boolean showShiftHint
+    ) {
+        this.content = java.util.Objects.requireNonNull(content, "content");
+        this.conditions = conditions == null ? List.of() : List.copyOf(conditions);
+        this.shift = shift;
+        this.prepend = prepend;
+        this.shiftHint = shiftHint;
+        this.scrollHint = scrollHint;
+        this.showShiftHint = showShiftHint;
+    }
+
     public TipContentEntry(
         TipContent content,
         List<ConditionChecker.Condition> conditions,
@@ -35,12 +55,7 @@ public record TipContentEntry(
         @Nullable TipContent shiftHint,
         @Nullable TipContent scrollHint
     ) {
-        this.content = java.util.Objects.requireNonNull(content, "content");
-        this.conditions = conditions == null ? List.of() : List.copyOf(conditions);
-        this.shift = shift;
-        this.prepend = prepend;
-        this.shiftHint = shiftHint;
-        this.scrollHint = scrollHint;
+        this(content, conditions, shift, prepend, shiftHint, scrollHint, true);
     }
 
     public TipContentEntry(

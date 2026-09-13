@@ -6,10 +6,9 @@ import com.cooobird.datatip.api.TipEventManager;
 import com.cooobird.datatip.api.component.ScrollHintTooltipComponent;
 import com.cooobird.datatip.api.component.TipContentTooltipComponent;
 import com.cooobird.datatip.api.component.TooltipViewportBudget;
-import com.cooobird.datatip.api.content.CarouselContent;
-import com.cooobird.datatip.api.content.ContainerContent;
+
 import com.cooobird.datatip.api.content.VBoxContent;
-import com.cooobird.datatip.api.node.TipNode;
+
 import com.cooobird.datatip.api.session.TooltipHit;
 import com.cooobird.datatip.config.DatatipConfig;
 import com.mojang.datafixers.util.Either;
@@ -19,7 +18,6 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.event.RenderTooltipEvent;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,52 +61,23 @@ final class TipTooltipElements {
         KeyMapping showTipKey,
         TooltipHit hit
     ) {
-        if (hasShiftContent(entries) && !shiftDown) {
-            addShiftHint(event, entries, showTipKey, hit);
+        ShiftHintSelection selection = ShiftHintSelection.select(entries, shiftDown);
+        if (selection.visible()) {
+            addShiftHint(event, selection.custom(), showTipKey, hit,
+                selection.insertionIndex(event.getTooltipElements().size()));
         }
-    }
-
-    private static boolean hasShiftContent(List<TipContentEntry> entries) {
-        for (TipContentEntry entry : entries) {
-            if (entry.shift() || containsShiftNode(entry.content())) return true;
-        }
-        return false;
-    }
-
-    private static boolean containsShiftNode(TipContent content) {
-        ArrayDeque<TipContent> work = new ArrayDeque<>();
-        work.push(content);
-        while (!work.isEmpty()) {
-            TipContent current = work.pop();
-            if (current instanceof TipNode(TipContent inner, com.cooobird.datatip.api.node.TipModifiers modifiers)) {
-                if (modifiers.shift()) return true;
-                work.push(inner);
-                continue;
-            }
-            if (current instanceof ContainerContent container) {
-                for (TipContent child : container.children()) {
-                    work.push(child);
-                }
-                continue;
-            }
-            if (current instanceof CarouselContent carousel) {
-                for (TipContent frame : carousel.getFrames()) {
-                    work.push(frame);
-                }
-            }
-        }
-        return false;
     }
 
     private static void addShiftHint(
         RenderTooltipEvent.GatherComponents event,
-        List<TipContentEntry> entries,
+        @Nullable TipContent custom,
         KeyMapping showTipKey,
-        TooltipHit hit
+        TooltipHit hit,
+        int insertionIndex
     ) {
-        TipContent custom = firstHint(entries, true);
+
         if (custom != null) {
-            event.getTooltipElements().add(Either.right(
+            event.getTooltipElements().add(insertionIndex, Either.right(
                 new TipContentTooltipComponent(
                     custom,
                     hit.stackSnapshot(),
@@ -123,7 +92,7 @@ final class TipTooltipElements {
         ).withStyle(style -> style
             .withColor(DatatipConfig.shiftHintColor())
             .withItalic(true));
-        event.getTooltipElements().add(Either.left(hint));
+        event.getTooltipElements().add(insertionIndex, Either.left(hint));
     }
 
     private static void collectVisibleContents(
@@ -235,7 +204,7 @@ final class TipTooltipElements {
         TooltipHit hit
     ) {
         if (budget == null) return;
-        TipContent custom = firstHint(entries, false);
+        TipContent custom = firstScrollHint(entries);
         event.getTooltipElements().add(
             Either.right(custom != null
                 ? new ScrollHintTooltipComponent(budget, custom, hit)
@@ -247,14 +216,9 @@ final class TipTooltipElements {
     }
 
     @Nullable
-    private static TipContent firstHint(
-        List<TipContentEntry> entries,
-        boolean shiftHint
-    ) {
+    private static TipContent firstScrollHint(List<TipContentEntry> entries) {
         for (TipContentEntry entry : entries) {
-            TipContent hint = shiftHint
-                ? entry.shiftHint()
-                : entry.scrollHint();
+            TipContent hint = entry.scrollHint();
             if (hint != null) return hint;
         }
         return null;

@@ -373,6 +373,11 @@
         "shift": {
           "type": "boolean"
         },
+        "showShiftHint": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether this entry contributes a Shift hint. False hides the hint without disabling key expansion."
+        },
         "prepend": {
           "type": "boolean"
         },
@@ -863,6 +868,11 @@
         },
         "shift": {
           "type": "boolean"
+        },
+        "showShiftHint": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether this entry contributes a Shift hint. False hides the hint without disabling key expansion."
         },
         "prepend": {
           "type": "boolean"

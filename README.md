@@ -122,14 +122,15 @@ scroll session instead of jumping back to the top.
 
 The object selected by an item key is both the root content node and the entry definition.
 
-| Property     | Default                  | Description                                                                      |
-|--------------|--------------------------|----------------------------------------------------------------------------------|
-| `type`       | required for modern JSON | Root content type                                                                |
-| `prepend`    | `false`                  | Inserts the entry after the item name and before the remaining vanilla lines     |
-| `shift`      | `false`                  | Folds only this node and its subtree until the Show Detailed Tooltip key is held |
-| `conditions` | `{}`                     | AND-combined conditions for this node                                            |
-| `shiftHint`  | unset                    | Replaces the merged Shift hint with full DataTip content                         |
-| `scrollHint` | unset                    | Replaces the overflow scroll hint with full DataTip content                      |
+| Property        | Default                  | Description                                                                      |
+|-----------------|--------------------------|----------------------------------------------------------------------------------|
+| `type`          | required for modern JSON | Root content type                                                                |
+| `prepend`       | `false`                  | Inserts the entry after the item name and before the remaining vanilla lines     |
+| `shift`         | `false`                  | Folds only this node and its subtree until the Show Detailed Tooltip key is held |
+| `conditions`    | `{}`                     | AND-combined conditions for this node                                            |
+| `showShiftHint` | `true`                   | Whether this entry contributes a Shift hint                                      |
+| `shiftHint`     | unset                    | Replaces the merged Shift hint with full DataTip content                         |
+| `scrollHint`    | unset                    | Replaces the overflow scroll hint with full DataTip content                      |
 
 `shift` and `conditions` are common modifiers, so they also work on any nested node—not only the root.
 
@@ -548,6 +549,12 @@ position, background, and border still follow the vanilla tooltip pipeline.
 
 `shift_hint_color*` and `scroll_hint_color*` style only the generated default hints. If an entry supplies `shiftHint` or
 `scrollHint`, that node uses its own `color`, formatting, and `cycle_text` palette instead.
+
+Set `"showShiftHint": false` on an entry in its JSON to hide its Shift hint while keeping key expansion. The default is
+`true`. Hidden entries do not supply custom hints or affect hint placement; other matching entries may still show a
+merged hint.
+The merged hint (including custom `shiftHint`) appears immediately after the item name when any entry with Shift-gated
+content has `prepend: true`; otherwise it is appended. This also applies to nested Shift-gated nodes.
 
 ## JSON Schema
 
