@@ -131,7 +131,8 @@ public class TipContentLoader extends SimpleJsonResourceReloadListener implement
                         shift,
                         prepend,
                         shiftHint,
-                        scrollHint
+                        scrollHint,
+                        entryParser.parseBoolean(itemElement, "showShiftHint", true)
                     ))
                     .toList();
 

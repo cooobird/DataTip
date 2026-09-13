@@ -172,6 +172,9 @@ public class LegacyFormatConverter {
         if (originalObj.has("prepend")) {
             contentJson.add("prepend", originalObj.get("prepend"));
         }
+        if (originalObj.has("showShiftHint")) {
+            contentJson.add("showShiftHint", originalObj.get("showShiftHint"));
+        }
         if (originalObj.has("conditions")) {
             contentJson.add("conditions", originalObj.get("conditions"));
         }

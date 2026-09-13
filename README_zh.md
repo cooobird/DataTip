@@ -111,14 +111,15 @@ DataTip 接入 Minecraft/Forge 的 Tooltip 流程，而不是替换原版 Toolti
 
 物品选择器对应的对象既是根内容节点，也是该条目的定义。
 
-| 属性           | 默认值        | 说明                            |
-|--------------|------------|-------------------------------|
-| `type`       | 现代 JSON 必填 | 根内容类型                         |
-| `prepend`    | `false`    | 插入在物品名称之后、其余原版文本之前            |
-| `shift`      | `false`    | 在“显示详细提示”键按下前，仅折叠当前节点及其子树     |
-| `conditions` | `{}`       | 当前节点必须全部通过的条件                 |
-| `shiftHint`  | 未设置        | 用完整 DataTip 节点替换合并后的 Shift 提示 |
-| `scrollHint` | 未设置        | 用完整 DataTip 节点替换溢出时的滚动提示      |
+| 属性            | 默认值         | 说明                                             |
+|-----------------|----------------|--------------------------------------------------|
+| `type`          | 现代 JSON 必填 | 根内容类型                                       |
+| `prepend`       | `false`        | 插入在物品名称之后、其余原版文本之前             |
+| `shift`         | `false`        | 在“显示详细提示”键按下前，仅折叠当前节点及其子树 |
+| `conditions`    | `{}`           | 当前节点必须全部通过的条件                       |
+| `showShiftHint` | `true`         | 是否为此条目显示 Shift 提示                      |
+| `shiftHint`     | 未设置         | 用完整 DataTip 节点替换合并后的 Shift 提示       |
+| `scrollHint`    | 未设置         | 用完整 DataTip 节点替换溢出时的滚动提示          |
 
 `shift` 和 `conditions` 都是通用修饰符，因此也可以用于任意嵌套节点，并非只能写在根节点。
 
@@ -529,6 +530,11 @@ DataTip JSON 字符串和 `assets/<namespace>/lang/*.json` 的翻译值都支持
 
 `shift_hint_color*` 和 `scroll_hint_color*` 只设置自动生成的默认提示。条目提供 `shiftHint` 或 `scrollHint` 后，
 该节点会使用自身的 `color`、格式以及 `cycle_text` 调色板。
+
+在条目 JSON 中设置 `"showShiftHint": false` 即可隐藏该条目的 Shift 提示，仍可按键展开内容，默认值为 `true`
+。隐藏提示的条目不会提供自定义提示或影响提示位置；其他匹配条目仍可显示合并提示。
+包含 Shift 折叠内容且允许显示提示的条目中，只要有条目设置了 `prepend: true`，合并提示（包括自定义 `shiftHint`
+）就紧跟物品名称显示，否则追加在末尾。嵌套节点的 Shift 折叠内容也遵循此规则。
 
 ## JSON Schema
 
