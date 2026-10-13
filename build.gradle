@@ -125,7 +125,7 @@ publishing {
     publications {
         register('mavenJava', MavenPublication) {
             from components.java
-            artifactId = "DataTip-${mod_version}-forge-${minecraft_version}"
+            artifactId = "DataTip-${mod_version}-${minecraft_version}"
         }
     }
     repositories {
