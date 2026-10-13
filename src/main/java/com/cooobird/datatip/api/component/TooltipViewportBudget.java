@@ -173,7 +173,8 @@ public final class TooltipViewportBudget {
     }
 
     boolean scrollHintVisible() {
-        return scrollHintVisible;
+        return scrollHintVisible
+            && components.stream().anyMatch(component -> !component.isExpired());
     }
 
     void register(TipContentTooltipComponent component) {

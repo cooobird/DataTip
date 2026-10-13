@@ -120,6 +120,7 @@ public final class TipContentTooltipComponent
 
     @Override
     public int getHeight() {
+        if (isExpired()) return 0;
         Minecraft minecraft = Minecraft.getInstance();
         PreparedLayout prepared = layout(minecraft.font);
         return viewportHeight(prepared);
@@ -127,6 +128,7 @@ public final class TipContentTooltipComponent
 
     @Override
     public int getWidth(Font font) {
+        if (isExpired()) return 0;
         return toMinecraftDimension(layout(font).allocatedBounds().width());
     }
 
@@ -139,11 +141,13 @@ public final class TipContentTooltipComponent
         MultiBufferSource.BufferSource bufferSource
     ) {
         // Prepared 文字与图片命令统一在图片阶段执行，才能共享滚动和裁剪。
+        if (isExpired()) return;
         layout(font);
     }
 
     @Override
     public void renderImage(Font font, int x, int y, GuiGraphics graphics) {
+        if (isExpired()) return;
         Minecraft minecraft = Minecraft.getInstance();
         ItemStack renderStack = normalizedStack();
         PreparedLayout prepared = layout(font);
@@ -319,11 +323,21 @@ public final class TipContentTooltipComponent
     }
 
     int intrinsicHeight(Font font) {
+        if (isExpired()) return 0;
         return toMinecraftDimension(layout(font).allocatedBounds().height());
     }
 
     int intrinsicWidth(Font font) {
+        if (isExpired()) return 0;
         return toMinecraftDimension(layout(font).allocatedBounds().width());
+    }
+
+    /**
+     * 其他 Tooltip 模组可能缓存组件并在悬停结束后再次查询或绘制。
+     * 旧组件不能继续使用已释放的会话缓存和渲染资源。
+     */
+    boolean isExpired() {
+        return hit != null && hit.session().isClosed();
     }
 
     private RenderCommandPipeline visiblePlan(

@@ -119,19 +119,26 @@ tasks.named('processResources', ProcessResources) {
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }
 
+java.withSourcesJar()
+
 publishing {
     publications {
         register('mavenJava', MavenPublication) {
             from components.java
+            artifactId = "OpalLight-neoforge-${minecraft_version}"
         }
     }
     repositories {
         maven {
-            url "file://${project.projectDir}/repo"
+            name = "Confluence"
+            url = "https://maven.confluence.ink/releases"
+            credentials {
+                username = System.getenv("MAGIC_TEAM_USERNAME")
+                password = System.getenv("MAGIC_TEAM_TOKEN")
+            }
         }
     }
 }
-
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }
