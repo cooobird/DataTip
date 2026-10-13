@@ -373,7 +373,7 @@ public class CarouselContent implements TipContent, PreparedContent {
         int maxWidth,
         float alpha
     ) {
-        float normalizedAlpha = Math.max(0.0f, Math.min(1.0f, alpha));
+        float normalizedAlpha = Math.clamp(alpha, 0.0f, 1.0f);
         if (normalizedAlpha <= 0) return;
 
         // Fade 需要覆盖纹理、模型、图表和文本。先提交原版 Tooltip 缓冲，再在局部
@@ -568,21 +568,18 @@ public class CarouselContent implements TipContent, PreparedContent {
             viewportY,
             viewportWidth,
             viewportHeight,
-            Math.max(0.0f, Math.min(1.0f, alpha)),
+            Math.clamp(alpha, 0.0f, 1.0f),
             true
         );
     }
 
     private static int toDimension(long value) {
-        return (int) Math.min(Integer.MAX_VALUE, Math.max(0, value));
+        return Math.clamp(value, 0, Integer.MAX_VALUE);
     }
 
     private static int coordinate(int origin, long offset) {
         long value = TipMath.add(origin, offset);
-        return (int) Math.max(
-            Integer.MIN_VALUE,
-            Math.min(Integer.MAX_VALUE, value)
-        );
+        return Math.clamp(value, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
 
     List<TipContent> visibleFrames() {

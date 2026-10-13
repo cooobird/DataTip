@@ -78,7 +78,7 @@ public record HBoxContent(List<TipContent> children, int gap, int padding,
             if (availableWidth == 0) return;
             if (needsGap) usedWidth[0] = Math.min(availableWidth, usedWidth[0] + gap);
             int remainingWidth = Math.max(1, availableWidth - usedWidth[0]);
-            int childWidth = Math.max(1, Math.min(child.getWidth(childContext), remainingWidth));
+            int childWidth = Math.clamp(child.getWidth(childContext), 1, remainingWidth);
             TipLayoutContext slotContext = TipLayoutContext.bounded(
                 context.font(), context.itemStack(), childWidth);
             int ch = child.getHeight(slotContext);

@@ -35,10 +35,7 @@ public final class LegacyContentPreparer {
             spec,
             OverflowPolicy.CLIP
         );
-        int renderWidth = (int) Math.max(
-            1,
-            Math.min(Integer.MAX_VALUE, measured.allocatedBounds().width())
-        );
+        int renderWidth = Math.clamp(measured.allocatedBounds().width(), 1, Integer.MAX_VALUE);
         RenderCommand command = RenderCommand.positioned(
             RenderPhase.VISUAL_2D,
             content.offsetZ(),

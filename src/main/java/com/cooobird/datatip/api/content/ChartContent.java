@@ -218,7 +218,7 @@ public record ChartContent(
         if (alpha <= 0 || entries.isEmpty()) return;
 
         // 限制标题宽度
-        int renderWidth = Math.max(1, Math.min(width, maxWidth));
+        int renderWidth = Math.clamp(maxWidth, 1, width);
         int renderX = type == ChartType.PIE
             ? x
             : x + Math.max(0, (maxWidth - renderWidth) / 2);

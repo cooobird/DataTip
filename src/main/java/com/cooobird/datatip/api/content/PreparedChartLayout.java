@@ -69,7 +69,7 @@ final class PreparedChartLayout {
             }
         }
 
-        measuredWidth = Math.max(1, Math.min(hardWidth, measuredWidth));
+        measuredWidth = Math.clamp(measuredWidth, 1, hardWidth);
         int lineStep = layout.font().lineHeight + 2;
         int titleHeight = titleLines.size() * lineStep;
         int legendHeight = legendLines.isEmpty()

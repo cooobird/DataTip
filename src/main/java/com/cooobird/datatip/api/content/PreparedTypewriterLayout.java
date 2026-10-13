@@ -205,10 +205,7 @@ final class PreparedTypewriterLayout {
     }
 
     private static int coordinate(long value) {
-        return (int) Math.max(
-            Integer.MIN_VALUE,
-            Math.min(Integer.MAX_VALUE, value)
-        );
+        return Math.clamp(value, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
 
     private static void splitLine(

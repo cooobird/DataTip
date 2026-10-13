@@ -45,10 +45,7 @@ final class ContentBounds {
         for (long offset : offsets) {
             value = TipMath.add(value, offset);
         }
-        return (int) Math.max(
-            Integer.MIN_VALUE,
-            Math.min(Integer.MAX_VALUE, value)
-        );
+        return Math.clamp(value, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
 
     static int extent(int dimension, int offset) {
@@ -60,7 +57,7 @@ final class ContentBounds {
 
     static int scaledDimension(int dimension, float scale) {
         double scaled = dimension * (double) scale;
-        return (int) Math.min(Integer.MAX_VALUE, Math.max(1, scaled));
+        return (int) Math.clamp(scaled, 1, Integer.MAX_VALUE);
     }
 
     static int pieDimension(int value) {

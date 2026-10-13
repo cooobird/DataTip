@@ -150,8 +150,8 @@ public record ProgressContent(
 
         // 限制宽度不超过 maxWidth
         int totalWidth = Math.max(1, maxWidth);
-        int renderWidth = Math.max(1, Math.min(width, totalWidth));
-        float clampedProgress = Math.max(0, Math.min(1, progress));
+        int renderWidth = Math.clamp(width, 1, totalWidth);
+        float clampedProgress = Math.clamp(progress, 0, 1);
         int filledWidth = (int) (renderWidth * clampedProgress);
 
         switch (style) {
@@ -186,7 +186,7 @@ public record ProgressContent(
                     // 先绘制稳定的实际进度，再让高光在已填充区域内移动，避免动画过程中
                     // 填充长度变化造成闪烁或误导。
                     context.fill(x, y, x + filledWidth, y + height, colorFg);
-                    int highlightWidth = Math.min(12, Math.max(2, filledWidth / 4));
+                    int highlightWidth = Math.clamp(filledWidth / 4, 2, 12);
                     int travel = filledWidth + highlightWidth;
                     int highlightStart = Math.floorMod(context.tickCount() / animSpeed, travel) - highlightWidth;
                     int clippedStart = Math.max(0, highlightStart);
@@ -227,7 +227,7 @@ public record ProgressContent(
     }
 
     private Component labelText() {
-        float clampedProgress = Math.max(0, Math.min(1, progress));
+        float clampedProgress = Math.clamp(progress, 0, 1);
         return customLabel != null
             ? customLabel
             : Component.literal((int) (clampedProgress * 100) + "%");
@@ -329,7 +329,7 @@ public record ProgressContent(
         int renderWidth,
         float alpha
     ) {
-        float clampedProgress = Math.max(0, Math.min(1, progress));
+        float clampedProgress = Math.clamp(progress, 0, 1);
         int filledWidth = (int) (renderWidth * clampedProgress);
         int background = TipRenderContext.applyAlpha(colorBg, alpha);
         int foreground = TipRenderContext.applyAlpha(colorFg, alpha);
@@ -388,10 +388,7 @@ public record ProgressContent(
                 context.fill(x, y, x + renderWidth, y + height, background);
                 if (filledWidth <= 0) return;
                 context.fill(x, y, x + filledWidth, y + height, foreground);
-                int highlightWidth = Math.min(
-                    12,
-                    Math.max(2, filledWidth / 4)
-                );
+                int highlightWidth = Math.clamp(filledWidth / 4, 2, 12);
                 int travel = filledWidth + highlightWidth;
                 int highlightStart = Math.floorMod(
                     context.tickCount() / animSpeed,

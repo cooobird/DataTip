@@ -35,7 +35,7 @@ final class PreparedChartGeometry implements PreparedViewportDraw {
             case BAR -> bar(chart, maxWidth);
             case LINE -> line(chart, maxWidth);
             case PIE -> pie(
-                Math.max(1, Math.min(chart.width(), maxWidth)),
+                Math.clamp(maxWidth, 1, chart.width()),
                 chart.height(),
                 slices(chart.entries())
             );
@@ -112,7 +112,7 @@ final class PreparedChartGeometry implements PreparedViewportDraw {
         ChartContent chart,
         int maxWidth
     ) {
-        int renderWidth = Math.max(1, Math.min(chart.width(), maxWidth));
+        int renderWidth = Math.clamp(maxWidth, 1, chart.width());
         List<ChartGeometryBuckets.Bucket> buckets =
             ChartGeometryBuckets.maximumAbsolute(
                 chart.entries(),
@@ -142,7 +142,7 @@ final class PreparedChartGeometry implements PreparedViewportDraw {
                 Math.abs(bucket.value()) / range * chart.height()
             );
             long barY = bucket.value() >= 0 ? zeroY - barHeight : zeroY;
-            barY = Math.max(0, Math.min(chart.height(), barY));
+            barY = Math.clamp(barY, 0, chart.height());
             barHeight = Math.min(barHeight, (long) chart.height() - barY);
             if (barHeight > 0) {
                 fills.add(new Fill(
@@ -170,13 +170,10 @@ final class PreparedChartGeometry implements PreparedViewportDraw {
         ChartContent chart,
         int maxWidth
     ) {
-        int outerWidth = Math.max(1, Math.min(chart.width(), maxWidth));
-        int plotInset = Math.min(2, Math.max(0, (outerWidth - 1) / 2));
+        int outerWidth = Math.clamp(maxWidth, 1, chart.width());
+        int plotInset = Math.clamp((outerWidth - 1) / 2, 0, 2);
         int renderWidth = Math.max(0, outerWidth - 1 - plotInset * 2);
-        int verticalInset = Math.min(
-            2,
-            Math.max(0, (chart.height() - 1) / 2)
-        );
+        int verticalInset = Math.clamp((chart.height() - 1) / 2, 0, 2);
         long plotHeight = Math.max(
             0L,
             (long) chart.height() - 1 - verticalInset * 2L
@@ -538,14 +535,11 @@ final class PreparedChartGeometry implements PreparedViewportDraw {
     }
 
     private static int coordinate(long value) {
-        return (int) Math.max(
-            Integer.MIN_VALUE,
-            Math.min(Integer.MAX_VALUE, value)
-        );
+        return Math.clamp(value, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
 
     private static long clamp(long value, long minimum, long maximum) {
-        return Math.max(minimum, Math.min(maximum, value));
+        return Math.clamp(value, minimum, maximum);
     }
 
     private record ClippedLine(long x1, long y1, long x2, long y2) {

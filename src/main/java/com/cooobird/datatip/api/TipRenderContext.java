@@ -29,7 +29,7 @@ public record TipRenderContext(GuiGraphics graphics, Font font, int tickCount, f
      * 仅合成当前内容颜色的透明度，不修改全局 Shader 状态。
      */
     public static int applyAlpha(int color, float alpha) {
-        float normalizedAlpha = Math.max(0.0f, Math.min(1.0f, alpha));
+        float normalizedAlpha = Math.clamp(alpha, 0.0f, 1.0f);
         int sourceAlpha = color >>> 24;
         if (sourceAlpha == 0) sourceAlpha = 0xFF;
         int resultAlpha = normalizedAlpha > 0.0f

@@ -178,10 +178,7 @@ public final class PreparedLabeledVisualLayout {
 
     private static int scaled(int value, double scale) {
         if (value <= 0) return 0;
-        return (int) Math.max(
-            1,
-            Math.min(Integer.MAX_VALUE, Math.round(value * scale))
-        );
+        return Math.clamp(Math.round(value * scale), 1, Integer.MAX_VALUE);
     }
 
     @FunctionalInterface

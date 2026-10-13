@@ -76,10 +76,7 @@ public final class TooltipViewportBudget {
             - normalizedHeight
             - BACKGROUND_BOTTOM_OFFSET
             + VANILLA_MOUSE_Y_OFFSET;
-        return (int) Math.max(
-            Integer.MIN_VALUE,
-            Math.min(Integer.MAX_VALUE, adjusted)
-        );
+        return Math.clamp(adjusted, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
 
     /**
@@ -173,7 +170,7 @@ public final class TooltipViewportBudget {
     }
 
     boolean scrollHintVisible() {
-        return scrollHintVisible;
+        return scrollHintVisible && components.stream().anyMatch(component -> !component.isExpired());
     }
 
     void register(TipContentTooltipComponent component) {
@@ -305,7 +302,7 @@ public final class TooltipViewportBudget {
                 long sideLimit = mouseX > screenWidth / 2
                     ? (long) mouseX - 20L
                     : (long) screenWidth - 16L - mouseX;
-                width = Math.min(width, Math.max(1L, sideLimit));
+                width = Math.clamp(sideLimit, 1L, width);
             }
         }
         return (int) Math.min(Integer.MAX_VALUE, width);

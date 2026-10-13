@@ -168,10 +168,7 @@ public final class PreparedTextLayout {
         boolean shadow
     ) {
         long width = (long) font.width(text) + (shadow ? 1 : 0);
-        return (int) Math.max(
-            1,
-            Math.min(Integer.MAX_VALUE, width)
-        );
+        return Math.clamp(width, 1, Integer.MAX_VALUE);
     }
 
     private static int positiveMinimum(int first, int second) {
@@ -188,7 +185,7 @@ public final class PreparedTextLayout {
 
     private static int saturatedMultiply(int first, int second) {
         long result = (long) first * second;
-        return (int) Math.min(Integer.MAX_VALUE, Math.max(0, result));
+        return Math.clamp(result, 0, Integer.MAX_VALUE);
     }
 
     private static int saturatedAdd(int... values) {
@@ -264,10 +261,7 @@ public final class PreparedTextLayout {
     }
 
     private static int coordinate(long value) {
-        return (int) Math.max(
-            Integer.MIN_VALUE,
-            Math.min(Integer.MAX_VALUE, value)
-        );
+        return Math.clamp(value, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
 
     private record TextBlock(

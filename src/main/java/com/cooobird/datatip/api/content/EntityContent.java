@@ -351,16 +351,10 @@ public class EntityContent implements PreparedContent {
     }
 
     private static int scaled(int value, double scale) {
-        return (int) Math.max(
-            1,
-            Math.min(Integer.MAX_VALUE, Math.round(value * scale))
-        );
+        return Math.clamp(Math.round(value * scale), 1, Integer.MAX_VALUE);
     }
 
     private static int scaledSigned(int value, double scale) {
-        return (int) Math.max(
-            Integer.MIN_VALUE,
-            Math.min(Integer.MAX_VALUE, Math.round(value * scale))
-        );
+        return Math.clamp(Math.round(value * scale), Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
 }

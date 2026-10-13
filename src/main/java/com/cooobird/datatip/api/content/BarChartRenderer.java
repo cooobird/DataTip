@@ -14,7 +14,7 @@ final class BarChartRenderer {
 
     static void render(ChartContent chart, TipRenderContext context, int x, int y, int maxWidth) {
         List<ChartContent.ChartEntry> entries = chart.entries();
-        int renderWidth = Math.max(1, Math.min(chart.width(), maxWidth));
+        int renderWidth = Math.clamp(maxWidth, 1, chart.width());
 
         double[] values = entries.stream()
             .mapToDouble(entry -> entry.resolveValue(context))

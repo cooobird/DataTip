@@ -20,7 +20,7 @@ final class PieChartRenderer {
         double total = Arrays.stream(values).sum();
         if (total == 0) return;
 
-        int renderWidth = Math.max(1, Math.min(chart.width(), maxWidth));
+        int renderWidth = Math.clamp(maxWidth, 1, chart.width());
         int renderHeight = chart.height();
 
         int centerX = x + renderWidth / 2;

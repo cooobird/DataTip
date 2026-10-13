@@ -89,7 +89,7 @@ final class TextContentLayout {
 
     private static int effectiveWidth(TextContent content, TipLayoutContext context) {
         if (content.maxWidth() > 0) {
-            return Math.max(1, Math.min(content.maxWidth(), context.availableWidth()));
+            return Math.clamp(context.availableWidth(), 1, content.maxWidth());
         }
         return Math.max(1, context.availableWidth());
     }

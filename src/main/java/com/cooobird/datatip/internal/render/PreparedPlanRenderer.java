@@ -222,10 +222,7 @@ public final class PreparedPlanRenderer {
             RenderTransform transform = current.transform().compose(
                 group.localTransform()
             );
-            float resolvedAlpha = (float) Math.max(
-                0.0,
-                Math.min(1.0, current.alpha() * group.opacity())
-            );
+            float resolvedAlpha = (float) Math.clamp(current.alpha() * group.opacity(), 0.0, 1.0);
             if (resolvedAlpha <= 0.0f) continue;
             TipRect clip = current.clipBounds();
             if (group.clipBounds() != null) {
@@ -462,10 +459,7 @@ public final class PreparedPlanRenderer {
     }
 
     private static int dimension(long value) {
-        return (int) Math.max(
-            Integer.MIN_VALUE,
-            Math.min(Integer.MAX_VALUE, value)
-        );
+        return Math.clamp(value, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
 
     private record RenderTraversal(
@@ -862,9 +856,6 @@ public final class PreparedPlanRenderer {
 
     private static int addCoordinate(int origin, long relative) {
         long result = TipMath.add(origin, relative);
-        return (int) Math.max(
-            Integer.MIN_VALUE,
-            Math.min(Integer.MAX_VALUE, result)
-        );
+        return Math.clamp(result, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
 }

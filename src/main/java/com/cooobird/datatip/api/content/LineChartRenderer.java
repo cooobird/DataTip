@@ -16,11 +16,11 @@ final class LineChartRenderer {
         List<ChartContent.ChartEntry> entries = chart.entries();
         if (entries.size() < 2) return;
 
-        int outerWidth = Math.max(1, Math.min(chart.width(), maxWidth));
-        int plotInset = Math.min(2, Math.max(0, (outerWidth - 1) / 2));
+        int outerWidth = Math.clamp(maxWidth, 1, chart.width());
+        int plotInset = Math.clamp((outerWidth - 1) / 2, 0, 2);
         int renderWidth = Math.max(0, outerWidth - 1 - plotInset * 2);
         x += plotInset;
-        int verticalInset = Math.min(2, Math.max(0, (chart.height() - 1) / 2));
+        int verticalInset = Math.clamp((chart.height() - 1) / 2, 0, 2);
         int plotHeight = Math.max(0, chart.height() - 1 - verticalInset * 2);
         y += verticalInset;
         int markerRadius = Math.min(plotInset, verticalInset);
