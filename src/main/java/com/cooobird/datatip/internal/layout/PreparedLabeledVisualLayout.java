@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * 带可选标签的图像或模型叶节点布局。
  *
- * <p>主体超过物理 viewport 时等比缩小；标签无法同行时完整换行到
+ * <p>主体超过物理 viewport 时等比缩小；标签无法同行时完整换行到<br>
  * 主体下方，不通过裁剪静默丢字。</p>
  */
 public final class PreparedLabeledVisualLayout {

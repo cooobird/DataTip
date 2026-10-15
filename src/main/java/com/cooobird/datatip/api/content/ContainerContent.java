@@ -5,10 +5,10 @@ import com.cooobird.datatip.api.TipContent;
 import java.util.List;
 
 /**
- * 容器内容接口。
+ * 容器内容接口。<br>
  * 可以包含子元素的内容类型。
  * <p>
- * 提供默认的儿童迭代/过滤/动画传播逻辑，
+ * 提供默认的儿童迭代/过滤/动画传播逻辑，<br>
  * {@link VBoxContent} 和 {@link HBoxContent} 继承后只需实现布局算法。
  * </p>
  *
@@ -48,7 +48,7 @@ public interface ContainerContent
     }
 
     /**
-     * 遍历有效子元素（跳过无内容项），对每个非折叠项调用 visitor。
+     * 遍历有效子元素（跳过无内容项），对每个非折叠项调用 visitor。<br>
      * visitor 第二参数表示是否需要加 gap（非首项）。
      *
      * @return 是否有折叠项、是否有非折叠项

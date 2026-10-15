@@ -537,266 +537,267 @@ DataTip 启动时会导出 `.minecraft/datatip.schema.json`。建议在编辑器
 
 ```text
 assets/*/datatip/**/*.json
-```
-
-Schema 为内置内容类型、通用修饰符、条件、本地化结构和物品选择器提供补全与校验。运行时允许顶层 `$schema` 属性并会忽略它。如果将
-Schema 复制到资源包根目录，`assets/<namespace>/datatip/` 下的文件可以使用正确的相对路径引用它。
-
-仓库中的 [datatip.schema.json](datatip.schema.json) 用于开发时校验。
-
-## 旧格式转换
-
-加载器会识别没有 `type` 的旧对象、原始值/数组形式以及旧的嵌套 `trans` 属性。它会先转换，再把转换结果交给正常的现代解析流程。
-
-- 转换输出会把 `trans` 规范化为 `translate`。
-- `shift`、`prepend` 和 `conditions` 会保留。
-- 现代 JSON 应使用 `translate`；`trans` 不是现代格式的别名。
-- 转换后的文件会写入 `.minecraft/datatip_converted/<resource-namespace>/<resource-path>.json` 供检查。
-
-例如资源 `example:equipment/weapons` 会导出为：
-
-```text
-.minecraft/datatip_converted/example/equipment/weapons.json
-```
-
-## 生成完整示例
-
-数据生成器是完整覆盖示例的权威来源。Windows 下运行：
-
-```powershell
-.\gradlew.bat runData
-```
-
-类 Unix 系统下运行：
-
-```bash
-./gradlew runData
-```
-
-它会生成：
-
-```text
-src/generated/resources/assets/minecraft/datatip/showcase.json
-src/generated/resources/assets/minecraft/datatip/all_conditions.json
-```
-
-`showcase.json` 覆盖所有内置内容类型，以及布局、本地化、动画、叠放、翻译键、Shift 折叠、通用变换、约束、overflow 和视口压力场景。
-`all_conditions.json` 覆盖所有内置条件及常见值形态。
-
-## Java API
-
-### 注册内容类型
-
-```java
-TipContentRegistry.registerParser("my_type", (json, context) -> {
-    String value = context.getString(json, "value", "");
-    return new MyTipContent(value);
-});
-```
-
-### 添加或清理运行时内容
-
-```java
-TipRuntimeContentRegistry.register(
-    "example:my_item",
-    new TipContentEntry(myContent, List.of(), false, false)
-);
-
-TipRuntimeContentRegistry.clearNamespace("example");
-```
-
-### 注册变量、条件和组件读取器
-
-```java
-VariableResolver.registerVariable("my_value",stack ->"42");
-
-    ConditionChecker.
-
-registerCondition(
-    "my_condition",
-        (value, stack, player, level) ->Boolean.TRUE.
-
-equals(value)
-);
-
-    ComponentReaderRegistry.
-
-register("my_component",reader);
-```
-
-`TipEventManager` 还为模组集成提供资源重载、渲染前和渲染后钩子。需要由 Java 生成 JSON 时，可以使用
-`com.cooobird.datatip.datagen` 下的数据生成构建器。
-
-## 完整 JSON 示例
-
-下面的文件可以直接保存为 `assets/example/datatip/readme_showcase.json`。它覆盖全部 15 种内置内容类型，以及翻译键、通用修饰符、Stack/Z
-顺序和独立 Shift 折叠：
-
-```json
-{
-  "minecraft:diamond": {
-    "type": "vbox",
-    "gap": 3,
-    "padding": 2,
-    "align": "center",
-    "children": [
-      {
-        "type": "text",
-        "translate": "example.tooltip.title",
-        "color": "aqua",
-        "bold": true,
-        "selfAlignX": "center"
-      },
-      {
-        "type": "divider",
-        "style": "dashed",
-        "widthMode": "fixed",
-        "width": 150,
-        "color": "dark_aqua"
-      },
-      {
-        "type": "hbox",
-        "gap": 6,
-        "align": "center",
-        "children": [
-          {
-            "type": "item",
-            "item": "minecraft:diamond",
-            "count": 8,
-            "size": 24,
-            "showCount": true
-          },
-          {
-            "type": "progress",
-            "progress": 0.75,
-            "width": 110,
-            "height": 8,
-            "style": "gradient",
-            "label": "75%",
-            "labelAlign": "right"
-          }
-        ]
-      },
-      {
-        "type": "stack",
-        "padding": 3,
-        "horizontalAlign": "center",
-        "verticalAlign": "center",
-        "children": [
-          {
-            "type": "block",
-            "block": "minecraft:diamond_block",
-            "size": 56,
-            "rotationSpeed": 0.6,
-            "offsetZ": -10
-          },
-          {
-            "type": "text",
-            "translate": "example.tooltip.foreground",
-            "color": "yellow",
-            "bold": true,
-            "shadow": true,
-            "offsetX": 4,
-            "offsetY": -2,
-            "offsetZ": 10
-          }
-        ]
-      },
-      {
-        "type": "text",
-        "translate": "example.tooltip.shift_detail",
-        "color": "light_purple",
-        "shift": true
-      }
-    ]
-  },
-  "minecraft:carrot_on_a_stick": {
-    "type": "stack",
-    "padding": 4,
-    "horizontalAlign": "center",
-    "verticalAlign": "bottom",
-    "children": [
-      {
-        "type": "entity",
-        "entity": "minecraft:pig",
-        "size": 72,
-        "rotationSpeed": 1.0,
-        "autoRotate": true,
-        "offsetZ": -5
-      },
-      {
-        "type": "text",
-        "text": {
-          "zh_cn": "文字位于完整猪模型之上",
-          "en_us": "Text above the complete pig model"
-        },
-        "color": "gold",
-        "bold": true,
-        "offsetY": -4,
-        "offsetZ": 5
-      }
-    ]
-  },
-  "minecraft:clock": {
-    "type": "carousel",
-    "intervalSeconds": 3,
-    "transition": "slide",
-    "frames": [
-      {
-        "type": "atlas",
-        "item": "minecraft:clock",
-        "size": 32,
-        "label": {"translate": "item.minecraft.clock"}
-      },
-      {
-        "type": "image",
-        "texture": "minecraft:textures/item/clock_00.png",
-        "width": 32,
-        "height": 32,
-        "textureWidth": 32,
-        "textureHeight": 32
-      },
-      {
-        "type": "typewriter",
-        "lines": {
-          "zh_cn": ["轮播第三帧", "打字机文本"],
-          "en_us": ["Carousel frame three", "Typewriter text"]
-        },
-        "charsPerSecond": 16,
-        "pauseSeconds": 1,
-        "loop": true,
-        "color": "white",
-        "align": "center"
-      }
-    ]
-  },
-  "minecraft:slime_ball": {
-    "type": "vbox",
-    "gap": 3,
-    "children": [
-      {"type": "spacer", "height": 4},
-      {
-        "type": "chart",
-        "chartType": "bar",
-        "width": 150,
-        "height": 60,
-        "title": {"translate": "example.tooltip.chart"},
-        "showLabels": true,
-        "showValues": true,
-        "entries": [
-          {"label": "A", "value": 3, "color": "red"},
-          {"label": "B", "value": 7, "color": "green"},
-          {"label": "C", "valueExpr": "{count}", "color": "blue"}
-        ]
-      }
-    ]
-  }
-}
-```
-
-示例使用的翻译键可以分别放入 `assets/example/lang/en_us.json` 和 `assets/example/lang/zh_cn.json`。数据生成器输出的
-`showcase.json` 仍然是完整压力测试的权威参考。
-
-## 许可证
-
-DataTip 使用 GNU Lesser General Public License 3.0。详见 [LICENSE](LICENSE)。
+//```
+//
+//Schema 为内置内容类型、通用修饰符、条件、本地化结构和物品选择器提供补全与校验。运行时允许顶层 `$schema` 属性并会忽略它。如果将
+//Schema 复制到资源包根目录，`assets/<namespace>/datatip/` 下的文件可以使用正确的相对路径引用它。
+//
+//仓库中的 [datatip.schema.json](datatip.schema.json) 用于开发时校验。
+//
+//## 旧格式转换
+//
+//加载器会识别没有 `type` 的旧对象、原始值/数组形式以及旧的嵌套 `trans` 属性。它会先转换，再把转换结果交给正常的现代解析流程。
+//
+//- 转换输出会把 `trans` 规范化为 `translate`。
+//- `shift`、`prepend` 和 `conditions` 会保留。
+//- 现代 JSON 应使用 `translate`；`trans` 不是现代格式的别名。
+//- 转换后的文件会写入 `.minecraft/datatip_converted/<resource-namespace>/<resource-path>.json` 供检查。
+//
+//例如资源 `example:equipment/weapons` 会导出为：
+//
+//```text
+//.minecraft/datatip_converted/example/equipment/weapons.json
+//```
+//
+//## 生成完整示例
+//
+//数据生成器是完整覆盖示例的权威来源。Windows 下运行：
+//
+//```powershell
+//.\gradlew.bat runData
+//```
+//
+//类 Unix 系统下运行：
+//
+//```bash
+//./gradlew runData
+//```
+//
+//它会生成：
+//
+//```text
+//src/generated/resources/assets/minecraft/datatip/showcase.json
+//src/generated/resources/assets/minecraft/datatip/all_conditions.json
+//```
+//
+//`showcase.json` 覆盖所有内置内容类型，以及布局、本地化、动画、叠放、翻译键、Shift 折叠、通用变换、约束、overflow 和视口压力场景。
+//`all_conditions.json` 覆盖所有内置条件及常见值形态。
+//
+//## Java API
+//
+//### 注册内容类型
+//
+//```java
+//TipContentRegistry.registerParser("my_type", (json, context) -> {
+    //String value = context.getString(json, "value", "");
+    //return new MyTipContent(value);
+//});
+//```
+//
+//### 添加或清理运行时内容
+//
+//```java
+//TipRuntimeContentRegistry.register(
+    //"example:my_item",
+    //new TipContentEntry(myContent, List.of(), false, false)
+//);
+//
+//TipRuntimeContentRegistry.clearNamespace("example");
+//```
+//
+//### 注册变量、条件和组件读取器
+//
+//```java
+//VariableResolver.registerVariable("my_value",stack ->"42");
+//
+    //ConditionChecker.
+//
+//registerCondition(
+    //"my_condition",
+        //(value, stack, player, level) ->Boolean.TRUE.
+//
+//equals(value)
+//);
+//
+    //ComponentReaderRegistry.
+//
+//register("my_component",reader);
+//```
+//
+//`TipEventManager` 还为模组集成提供资源重载、渲染前和渲染后钩子。需要由 Java 生成 JSON 时，可以使用
+//`com.cooobird.datatip.datagen` 下的数据生成构建器。
+//
+//## 完整 JSON 示例
+//
+//下面的文件可以直接保存为 `assets/example/datatip/readme_showcase.json`。它覆盖全部 15 种内置内容类型，以及翻译键、通用修饰符、Stack/Z
+//顺序和独立 Shift 折叠：
+//
+//```json
+//{
+  //"minecraft:diamond": {
+    //"type": "vbox",
+    //"gap": 3,
+    //"padding": 2,
+    //"align": "center",
+    //"children": [
+      //{
+        //"type": "text",
+        //"translate": "example.tooltip.title",
+        //"color": "aqua",
+        //"bold": true,
+        //"selfAlignX": "center"
+      //},
+      //{
+        //"type": "divider",
+        //"style": "dashed",
+        //"widthMode": "fixed",
+        //"width": 150,
+        //"color": "dark_aqua"
+      //},
+      //{
+        //"type": "hbox",
+        //"gap": 6,
+        //"align": "center",
+        //"children": [
+          //{
+            //"type": "item",
+            //"item": "minecraft:diamond",
+            //"count": 8,
+            //"size": 24,
+            //"showCount": true
+          //},
+          //{
+            //"type": "progress",
+            //"progress": 0.75,
+            //"width": 110,
+            //"height": 8,
+            //"style": "gradient",
+            //"label": "75%",
+            //"labelAlign": "right"
+          //}
+        //]
+      //},
+      //{
+        //"type": "stack",
+        //"padding": 3,
+        //"horizontalAlign": "center",
+        //"verticalAlign": "center",
+        //"children": [
+          //{
+            //"type": "block",
+            //"block": "minecraft:diamond_block",
+            //"size": 56,
+            //"rotationSpeed": 0.6,
+            //"offsetZ": -10
+          //},
+          //{
+            //"type": "text",
+            //"translate": "example.tooltip.foreground",
+            //"color": "yellow",
+            //"bold": true,
+            //"shadow": true,
+            //"offsetX": 4,
+            //"offsetY": -2,
+            //"offsetZ": 10
+          //}
+        //]
+      //},
+      //{
+        //"type": "text",
+        //"translate": "example.tooltip.shift_detail",
+        //"color": "light_purple",
+        //"shift": true
+      //}
+    //]
+  //},
+  //"minecraft:carrot_on_a_stick": {
+    //"type": "stack",
+    //"padding": 4,
+    //"horizontalAlign": "center",
+    //"verticalAlign": "bottom",
+    //"children": [
+      //{
+        //"type": "entity",
+        //"entity": "minecraft:pig",
+        //"size": 72,
+        //"rotationSpeed": 1.0,
+        //"autoRotate": true,
+        //"offsetZ": -5
+      //},
+      //{
+        //"type": "text",
+        //"text": {
+          //"zh_cn": "文字位于完整猪模型之上",
+          //"en_us": "Text above the complete pig model"
+        //},
+        //"color": "gold",
+        //"bold": true,
+        //"offsetY": -4,
+        //"offsetZ": 5
+      //}
+    //]
+  //},
+  //"minecraft:clock": {
+    //"type": "carousel",
+    //"intervalSeconds": 3,
+    //"transition": "slide",
+    //"frames": [
+      //{
+        //"type": "atlas",
+        //"item": "minecraft:clock",
+        //"size": 32,
+        //"label": {"translate": "item.minecraft.clock"}
+      //},
+      //{
+        //"type": "image",
+        //"texture": "minecraft:textures/item/clock_00.png",
+        //"width": 32,
+        //"height": 32,
+        //"textureWidth": 32,
+        //"textureHeight": 32
+      //},
+      //{
+        //"type": "typewriter",
+        //"lines": {
+          //"zh_cn": ["轮播第三帧", "打字机文本"],
+          //"en_us": ["Carousel frame three", "Typewriter text"]
+        //},
+        //"charsPerSecond": 16,
+        //"pauseSeconds": 1,
+        //"loop": true,
+        //"color": "white",
+        //"align": "center"
+      //}
+    //]
+  //},
+  //"minecraft:slime_ball": {
+    //"type": "vbox",
+    //"gap": 3,
+    //"children": [
+      //{"type": "spacer", "height": 4},
+      //{
+        //"type": "chart",
+        //"chartType": "bar",
+        //"width": 150,
+        //"height": 60,
+        //"title": {"translate": "example.tooltip.chart"},
+        //"showLabels": true,
+        //"showValues": true,
+        //"entries": [
+          //{"label": "A", "value": 3, "color": "red"},
+          //{"label": "B", "value": 7, "color": "green"},
+          //{"label": "C", "valueExpr": "{count}", "color": "blue"}
+        //]
+      //}
+    //]
+  //}
+//}
+//```
+//
+//示例使用的翻译键可以分别放入 `assets/example/lang/en_us.json` 和 `assets/example/lang/zh_cn.json`。数据生成器输出的
+//`showcase.json` 仍然是完整压力测试的权威参考。
+//
+//## 许可证
+//
+//DataTip 使用 GNU Lesser General Public License 3.0。详见 [LICENSE](LICENSE)。
+//

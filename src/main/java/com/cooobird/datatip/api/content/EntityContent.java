@@ -24,7 +24,7 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * 实体渲染内容类。
+ * 实体渲染内容类。<br>
  * 在 tooltip 中渲染 3D 实体模型。
  */
 public class EntityContent implements PreparedContent {
@@ -53,7 +53,9 @@ public class EntityContent implements PreparedContent {
         this.label = label;
     }
 
-    // Getter 方法
+    /**
+     * Getter 方法
+     */
     public EntityType<?> entityType() {
         return entityType;
     }
@@ -83,22 +85,30 @@ public class EntityContent implements PreparedContent {
         return label;
     }
 
-    // 创建实体内容
+    /**
+     * 创建实体内容
+     */
     public static EntityContent of(EntityType<?> entityType) {
         return new EntityContent(entityType, 48, 1.0f, true, 0, 0, null);
     }
 
-    // 创建带标签的实体内容
+    /**
+     * 创建带标签的实体内容
+     */
     public static EntityContent withLabel(EntityType<?> entityType, Component label) {
         return new EntityContent(entityType, 48, 1.0f, true, 0, 0, label);
     }
 
-    // 创建指定尺寸的实体内容
+    /**
+     * 创建指定尺寸的实体内容
+     */
     public static EntityContent of(EntityType<?> entityType, int size) {
         return new EntityContent(entityType, size, 1.0f, true, 0, 0, null);
     }
 
-    // 创建带偏移的实体内容
+    /**
+     * 创建带偏移的实体内容
+     */
     public static EntityContent withOffset(EntityType<?> entityType, int size, int offsetX, int offsetY) {
         return new EntityContent(entityType, size, 1.0f, true, offsetX, offsetY, null);
     }

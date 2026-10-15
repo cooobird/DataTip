@@ -5,11 +5,11 @@ import com.google.gson.JsonObject;
 /**
  * 内容解析器接口。
  * <p>
- * 将 JSON 对象转换为 {@link TipContent} 实例。
+ * 将 JSON 对象转换为 {@link TipContent} 实例。<br>
  * 每种内容类型都需要注册一个对应的解析器。
  * </p>
  *
- * <h3>注册自定义解析器</h3>
+ * <p>注册自定义解析器</p>
  * <pre>{@code
  * TipContentRegistry.registerParser("my_type", (json, context) -> {
  *     String text = context.getString(json, "text", "");
@@ -18,7 +18,7 @@ import com.google.gson.JsonObject;
  * });
  * }</pre>
  *
- * <h3>JSON 格式</h3>
+ * <p>JSON 格式</p>
  * <pre>{@code
  * {
  *   "type": "my_type",

@@ -5,7 +5,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
 /**
- * 性能优化工具。
+ * 性能优化工具。<br>
  * 提供 tooltip 匹配时使用的轻量查询方法。
  *
  * @author cooobird

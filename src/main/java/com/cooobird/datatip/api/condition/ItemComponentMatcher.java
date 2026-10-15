@@ -10,7 +10,7 @@ import java.util.Set;
 /**
  * 物品数据组件读取门面。
  * <p>
- * Minecraft 1.21.1 的物品数据是 Data Components。这里保留常用入口，
+ * Minecraft 1.21.1 的物品数据是 Data Components。这里保留常用入口，<br>
  * 具体读取逻辑拆分到内置读取器、扩展读取器注册表和 custom_data 路径读取器。
  * </p>
  */

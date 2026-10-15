@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * 图表内容。
+ * 图表内容。<br>
  * 渲染简单的柱状图、饼图等。
  *
  * @author cooobird
@@ -35,14 +35,18 @@ public record ChartContent(
     private static final int VALUE_LABEL_HEIGHT = 12;
     private static final int AXIS_LABEL_HEIGHT = 12;
 
-    // 图表类型
+    /**
+     * 图表类型
+     */
     public enum ChartType {
         BAR,   // 柱状图
         PIE,   // 饼图
         LINE   // 折线图
     }
 
-    // 图表条目，支持静态值和变量表达式
+    /**
+     * 图表条目，支持静态值和变量表达式
+     */
     public ChartContent(
         ChartType type,
         List<ChartEntry> entries,
@@ -107,7 +111,9 @@ public record ChartContent(
             return labelText.resolve();
         }
 
-        // 获取解析后的数值
+        /**
+         * 获取解析后的数值
+         */
         public double resolveValue(TipRenderContext context) {
             try {
                 // 尝试直接解析为数字
@@ -126,31 +132,41 @@ public record ChartContent(
         }
     }
 
-    // 创建柱状图
+    /**
+     * 创建柱状图
+     */
     public static ChartContent bar(int width, int height) {
         return new ChartContent(ChartType.BAR, new ArrayList<>(), width, height, null, true, true,
             0xFFFFFF, 0xAAAAAA, 0xFFFFFF, 0x888888);
     }
 
-    // 创建饼图
+    /**
+     * 创建饼图
+     */
     public static ChartContent pie(int size) {
         return new ChartContent(ChartType.PIE, new ArrayList<>(), size, size, null, true, true,
             0xFFFFFF, 0xAAAAAA, 0xFFFFFF, 0x888888);
     }
 
-    // 创建折线图
+    /**
+     * 创建折线图
+     */
     public static ChartContent line(int width, int height) {
         return new ChartContent(ChartType.LINE, new ArrayList<>(), width, height, null, true, true,
             0xFFFFFF, 0xAAAAAA, 0xFFFFFF, 0x888888);
     }
 
-    // 创建带自定义颜色的图表
+    /**
+     * 创建带自定义颜色的图表
+     */
     public static ChartContent withColors(ChartType type, int width, int height, int titleColor, int labelColor, int valueColor, int zeroLineColor) {
         return new ChartContent(type, new ArrayList<>(), width, height, null, true, true,
             titleColor, labelColor, valueColor, zeroLineColor);
     }
 
-    // 添加数据条目
+    /**
+     * 添加数据条目
+     */
     public ChartContent addEntry(@Nullable String label, @Nullable String valueExpr, int color) {
         return addEntry(LocalizedText.literal(label), valueExpr, color);
     }
@@ -160,12 +176,16 @@ public record ChartContent(
         return this;
     }
 
-    // 添加数据条目
+    /**
+     * 添加数据条目
+     */
     public ChartContent addEntry(String label, double value, int color) {
         return addEntry(LocalizedText.literal(label), String.valueOf(value), color);
     }
 
-    // 设置标题
+    /**
+     * 设置标题
+     */
     public ChartContent title(@Nullable Component title) {
         return new ChartContent(type, entries, width, height, title, showLabels, showValues,
             titleColor, labelColor, valueColor, zeroLineColor);

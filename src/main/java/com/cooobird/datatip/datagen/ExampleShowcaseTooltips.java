@@ -18,22 +18,24 @@ final class ExampleShowcaseTooltips {
     static JsonObject create() {
         JsonObject root = new JsonObject();
 
-        root.add("minecraft:diamond", toJson(vbox(3, 2, "center",
+        root.add("minecraft:diamond", toJson(vbox(vboxOptions().gap(3).padding(2).align("center"),
             langText(languages("DataTip 全内容展示", "DataTip Complete Showcase"), "aqua", true, false, false, false),
             text("Bold · Italic · Underline · Strike", "white", true, true, true, true),
             text("Custom font", "gray", "minecraft:uniform"),
-            divider("#35C9E8", 2, 160, 1, 1, "solid", "fixed"),
-            hbox(7, 1, "center",
-                item("minecraft:diamond", 16, 32, true, true, true,
-                    languages("物品渲染", "Item rendering"), "#55FFFF", 1, 1),
+            divider(dividerOptions().color("#35C9E8").thickness(2).width(160)
+                .marginTop(1).marginBottom(1).style("solid").widthMode("fixed")),
+            hbox(hboxOptions().gap(7).padding(1).align("center"),
+                item("minecraft:diamond", itemOptions().count(16).size(32).showLabel(true)
+                    .label(languages("物品渲染", "Item rendering")).labelColor("#55FFFF").offsetX(1).offsetY(1)),
                 vbox(1,
                     langText(languages("名称：{item_name}", "Name: {item_name}"), "white"),
                     text("ID: {item_id}", "gray", false, true, false, false),
                     text("Count: {count}/{max_stack_size}", "yellow")
                 )
             ),
-            progress(0.78f, 160, 7, "#35E8A0", "#252A34", "#B8FFE2", "#11151B",
-                "gradient", languages("渐变 · 居中", "Gradient · Center"), "center", 0),
+            progress(0.78f, 160, progressOptions().height(7).colorFg("#35E8A0").colorBg("#252A34")
+                .colorFgLight("#B8FFE2").colorBgDark("#11151B").style("gradient").showLabel(true)
+                .label(languages("渐变 · 居中", "Gradient · Center")).labelAlign("center").animSpeed(0)),
             centeredAligned(atlas("minecraft:diamond", 16)),
             rightAlignedContent(text("Aligned wrapper", "dark_gray")),
             text("按住 Shift / Hold Shift", "green", false, false, false, false, true)

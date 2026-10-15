@@ -6,7 +6,7 @@ import org.joml.Matrix4f;
 /**
  * Tooltip 命令树使用的二维仿射变换。
  *
- * <p>变换保留在命令组上，只有遍历叶命令时才组合，避免容器每嵌套一层就
+ * <p>变换保留在命令组上，只有遍历叶命令时才组合，避免容器每嵌套一层就<br>
  * 复制全部后代命令。</p>
  */
 public record RenderTransform(

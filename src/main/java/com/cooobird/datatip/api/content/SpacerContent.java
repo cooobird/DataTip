@@ -14,27 +14,37 @@ public record SpacerContent(int height)
         this.height = ContentBounds.spacing(height);
     }
 
-    // 创建默认间距
+    /**
+     * 创建默认间距
+     */
     public static SpacerContent create() {
         return new SpacerContent(4);
     }
 
-    // 创建指定高度的间距
+    /**
+     * 创建指定高度的间距
+     */
     public static SpacerContent of(int height) {
         return new SpacerContent(height);
     }
 
-    // 创建小间距
+    /**
+     * 创建小间距
+     */
     public static SpacerContent small() {
         return new SpacerContent(2);
     }
 
-    // 创建中等间距
+    /**
+     * 创建中等间距
+     */
     public static SpacerContent medium() {
         return new SpacerContent(8);
     }
 
-    // 创建大间距
+    /**
+     * 创建大间距
+     */
     public static SpacerContent large() {
         return new SpacerContent(16);
     }

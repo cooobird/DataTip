@@ -8,7 +8,7 @@ import java.util.Objects;
 /**
  * Tooltip 内容布局测量上下文。
  * <p>
- * 测量阶段需要同时知道字体、当前物品栈和可选宽度约束，才能保证变量替换后的文本
+ * 测量阶段需要同时知道字体、当前物品栈和可选宽度约束，才能保证变量替换后的文本<br>
  * 与最终绘制使用完全相同的尺寸语义。{@code maxWidth <= 0} 表示不主动限制宽度。
  * </p>
  */
@@ -43,7 +43,7 @@ public record TipLayoutContext(Font font, ItemStack itemStack, int maxWidth) {
     }
 
     /**
-     * 为尚未适配布局上下文的旧内容实现提供有限的测量宽度，避免把
+     * 为尚未适配布局上下文的旧内容实现提供有限的测量宽度，避免把<br>
      * {@link Integer#MAX_VALUE} 当作实际像素宽度使用。内置内容不使用此兼容值。
      */
     public int compatibilityWidth() {

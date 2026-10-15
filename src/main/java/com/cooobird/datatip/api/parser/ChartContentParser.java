@@ -12,11 +12,11 @@ import java.util.Locale;
 /**
  * ChartContent 解析器。
  * <p>
- * 负责将 JSON 对象解析为 {@link ChartContent} 实例。
+ * 负责将 JSON 对象解析为 {@link ChartContent} 实例。<br>
  * 图表用于可视化数据，支持柱状图、饼图、折线图。
  * </p>
  *
- * <h3>支持的 JSON 格式</h3>
+ * <p>支持的 JSON 格式</p>
  * <pre>{@code
  * // 柱状图
  * {
@@ -53,16 +53,16 @@ import java.util.Locale;
  * }
  * }</pre>
  *
- * <h3>字段说明</h3>
- * <table border="1">
- *   <tr><th>字段</th><th>类型</th><th>默认值</th><th>说明</th></tr>
- *   <tr><td>chartType</td><td>String</td><td>"bar"</td><td>图表类型（bar/pie/line）</td></tr>
- *   <tr><td>width</td><td>int</td><td>100</td><td>宽度（像素）</td></tr>
- *   <tr><td>height</td><td>int</td><td>60</td><td>高度（像素）</td></tr>
- *   <tr><td>title</td><td>String</td><td>null</td><td>图表标题</td></tr>
- *   <tr><td>entries</td><td>Array</td><td>[]</td><td>数据条目数组</td></tr>
- *   <tr><td>align</td><td>String</td><td>"left"</td><td>对齐方式（left/center/right）</td></tr>
- * </table>
+ * <p>字段说明</p>
+ * <pre>{@code
+ *   字段 | 类型 | 默认值 | 说明
+ *   chartType | String | "bar" | 图表类型（bar/pie/line）
+ *   width | int | 100 | 宽度（像素）
+ *   height | int | 60 | 高度（像素）
+ *   title | String | null | 图表标题
+ *   entries | Array | [] | 数据条目数组
+ *   align | String | "left" | 对齐方式（left/center/right）
+ * }</pre>
  *
  * @author cooobird
  * @see ChartContent 图表内容类

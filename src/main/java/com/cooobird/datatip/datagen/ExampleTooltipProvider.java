@@ -8,7 +8,7 @@ import java.nio.file.Path;
 import java.util.concurrent.CompletableFuture;
 
 /**
- * 示例 Tooltip 数据生成器。
+ * 示例 Tooltip 数据生成器。<br>
  * 展示所有内容类型与具有代表性的布局、动画和修饰符组合。
  *
  * @author cooobird

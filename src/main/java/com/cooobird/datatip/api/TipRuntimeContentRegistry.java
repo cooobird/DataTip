@@ -9,7 +9,7 @@ import java.util.*;
 /**
  * 运行时 Tooltip 内容注册表。
  * <p>
- * 用于让其他代码在资源包 JSON 之外注册 DataTip 内容。注册后的内容会和资源包内容一起参与 tooltip
+ * 用于让其他代码在资源包 JSON 之外注册 DataTip 内容。注册后的内容会和资源包内容一起参与 tooltip<br>
  * 查找，但不会写回资源包，也不会跨游戏进程持久化。
  * </p>
  */

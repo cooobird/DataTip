@@ -562,265 +562,266 @@ DataTip exports `.minecraft/datatip.schema.json` on startup. Map it in your edit
 
 ```text
 assets/*/datatip/**/*.json
-```
-
-The schema provides completion and validation for built-in content types, common modifiers, conditions, localization
-shapes, and item selectors. A top-level `$schema` property is allowed and ignored by the runtime. If the schema is
-copied to the resource-pack root, a file under `assets/<namespace>/datatip/` can reference it with the appropriate
-relative path.
-
-The repository also keeps [datatip.schema.json](datatip.schema.json) for development.
-
-## Legacy conversion
-
-The loader detects legacy entries such as objects without `type`, primitive/array forms, and old nested `trans`
-properties. It converts them first and then sends the converted output through the normal modern parser.
-
-- `trans` is normalized to `translate` in converted output.
-- `shift`, `prepend`, and `conditions` are preserved.
-- Modern JSON should use `translate`; `trans` is not a supported modern alias.
-- Converted files are written under `.minecraft/datatip_converted/<resource-namespace>/<resource-path>.json` for
-  inspection.
-
-For example, the resource `example:equipment/weapons` is exported as:
-
-```text
-.minecraft/datatip_converted/example/equipment/weapons.json
-```
-
-## Generated examples
-
-The data generator is the authoritative full-coverage sample. Run:
-
-```powershell
-.\gradlew.bat runData
-```
-
-On Unix-like systems:
-
-```bash
-./gradlew runData
-```
-
-It generates:
-
-```text
-src/generated/resources/assets/minecraft/datatip/showcase.json
-src/generated/resources/assets/minecraft/datatip/all_conditions.json
-```
-
-`showcase.json` covers every built-in content type plus layouts, localization, animation, stacking, translation keys,
-Shift folding, common transforms, constraints, overflow, and viewport stress cases. `all_conditions.json` covers all
-built-in conditions and their common value forms.
-
-## Java API
-
-### Register a content type
-
-```java
-TipContentRegistry.registerParser("my_type", (json, context) -> {
-    String value = context.getString(json, "value", "");
-    return new MyTipContent(value);
-});
-```
-
-### Add or clear runtime content
-
-```java
-TipRuntimeContentRegistry.register(
-    "example:my_item",
-    new TipContentEntry(myContent, List.of(), false, false)
-);
-
-TipRuntimeContentRegistry.clearNamespace("example");
-```
-
-### Register variables, conditions, and component readers
-
-```java
-VariableResolver.registerVariable("my_value", stack -> "42");
-
-ConditionChecker.registerCondition(
-    "my_condition",
-    (value, stack, player, level) -> Boolean.TRUE.equals(value)
-);
-
-ComponentReaderRegistry.register("my_component", reader);
-```
-
-`TipEventManager` also exposes reload, pre-render, and post-render hooks for mod integrations. Use the data-generation
-builders under `com.cooobird.datatip.datagen` when generating JSON from Java.
-
-## Complete JSON example
-
-The following file is directly usable as `assets/example/datatip/readme_showcase.json`. It covers all 15 built-in
-content types as well as translation keys, common modifiers, Stack/Z ordering, and independent Shift folding:
-
-```json
-{
-  "minecraft:diamond": {
-    "type": "vbox",
-    "gap": 3,
-    "padding": 2,
-    "align": "center",
-    "children": [
-      {
-        "type": "text",
-        "translate": "example.tooltip.title",
-        "color": "aqua",
-        "bold": true,
-        "selfAlignX": "center"
-      },
-      {
-        "type": "divider",
-        "style": "dashed",
-        "widthMode": "fixed",
-        "width": 150,
-        "color": "dark_aqua"
-      },
-      {
-        "type": "hbox",
-        "gap": 6,
-        "align": "center",
-        "children": [
-          {
-            "type": "item",
-            "item": "minecraft:diamond",
-            "count": 8,
-            "size": 24,
-            "showCount": true
-          },
-          {
-            "type": "progress",
-            "progress": 0.75,
-            "width": 110,
-            "height": 8,
-            "style": "gradient",
-            "label": "75%",
-            "labelAlign": "right"
-          }
-        ]
-      },
-      {
-        "type": "stack",
-        "padding": 3,
-        "horizontalAlign": "center",
-        "verticalAlign": "center",
-        "children": [
-          {
-            "type": "block",
-            "block": "minecraft:diamond_block",
-            "size": 56,
-            "rotationSpeed": 0.6,
-            "offsetZ": -10
-          },
-          {
-            "type": "text",
-            "translate": "example.tooltip.foreground",
-            "color": "yellow",
-            "bold": true,
-            "shadow": true,
-            "offsetX": 4,
-            "offsetY": -2,
-            "offsetZ": 10
-          }
-        ]
-      },
-      {
-        "type": "text",
-        "translate": "example.tooltip.shift_detail",
-        "color": "light_purple",
-        "shift": true
-      }
-    ]
-  },
-  "minecraft:carrot_on_a_stick": {
-    "type": "stack",
-    "padding": 4,
-    "horizontalAlign": "center",
-    "verticalAlign": "bottom",
-    "children": [
-      {
-        "type": "entity",
-        "entity": "minecraft:pig",
-        "size": 72,
-        "rotationSpeed": 1.0,
-        "autoRotate": true,
-        "offsetZ": -5
-      },
-      {
-        "type": "text",
-        "text": {
-          "zh_cn": "文字位于完整猪模型之上",
-          "en_us": "Text above the complete pig model"
-        },
-        "color": "gold",
-        "bold": true,
-        "offsetY": -4,
-        "offsetZ": 5
-      }
-    ]
-  },
-  "minecraft:clock": {
-    "type": "carousel",
-    "intervalSeconds": 3,
-    "transition": "slide",
-    "frames": [
-      {
-        "type": "atlas",
-        "item": "minecraft:clock",
-        "size": 32,
-        "label": {"translate": "item.minecraft.clock"}
-      },
-      {
-        "type": "image",
-        "texture": "minecraft:textures/item/clock_00.png",
-        "width": 32,
-        "height": 32,
-        "textureWidth": 32,
-        "textureHeight": 32
-      },
-      {
-        "type": "typewriter",
-        "lines": {
-          "zh_cn": ["轮播第三帧", "打字机文本"],
-          "en_us": ["Carousel frame three", "Typewriter text"]
-        },
-        "charsPerSecond": 16,
-        "pauseSeconds": 1,
-        "loop": true,
-        "color": "white",
-        "align": "center"
-      }
-    ]
-  },
-  "minecraft:slime_ball": {
-    "type": "vbox",
-    "gap": 3,
-    "children": [
-      {"type": "spacer", "height": 4},
-      {
-        "type": "chart",
-        "chartType": "bar",
-        "width": 150,
-        "height": 60,
-        "title": {"translate": "example.tooltip.chart"},
-        "showLabels": true,
-        "showValues": true,
-        "entries": [
-          {"label": "A", "value": 3, "color": "red"},
-          {"label": "B", "value": 7, "color": "green"},
-          {"label": "C", "valueExpr": "{count}", "color": "blue"}
-        ]
-      }
-    ]
-  }
-}
-```
-
-Translation keys used by the example can be placed in `assets/example/lang/en_us.json` and
-`assets/example/lang/zh_cn.json`. The generated `showcase.json` remains the exhaustive stress-test reference.
-
-## License
-
-DataTip is licensed under the GNU Lesser General Public License 3.0. See [LICENSE](LICENSE).
+//```
+//
+//The schema provides completion and validation for built-in content types, common modifiers, conditions, localization
+//shapes, and item selectors. A top-level `$schema` property is allowed and ignored by the runtime. If the schema is
+//copied to the resource-pack root, a file under `assets/<namespace>/datatip/` can reference it with the appropriate
+//relative path.
+//
+//The repository also keeps [datatip.schema.json](datatip.schema.json) for development.
+//
+//## Legacy conversion
+//
+//The loader detects legacy entries such as objects without `type`, primitive/array forms, and old nested `trans`
+//properties. It converts them first and then sends the converted output through the normal modern parser.
+//
+//- `trans` is normalized to `translate` in converted output.
+//- `shift`, `prepend`, and `conditions` are preserved.
+//- Modern JSON should use `translate`; `trans` is not a supported modern alias.
+//- Converted files are written under `.minecraft/datatip_converted/<resource-namespace>/<resource-path>.json` for
+  //inspection.
+//
+//For example, the resource `example:equipment/weapons` is exported as:
+//
+//```text
+//.minecraft/datatip_converted/example/equipment/weapons.json
+//```
+//
+//## Generated examples
+//
+//The data generator is the authoritative full-coverage sample. Run:
+//
+//```powershell
+//.\gradlew.bat runData
+//```
+//
+//On Unix-like systems:
+//
+//```bash
+//./gradlew runData
+//```
+//
+//It generates:
+//
+//```text
+//src/generated/resources/assets/minecraft/datatip/showcase.json
+//src/generated/resources/assets/minecraft/datatip/all_conditions.json
+//```
+//
+//`showcase.json` covers every built-in content type plus layouts, localization, animation, stacking, translation keys,
+//Shift folding, common transforms, constraints, overflow, and viewport stress cases. `all_conditions.json` covers all
+//built-in conditions and their common value forms.
+//
+//## Java API
+//
+//### Register a content type
+//
+//```java
+//TipContentRegistry.registerParser("my_type", (json, context) -> {
+    //String value = context.getString(json, "value", "");
+    //return new MyTipContent(value);
+//});
+//```
+//
+//### Add or clear runtime content
+//
+//```java
+//TipRuntimeContentRegistry.register(
+    //"example:my_item",
+    //new TipContentEntry(myContent, List.of(), false, false)
+//);
+//
+//TipRuntimeContentRegistry.clearNamespace("example");
+//```
+//
+//### Register variables, conditions, and component readers
+//
+//```java
+//VariableResolver.registerVariable("my_value", stack -> "42");
+//
+//ConditionChecker.registerCondition(
+    //"my_condition",
+    //(value, stack, player, level) -> Boolean.TRUE.equals(value)
+//);
+//
+//ComponentReaderRegistry.register("my_component", reader);
+//```
+//
+//`TipEventManager` also exposes reload, pre-render, and post-render hooks for mod integrations. Use the data-generation
+//builders under `com.cooobird.datatip.datagen` when generating JSON from Java.
+//
+//## Complete JSON example
+//
+//The following file is directly usable as `assets/example/datatip/readme_showcase.json`. It covers all 15 built-in
+//content types as well as translation keys, common modifiers, Stack/Z ordering, and independent Shift folding:
+//
+//```json
+//{
+  //"minecraft:diamond": {
+    //"type": "vbox",
+    //"gap": 3,
+    //"padding": 2,
+    //"align": "center",
+    //"children": [
+      //{
+        //"type": "text",
+        //"translate": "example.tooltip.title",
+        //"color": "aqua",
+        //"bold": true,
+        //"selfAlignX": "center"
+      //},
+      //{
+        //"type": "divider",
+        //"style": "dashed",
+        //"widthMode": "fixed",
+        //"width": 150,
+        //"color": "dark_aqua"
+      //},
+      //{
+        //"type": "hbox",
+        //"gap": 6,
+        //"align": "center",
+        //"children": [
+          //{
+            //"type": "item",
+            //"item": "minecraft:diamond",
+            //"count": 8,
+            //"size": 24,
+            //"showCount": true
+          //},
+          //{
+            //"type": "progress",
+            //"progress": 0.75,
+            //"width": 110,
+            //"height": 8,
+            //"style": "gradient",
+            //"label": "75%",
+            //"labelAlign": "right"
+          //}
+        //]
+      //},
+      //{
+        //"type": "stack",
+        //"padding": 3,
+        //"horizontalAlign": "center",
+        //"verticalAlign": "center",
+        //"children": [
+          //{
+            //"type": "block",
+            //"block": "minecraft:diamond_block",
+            //"size": 56,
+            //"rotationSpeed": 0.6,
+            //"offsetZ": -10
+          //},
+          //{
+            //"type": "text",
+            //"translate": "example.tooltip.foreground",
+            //"color": "yellow",
+            //"bold": true,
+            //"shadow": true,
+            //"offsetX": 4,
+            //"offsetY": -2,
+            //"offsetZ": 10
+          //}
+        //]
+      //},
+      //{
+        //"type": "text",
+        //"translate": "example.tooltip.shift_detail",
+        //"color": "light_purple",
+        //"shift": true
+      //}
+    //]
+  //},
+  //"minecraft:carrot_on_a_stick": {
+    //"type": "stack",
+    //"padding": 4,
+    //"horizontalAlign": "center",
+    //"verticalAlign": "bottom",
+    //"children": [
+      //{
+        //"type": "entity",
+        //"entity": "minecraft:pig",
+        //"size": 72,
+        //"rotationSpeed": 1.0,
+        //"autoRotate": true,
+        //"offsetZ": -5
+      //},
+      //{
+        //"type": "text",
+        //"text": {
+          //"zh_cn": "文字位于完整猪模型之上",
+          //"en_us": "Text above the complete pig model"
+        //},
+        //"color": "gold",
+        //"bold": true,
+        //"offsetY": -4,
+        //"offsetZ": 5
+      //}
+    //]
+  //},
+  //"minecraft:clock": {
+    //"type": "carousel",
+    //"intervalSeconds": 3,
+    //"transition": "slide",
+    //"frames": [
+      //{
+        //"type": "atlas",
+        //"item": "minecraft:clock",
+        //"size": 32,
+        //"label": {"translate": "item.minecraft.clock"}
+      //},
+      //{
+        //"type": "image",
+        //"texture": "minecraft:textures/item/clock_00.png",
+        //"width": 32,
+        //"height": 32,
+        //"textureWidth": 32,
+        //"textureHeight": 32
+      //},
+      //{
+        //"type": "typewriter",
+        //"lines": {
+          //"zh_cn": ["轮播第三帧", "打字机文本"],
+          //"en_us": ["Carousel frame three", "Typewriter text"]
+        //},
+        //"charsPerSecond": 16,
+        //"pauseSeconds": 1,
+        //"loop": true,
+        //"color": "white",
+        //"align": "center"
+      //}
+    //]
+  //},
+  //"minecraft:slime_ball": {
+    //"type": "vbox",
+    //"gap": 3,
+    //"children": [
+      //{"type": "spacer", "height": 4},
+      //{
+        //"type": "chart",
+        //"chartType": "bar",
+        //"width": 150,
+        //"height": 60,
+        //"title": {"translate": "example.tooltip.chart"},
+        //"showLabels": true,
+        //"showValues": true,
+        //"entries": [
+          //{"label": "A", "value": 3, "color": "red"},
+          //{"label": "B", "value": 7, "color": "green"},
+          //{"label": "C", "valueExpr": "{count}", "color": "blue"}
+        //]
+      //}
+    //]
+  //}
+//}
+//```
+//
+//Translation keys used by the example can be placed in `assets/example/lang/en_us.json` and
+//`assets/example/lang/zh_cn.json`. The generated `showcase.json` remains the exhaustive stress-test reference.
+//
+//## License
+//
+//DataTip is licensed under the GNU Lesser General Public License 3.0. See [LICENSE](LICENSE).
+//

@@ -14,7 +14,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import java.util.*;
 
 /**
- * 轮播容器内容。
+ * 轮播容器内容。<br>
  * 自动切换显示子内容。
  *
  * @author cooobird
@@ -58,7 +58,9 @@ public class CarouselContent implements TipContent, PreparedContent {
         return transition;
     }
 
-    // 获取轮播间隔
+    /**
+     * 获取轮播间隔
+     */
     public int getIntervalSeconds() {
         return (int) Math.min(Integer.MAX_VALUE, intervalTicks / 20L);
     }

@@ -11,11 +11,11 @@ import java.util.Locale;
 /**
  * ProgressContent 解析器。
  * <p>
- * 负责将 JSON 对象解析为 {@link ProgressContent} 实例。
+ * 负责将 JSON 对象解析为 {@link ProgressContent} 实例。<br>
  * 进度条用于显示进度、血量、耐久等数值。
  * </p>
  *
- * <h3>支持的 JSON 格式</h3>
+ * <p>支持的 JSON 格式</p>
  * <pre>{@code
  * // 基础进度条
  * {
@@ -57,23 +57,23 @@ import java.util.Locale;
  * }
  * }</pre>
  *
- * <h3>字段说明</h3>
- * <table border="1">
- *   <tr><th>字段</th><th>类型</th><th>默认值</th><th>说明</th></tr>
- *   <tr><td>progress</td><td>float</td><td>0.0</td><td>进度值（0.0-1.0）</td></tr>
- *   <tr><td>width</td><td>int</td><td>100</td><td>宽度（像素）</td></tr>
- *   <tr><td>height</td><td>int</td><td>8</td><td>高度（像素）</td></tr>
- *   <tr><td>colorFg</td><td>String</td><td>"#55FF55"</td><td>前景色</td></tr>
- *   <tr><td>colorBg</td><td>String</td><td>"#333333"</td><td>背景色</td></tr>
- *   <tr><td>colorFgLight</td><td>String</td><td>null</td><td>渐变前景色（可选）</td></tr>
- *   <tr><td>colorBgDark</td><td>String</td><td>null</td><td>渐变背景色（可选）</td></tr>
- *   <tr><td>style</td><td>String</td><td>"gradient"</td><td>样式（gradient/flat/segmented/animated）</td></tr>
- *   <tr><td>showLabel</td><td>boolean</td><td>false</td><td>是否显示标签</td></tr>
- *   <tr><td>label</td><td>String</td><td>null</td><td>自定义标签文本</td></tr>
- *   <tr><td>labelAlign</td><td>String</td><td>"left"</td><td>标签对齐（left/center/right）</td></tr>
- *   <tr><td>animated</td><td>boolean</td><td>false</td><td>是否启用动画</td></tr>
- *   <tr><td>animSpeed</td><td>int</td><td>2</td><td>动画速度</td></tr>
- * </table>
+ * <p>字段说明</p>
+ * <pre>{@code
+ *   字段 | 类型 | 默认值 | 说明
+ *   progress | float | 0.0 | 进度值（0.0-1.0）
+ *   width | int | 100 | 宽度（像素）
+ *   height | int | 8 | 高度（像素）
+ *   colorFg | String | "#55FF55" | 前景色
+ *   colorBg | String | "#333333" | 背景色
+ *   colorFgLight | String | null | 渐变前景色（可选）
+ *   colorBgDark | String | null | 渐变背景色（可选）
+ *   style | String | "gradient" | 样式（gradient/flat/segmented/animated）
+ *   showLabel | boolean | false | 是否显示标签
+ *   label | String | null | 自定义标签文本
+ *   labelAlign | String | "left" | 标签对齐（left/center/right）
+ *   animated | boolean | false | 是否启用动画
+ *   animSpeed | int | 2 | 动画速度
+ * }</pre>
  *
  * @author cooobird
  * @see ProgressContent 进度条内容类

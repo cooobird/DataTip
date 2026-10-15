@@ -97,6 +97,12 @@ tasks.named('processResources', ProcessResources) {
 
 java.withSourcesJar()
 
+tasks.withType(Javadoc).configureEach {
+    options.encoding = 'UTF-8'
+    options.charSet = 'UTF-8'
+    options.docEncoding = 'UTF-8'
+}
+
 publishing {
     publications {
         register('mavenJava', MavenPublication) {

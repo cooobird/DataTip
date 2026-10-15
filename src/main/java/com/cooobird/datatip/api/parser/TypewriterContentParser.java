@@ -18,7 +18,7 @@ import java.util.Map;
 /**
  * TypewriterContent 解析器。
  * <p>
- * 负责将 JSON 对象解析为 {@link TypewriterContent} 实例。
+ * 负责将 JSON 对象解析为 {@link TypewriterContent} 实例。<br>
  * 打字机效果会逐字显示文本，支持多语言和完整样式。
  * </p>
  *

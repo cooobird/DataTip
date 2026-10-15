@@ -12,7 +12,7 @@ import java.util.Objects;
 /**
  * 将公共节点修饰符统一应用到一次准备完成的布局。
  *
- * <p>该类只改变 DataTip 组件内部的几何与命令树，不参与原版 Tooltip 的
+ * <p>该类只改变 DataTip 组件内部的几何与命令树，不参与原版 Tooltip 的<br>
  * 定位、鼠标锚点、背景或边框绘制。</p>
  */
 public final class TipModifierLayout {
