@@ -46,22 +46,30 @@ public record ImageContent(
         this.offsetY = ContentBounds.offset(offsetY);
     }
 
-    // 创建图片内容
+    /**
+     * 创建图片内容
+     */
     public static ImageContent of(ResourceLocation texture, int width, int height) {
         return new ImageContent(texture, width, height, 0, 0, width, height, 1.0f, 0, 0);
     }
 
-    // 创建图片内容
+    /**
+     * 创建图片内容
+     */
     public static ImageContent of(ResourceLocation texture, int width, int height, float scale) {
         return new ImageContent(texture, width, height, 0, 0, width, height, scale, 0, 0);
     }
 
-    // 创建纹理图集中的图片
+    /**
+     * 创建纹理图集中的图片
+     */
     public static ImageContent fromAtlas(ResourceLocation texture, int u, int v, int width, int height, int textureWidth, int textureHeight) {
         return new ImageContent(texture, width, height, u, v, textureWidth, textureHeight, 1.0f, 0, 0);
     }
 
-    // 创建带偏移的图片内容
+    /**
+     * 创建带偏移的图片内容
+     */
     public static ImageContent withOffset(ResourceLocation texture, int width, int height, int offsetX, int offsetY) {
         return new ImageContent(texture, width, height, 0, 0, width, height, 1.0f, offsetX, offsetY);
     }

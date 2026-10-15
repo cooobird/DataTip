@@ -10,7 +10,7 @@ import java.util.*;
 import java.util.regex.Pattern;
 
 /**
- * Tip 内容索引。
+ * Tip 内容索引。<br>
  * 负责精确物品、标签和通配符三种查询方式。
  */
 public final class TipContentIndex {

@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 图表在布局阶段生成的紧凑几何快照。
+ * 图表在布局阶段生成的紧凑几何快照。<br>
  * 折线保留为线段并在绘制时按物理视口裁剪，饼图只缓存圆内的可见扫描线。
  */
 final class PreparedChartGeometry implements PreparedViewportDraw {

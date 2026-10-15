@@ -22,7 +22,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * 用于注册和查找内容解析器。支持扩展自定义内容类型。
  * </p>
  *
- * <h3>注册自定义内容类型</h3>
+ * <p>注册自定义内容类型</p>
  * <pre>{@code
  * // 注册解析器
  * TipContentRegistry.registerParser("my_type", (json, context) -> {
@@ -34,25 +34,25 @@ import java.util.concurrent.atomic.AtomicLong;
  * // {"type": "my_type", "text": "Hello"}
  * }</pre>
  *
- * <h3>内置内容类型</h3>
- * <table border="1">
- *   <tr><th>类型</th><th>说明</th></tr>
- *   <tr><td>text</td><td>文本内容</td></tr>
- *   <tr><td>item</td><td>物品内容</td></tr>
- *   <tr><td>block</td><td>方块内容</td></tr>
- *   <tr><td>entity</td><td>实体内容</td></tr>
- *   <tr><td>progress</td><td>进度条内容</td></tr>
- *   <tr><td>carousel</td><td>轮播内容</td></tr>
- *   <tr><td>typewriter</td><td>打字机内容</td></tr>
- *   <tr><td>atlas</td><td>纹理内容</td></tr>
- *   <tr><td>image</td><td>图片内容</td></tr>
- *   <tr><td>chart</td><td>图表内容</td></tr>
- *   <tr><td>vbox</td><td>垂直布局</td></tr>
- *   <tr><td>hbox</td><td>水平布局</td></tr>
- *   <tr><td>stack</td><td>共享 XY 区域的叠放布局</td></tr>
- *   <tr><td>divider</td><td>分割线</td></tr>
- *   <tr><td>spacer</td><td>间距</td></tr>
- * </table>
+ * <p>内置内容类型</p>
+ * <pre>{@code
+ *   类型 | 说明
+ *   text | 文本内容
+ *   item | 物品内容
+ *   block | 方块内容
+ *   entity | 实体内容
+ *   progress | 进度条内容
+ *   carousel | 轮播内容
+ *   typewriter | 打字机内容
+ *   atlas | 纹理内容
+ *   image | 图片内容
+ *   chart | 图表内容
+ *   vbox | 垂直布局
+ *   hbox | 水平布局
+ *   stack | 共享 XY 区域的叠放布局
+ *   divider | 分割线
+ *   spacer | 间距
+ * }</pre>
  *
  * @author cooobird
  * @see ContentParser 内容解析器接口

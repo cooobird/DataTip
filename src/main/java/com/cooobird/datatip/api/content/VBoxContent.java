@@ -25,22 +25,30 @@ public record VBoxContent(List<TipContent> children, int gap, int padding,
         this.horizontalAlign = horizontalAlign != null ? horizontalAlign : HorizontalAlign.LEFT;
     }
 
-    // 创建默认垂直布局
+    /**
+     * 创建默认垂直布局
+     */
     public static VBoxContent create() {
         return new VBoxContent(List.of(), 0, 0, HorizontalAlign.LEFT);
     }
 
-    // 创建带间距的垂直布局
+    /**
+     * 创建带间距的垂直布局
+     */
     public static VBoxContent withGap(int gap) {
         return new VBoxContent(List.of(), gap, 0, HorizontalAlign.LEFT);
     }
 
-    // 创建带内边距的垂直布局
+    /**
+     * 创建带内边距的垂直布局
+     */
     public static VBoxContent withPadding(int padding) {
         return new VBoxContent(List.of(), 0, padding, HorizontalAlign.LEFT);
     }
 
-    // 创建居中对齐的垂直布局
+    /**
+     * 创建居中对齐的垂直布局
+     */
     public static VBoxContent centered() {
         return new VBoxContent(List.of(), 0, 0, HorizontalAlign.CENTER);
     }
@@ -122,7 +130,9 @@ public record VBoxContent(List<TipContent> children, int gap, int padding,
         }
     }
 
-    // 水平对齐方式
+    /**
+     * 水平对齐方式
+     */
     public enum HorizontalAlign {
         LEFT, CENTER, RIGHT
     }

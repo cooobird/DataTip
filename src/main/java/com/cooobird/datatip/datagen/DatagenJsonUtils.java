@@ -3,6 +3,7 @@ package com.cooobird.datatip.datagen;
 import com.cooobird.datatip.api.TipContent;
 import com.cooobird.datatip.api.util.ColorParser;
 import com.google.gson.JsonArray;
+import net.minecraft.resources.ResourceLocation;
 
 import java.util.List;
 
@@ -11,6 +12,14 @@ import java.util.List;
  */
 final class DatagenJsonUtils {
     private DatagenJsonUtils() {
+    }
+
+    static ResourceLocation parseResourceLocation(String value) {
+        ResourceLocation id = ResourceLocation.tryParse(value);
+        if (id == null) {
+            throw new IllegalArgumentException("Invalid resource location: " + value);
+        }
+        return id;
     }
 
     static JsonArray childrenToJson(List<TipContent> children) {

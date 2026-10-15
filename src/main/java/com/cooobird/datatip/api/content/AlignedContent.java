@@ -10,11 +10,11 @@ import com.cooobird.datatip.api.layout.TipPrepareContext;
 /**
  * 对齐包装器。
  * <p>
- * 为旧的程序化 API 保留任意内容的对齐包装能力。
+ * 为旧的程序化 API 保留任意内容的对齐包装能力。<br>
  * 现代 JSON 使用通用 {@code selfAlign} 修饰符。
  * </p>
  *
- * <h3>使用示例</h3>
+ * <p>使用示例</p>
  * <pre>{@code
  * // 任何内容都可以指定对齐
  * {"type": "item", "item": "minecraft:diamond", "size": 32, "selfAlign": "center"}

@@ -8,11 +8,11 @@ import com.cooobird.datatip.api.node.TipModifiers;
 /**
  * Tooltip 内容的基础接口。
  * <p>
- * 所有自定义内容类型（文本、物品、进度条等）都应实现此接口。
+ * 所有自定义内容类型（文本、物品、进度条等）都应实现此接口。<br>
  * DataTip 通过此接口统一管理不同类型的内容渲染。
  * </p>
  *
- * <h3>实现示例</h3>
+ * <p>实现示例</p>
  * <pre>{@code
  * public record MyCustomContent(String text) implements TipContent {
  *     @Override
@@ -28,23 +28,23 @@ import com.cooobird.datatip.api.node.TipModifiers;
  * }
  * }</pre>
  *
- * <h3>内置实现</h3>
- * <ul>
- *   <li>{@link com.cooobird.datatip.api.content.TextContent} - 文本内容</li>
- *   <li>{@link com.cooobird.datatip.api.content.ItemContent} - 物品内容</li>
- *   <li>{@link com.cooobird.datatip.api.content.BlockContent} - 方块内容</li>
- *   <li>{@link com.cooobird.datatip.api.content.EntityContent} - 实体内容</li>
- *   <li>{@link com.cooobird.datatip.api.content.ProgressContent} - 进度条内容</li>
- *   <li>{@link com.cooobird.datatip.api.content.CarouselContent} - 轮播内容</li>
- *   <li>{@link com.cooobird.datatip.api.content.TypewriterContent} - 打字机内容</li>
- *   <li>{@link com.cooobird.datatip.api.content.AtlasContent} - 纹理内容</li>
- *   <li>{@link com.cooobird.datatip.api.content.ImageContent} - 图片内容</li>
- *   <li>{@link com.cooobird.datatip.api.content.ChartContent} - 图表内容</li>
- *   <li>{@link com.cooobird.datatip.api.content.VBoxContent} - 垂直布局</li>
- *   <li>{@link com.cooobird.datatip.api.content.HBoxContent} - 水平布局</li>
- *   <li>{@link com.cooobird.datatip.api.content.DividerContent} - 分割线</li>
- *   <li>{@link com.cooobird.datatip.api.content.SpacerContent} - 间距</li>
- * </ul>
+ * <p>内置实现</p>
+ *
+ *   - {@link com.cooobird.datatip.api.content.TextContent} - 文本内容<br>
+ *   - {@link com.cooobird.datatip.api.content.ItemContent} - 物品内容<br>
+ *   - {@link com.cooobird.datatip.api.content.BlockContent} - 方块内容<br>
+ *   - {@link com.cooobird.datatip.api.content.EntityContent} - 实体内容<br>
+ *   - {@link com.cooobird.datatip.api.content.ProgressContent} - 进度条内容<br>
+ *   - {@link com.cooobird.datatip.api.content.CarouselContent} - 轮播内容<br>
+ *   - {@link com.cooobird.datatip.api.content.TypewriterContent} - 打字机内容<br>
+ *   - {@link com.cooobird.datatip.api.content.AtlasContent} - 纹理内容<br>
+ *   - {@link com.cooobird.datatip.api.content.ImageContent} - 图片内容<br>
+ *   - {@link com.cooobird.datatip.api.content.ChartContent} - 图表内容<br>
+ *   - {@link com.cooobird.datatip.api.content.VBoxContent} - 垂直布局<br>
+ *   - {@link com.cooobird.datatip.api.content.HBoxContent} - 水平布局<br>
+ *   - {@link com.cooobird.datatip.api.content.DividerContent} - 分割线<br>
+ *   - {@link com.cooobird.datatip.api.content.SpacerContent} - 间距<br>
+ *
  *
  * @author cooobird
  * @see TipRenderContext 渲染上下文
@@ -73,7 +73,7 @@ public interface TipContent {
     /**
      * 使用完整布局上下文获取内容高度。
      * <p>
-     * 默认实现委派给旧宽度接口，现有第三方内容无需修改即可继续工作。需要按物品变量或字体
+     * 默认实现委派给旧宽度接口，现有第三方内容无需修改即可继续工作。需要按物品变量或字体<br>
      * 精确测量的内容可以覆盖此方法。
      * </p>
      */
@@ -118,7 +118,7 @@ public interface TipContent {
     /**
      * 是否因 Shift 折叠而显示为提示行（而非完整内容）。
      * <p>
-     * 容器（如 VBox）可用此方法判断是否需要将多个折叠项
+     * 容器（如 VBox）可用此方法判断是否需要将多个折叠项<br>
      * 合并为一条"按住 Shift 显示详情"提示。
      * </p>
      *
@@ -215,7 +215,7 @@ public interface TipContent {
     /**
      * 在当前语言环境下是否有可显示的内容。
      * <p>
-     * 多语言文本若当前语言无对应翻译则返回 false。
+     * 多语言文本若当前语言无对应翻译则返回 false。<br>
      * 容器在判断折叠合并时应跳过无内容的子元素。
      * </p>
      *
@@ -228,7 +228,7 @@ public interface TipContent {
     /**
      * 此内容是否需要每帧更新（动画）。
      * <p>
-     * 返回 true 时，{@link #tick(int)} 方法会在每 tick 被调用。
+     * 返回 true 时，{@link #tick(int)} 方法会在每 tick 被调用。<br>
      * 用于实现旋转、闪烁等动画效果。
      * </p>
      *
@@ -239,7 +239,7 @@ public interface TipContent {
     }
 
     /**
-     * 每 tick 调用一次，用于动画更新。
+     * 每 tick 调用一次，用于动画更新。<br>
      * 仅当 {@link #isAnimated()} 返回 true 时调用。
      *
      * @param tickCount 当前 tick 计数

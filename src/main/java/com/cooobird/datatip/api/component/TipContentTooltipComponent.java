@@ -32,7 +32,7 @@ import java.util.Objects;
 /**
  * 将 DataTip 内容接入原版 TooltipComponent 调用链。
  * <p>
- * 原版会在一次绘制中多次查询宽高，因此本组件缓存同一个 PreparedLayout，
+ * 原版会在一次绘制中多次查询宽高，因此本组件缓存同一个 PreparedLayout，<br>
  * 文字阶段和图片阶段只消费快照，不再重新测量内容。
  * </p>
  */
@@ -333,7 +333,7 @@ public final class TipContentTooltipComponent
     }
 
     /**
-     * 其他 Tooltip 模组可能缓存组件并在悬停结束后再次查询或绘制。
+     * 其他 Tooltip 模组可能缓存组件并在悬停结束后再次查询或绘制。<br>
      * 旧组件不能继续使用已释放的会话缓存和渲染资源。
      */
     boolean isExpired() {

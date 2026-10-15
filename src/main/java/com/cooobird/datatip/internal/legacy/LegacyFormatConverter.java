@@ -12,7 +12,7 @@ import java.util.ArrayDeque;
 import java.util.Map;
 
 /**
- * 老版本格式转换器。
+ * 老版本格式转换器。<br>
  * 将老版本 datatip.json 格式转换为新版本 TipContent 格式。
  * <p>
  * 老版本格式：
@@ -48,7 +48,7 @@ public class LegacyFormatConverter {
     private static final Logger LOGGER = LogUtils.getLogger();
 
     /**
-     * 检测是否为老版本格式。
+     * 检测是否为老版本格式。<br>
      * 如果任何条目没有 "type" 字段，则认为是老版本格式。
      */
     public static boolean isLegacyFormat(JsonObject json) {
@@ -56,8 +56,8 @@ public class LegacyFormatConverter {
     }
 
     /**
-     * 将老版本格式转换为新版本格式。
-     * 保留 shift、prepend、conditions 等顶层属性。
+     * 将老版本格式转换为新版本格式。<br>
+     * 保留 shift、prepend、conditions 等顶层属性。<br>
      * 同时将转换结果写入输出目录。
      */
     public static JsonObject convert(JsonObject legacyJson, ResourceLocation location) {

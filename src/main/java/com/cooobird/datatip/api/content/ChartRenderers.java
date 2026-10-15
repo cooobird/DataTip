@@ -3,7 +3,7 @@ package com.cooobird.datatip.api.content;
 import com.cooobird.datatip.api.TipRenderContext;
 
 /**
- * 图表绘制分发器。
+ * 图表绘制分发器。<br>
  * 只负责按图表类型转发，具体绘制逻辑由各类型渲染器承担。
  */
 final class ChartRenderers {

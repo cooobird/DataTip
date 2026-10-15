@@ -35,7 +35,7 @@ public class ConditionChecker {
     private static final AtomicLong REVISION = new AtomicLong();
 
     /**
-     * 自定义条件接口。
+     * 自定义条件接口。<br>
      * 其他 mod 可以实现此接口来注册自定义条件。
      */
     @FunctionalInterface

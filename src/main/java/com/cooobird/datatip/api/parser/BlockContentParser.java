@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.Blocks;
 /**
  * BlockContent 解析器。
  * <p>
- * 负责将 JSON 对象解析为 {@link BlockContent} 实例。
+ * 负责将 JSON 对象解析为 {@link BlockContent} 实例。<br>
  * 支持自动旋转和可选标签。
  * </p>
  *
- * <h3>支持的 JSON 格式</h3>
+ * <p>支持的 JSON 格式</p>
  * <pre>{@code
  * // 基础方块渲染
  * {
@@ -44,17 +44,17 @@ import net.minecraft.world.level.block.Blocks;
  * }
  * }</pre>
  *
- * <h3>字段说明</h3>
- * <table border="1">
- *   <tr><th>字段</th><th>类型</th><th>默认值</th><th>说明</th></tr>
- *   <tr><td>block</td><td>String</td><td>"minecraft:stone"</td><td>方块 ID</td></tr>
- *   <tr><td>size</td><td>int</td><td>32</td><td>渲染大小</td></tr>
- *   <tr><td>rotationSpeed</td><td>float</td><td>0.5</td><td>旋转速度</td></tr>
- *   <tr><td>autoRotate</td><td>boolean</td><td>true</td><td>是否自动旋转</td></tr>
- *   <tr><td>offsetX</td><td>int</td><td>0</td><td>X 轴偏移量</td></tr>
- *   <tr><td>offsetY</td><td>int</td><td>0</td><td>Y 轴偏移量</td></tr>
- *   <tr><td>label</td><td>String</td><td>null</td><td>标签文本</td></tr>
- * </table>
+ * <p>字段说明</p>
+ * <pre>{@code
+ *   字段 | 类型 | 默认值 | 说明
+ *   block | String | "minecraft:stone" | 方块 ID
+ *   size | int | 32 | 渲染大小
+ *   rotationSpeed | float | 0.5 | 旋转速度
+ *   autoRotate | boolean | true | 是否自动旋转
+ *   offsetX | int | 0 | X 轴偏移量
+ *   offsetY | int | 0 | Y 轴偏移量
+ *   label | String | null | 标签文本
+ * }</pre>
  *
  * @author cooobird
  * @see BlockContent 方块内容类

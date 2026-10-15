@@ -10,11 +10,11 @@ import java.util.Locale;
 /**
  * DividerContent 解析器。
  * <p>
- * 负责将 JSON 对象解析为 {@link DividerContent} 实例。
+ * 负责将 JSON 对象解析为 {@link DividerContent} 实例。<br>
  * 分割线用于在 tooltip 中分隔不同内容区域。
  * </p>
  *
- * <h3>支持的 JSON 格式</h3>
+ * <p>支持的 JSON 格式</p>
  * <pre>{@code
  * // 基础分割线（填充整个宽度）
  * {
@@ -46,17 +46,17 @@ import java.util.Locale;
  * }
  * }</pre>
  *
- * <h3>字段说明</h3>
- * <table border="1">
- *   <tr><th>字段</th><th>类型</th><th>默认值</th><th>说明</th></tr>
- *   <tr><td>color</td><td>String</td><td>"#555555"</td><td>颜色（命名色或十六进制）</td></tr>
- *   <tr><td>thickness</td><td>int</td><td>1</td><td>线条粗细（像素）</td></tr>
- *   <tr><td>width</td><td>int</td><td>0</td><td>宽度（像素，0=自动）</td></tr>
- *   <tr><td>widthMode</td><td>String</td><td>"fill"</td><td>宽度模式（fill/fixed/centered）</td></tr>
- *   <tr><td>marginTop</td><td>int</td><td>2</td><td>上边距（像素）</td></tr>
- *   <tr><td>marginBottom</td><td>int</td><td>2</td><td>下边距（像素）</td></tr>
- *   <tr><td>style</td><td>String</td><td>"solid"</td><td>线条样式（solid/dashed/dotted）</td></tr>
- * </table>
+ * <p>字段说明</p>
+ * <pre>{@code
+ *   字段 | 类型 | 默认值 | 说明
+ *   color | String | "#555555" | 颜色（命名色或十六进制）
+ *   thickness | int | 1 | 线条粗细（像素）
+ *   width | int | 0 | 宽度（像素，0=自动）
+ *   widthMode | String | "fill" | 宽度模式（fill/fixed/centered）
+ *   marginTop | int | 2 | 上边距（像素）
+ *   marginBottom | int | 2 | 下边距（像素）
+ *   style | String | "solid" | 线条样式（solid/dashed/dotted）
+ * }</pre>
  *
  * @author cooobird
  * @see DividerContent 分割线内容类

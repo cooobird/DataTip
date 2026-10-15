@@ -11,7 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * 物品图标内容。
+ * 物品图标内容。<br>
  * 渲染物品图标，可选显示数量、耐久条、标签文字。
  *
  * @author cooobird
@@ -51,42 +51,58 @@ public record ItemContent(
         this.offsetY = ContentBounds.offset(offsetY);
     }
 
-    // 创建物品内容
+    /**
+     * 创建物品内容
+     */
     public static ItemContent of(ItemStack stack) {
         return new ItemContent(stack, 16, true, true, false, null, null, 0, 0);
     }
 
-    // 创建物品内容
+    /**
+     * 创建物品内容
+     */
     public static ItemContent of(ItemStack stack, int size) {
         return new ItemContent(stack, size, true, true, false, null, null, 0, 0);
     }
 
-    // 创建带标签的物品内容
+    /**
+     * 创建带标签的物品内容
+     */
     public static ItemContent withLabel(ItemStack stack, Component label) {
         return new ItemContent(stack, 16, true, true, true, label, 0xFFFFFF, 0, 0);
     }
 
-    // 创建带标签的物品内容
+    /**
+     * 创建带标签的物品内容
+     */
     public static ItemContent withLabel(ItemStack stack, Component label, int labelColor) {
         return new ItemContent(stack, 16, true, true, true, label, labelColor, 0, 0);
     }
 
-    // 创建大尺寸物品图标
+    /**
+     * 创建大尺寸物品图标
+     */
     public static ItemContent large(ItemStack stack) {
         return new ItemContent(stack, 32, true, true, false, null, null, 0, 0);
     }
 
-    // 创建只显示图标的物品内容
+    /**
+     * 创建只显示图标的物品内容
+     */
     public static ItemContent iconOnly(ItemStack stack) {
         return new ItemContent(stack, 16, false, false, false, null, null, 0, 0);
     }
 
-    // 创建只显示图标的物品内容
+    /**
+     * 创建只显示图标的物品内容
+     */
     public static ItemContent iconOnly(ItemStack stack, int size) {
         return new ItemContent(stack, size, false, false, false, null, null, 0, 0);
     }
 
-    // 创建带偏移的物品内容
+    /**
+     * 创建带偏移的物品内容
+     */
     public static ItemContent withOffset(ItemStack stack, int size, int offsetX, int offsetY) {
         return new ItemContent(stack, size, true, true, false, null, null, offsetX, offsetY);
     }

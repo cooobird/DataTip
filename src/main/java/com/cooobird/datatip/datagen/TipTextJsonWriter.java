@@ -45,7 +45,9 @@ final class TipTextJsonWriter {
         } else if (textContent.text() != null) {
             json.addProperty("text", textContent.text());
         }
-        if (textContent.color() != 0xFFFFFF)
+        if (textContent.colorExpression() != null)
+            json.addProperty("color", textContent.colorExpression());
+        else if (textContent.color() != 0xFFFFFF)
             json.addProperty("color", DatagenJsonUtils.colorToHex(textContent.color()));
         if (textContent.font() != null)
             json.addProperty("font", textContent.font().toString());

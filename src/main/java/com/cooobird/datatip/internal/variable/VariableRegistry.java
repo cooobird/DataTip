@@ -12,7 +12,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * 变量注册表。
+ * 变量注册表。<br>
  * 存放内置变量和外部注册的自定义变量。
  */
 public final class VariableRegistry {

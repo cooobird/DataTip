@@ -14,11 +14,11 @@ import net.minecraft.world.item.Items;
 /**
  * ItemContent 解析器。
  * <p>
- * 负责将 JSON 对象解析为 {@link ItemContent} 实例。
+ * 负责将 JSON 对象解析为 {@link ItemContent} 实例。<br>
  * 物品内容用于渲染物品图标，支持显示数量、耐久、标签等。
  * </p>
  *
- * <h3>支持的 JSON 格式</h3>
+ * <p>支持的 JSON 格式</p>
  * <pre>{@code
  * // 基础物品渲染
  * {
@@ -45,20 +45,20 @@ import net.minecraft.world.item.Items;
  * }
  * }</pre>
  *
- * <h3>字段说明</h3>
- * <table border="1">
- *   <tr><th>字段</th><th>类型</th><th>默认值</th><th>说明</th></tr>
- *   <tr><td>item</td><td>String</td><td>"minecraft:air"</td><td>物品 ID</td></tr>
- *   <tr><td>count</td><td>int</td><td>1</td><td>物品数量</td></tr>
- *   <tr><td>size</td><td>int</td><td>16</td><td>渲染大小</td></tr>
- *   <tr><td>showCount</td><td>boolean</td><td>true</td><td>是否显示数量</td></tr>
- *   <tr><td>showDurability</td><td>boolean</td><td>true</td><td>是否显示耐久</td></tr>
- *   <tr><td>showLabel</td><td>boolean</td><td>false</td><td>是否显示标签</td></tr>
- *   <tr><td>label</td><td>String</td><td>null</td><td>自定义标签文本</td></tr>
- *   <tr><td>labelColor</td><td>String</td><td>"#FFFFFF"</td><td>标签颜色</td></tr>
- *   <tr><td>offsetX</td><td>int</td><td>0</td><td>X 轴偏移量</td></tr>
- *   <tr><td>offsetY</td><td>int</td><td>0</td><td>Y 轴偏移量</td></tr>
- * </table>
+ * <p>字段说明</p>
+ * <pre>{@code
+ *   字段 | 类型 | 默认值 | 说明
+ *   item | String | "minecraft:air" | 物品 ID
+ *   count | int | 1 | 物品数量
+ *   size | int | 16 | 渲染大小
+ *   showCount | boolean | true | 是否显示数量
+ *   showDurability | boolean | true | 是否显示耐久
+ *   showLabel | boolean | false | 是否显示标签
+ *   label | String | null | 自定义标签文本
+ *   labelColor | String | "#FFFFFF" | 标签颜色
+ *   offsetX | int | 0 | X 轴偏移量
+ *   offsetY | int | 0 | Y 轴偏移量
+ * }</pre>
  *
  * @author cooobird
  * @see ItemContent 物品内容类

@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 打字机效果内容。
+ * 打字机效果内容。<br>
  * 逐字显示文本，支持与 TextContent 相同的样式和多语言。
  *
  * @author cooobird

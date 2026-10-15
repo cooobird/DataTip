@@ -12,7 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Tooltip 渲染上下文。
+ * Tooltip 渲染上下文。<br>
  * 封装 GuiGraphics、字体、动画状态和当前物品栈，提供内容渲染时需要的常用绘制方法。
  *
  * @param graphics    GuiGraphics 实例

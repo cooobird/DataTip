@@ -5,25 +5,25 @@ import net.minecraftforge.common.ForgeConfigSpec;
 /**
  * DataTip 配置类。
  * <p>
- * 定义了 DataTip 模组的所有配置选项。
+ * 定义了 DataTip 模组的所有配置选项。<br>
  * 配置文件位于 {@code config/datatip-common.toml}。
  * </p>
  *
- * <h3>配置选项</h3>
- * <table border="1">
- *   <tr><th>选项</th><th>类型</th><th>默认值</th><th>说明</th></tr>
- *   <tr><td>enabled</td><td>boolean</td><td>true</td><td>启用/禁用 DataTip</td></tr>
- *   <tr><td>default_color</td><td>enum</td><td>GRAY</td><td>默认文本颜色预设</td></tr>
- *   <tr><td>default_color_value</td><td>string</td><td>#FFAAAAAA</td><td>自定义默认文本颜色</td></tr>
- *   <tr><td>default_line_height</td><td>int</td><td>0</td><td>默认行高（0=使用原版字体行高）</td></tr>
- *   <tr><td>max_width</td><td>int</td><td>0</td><td>DataTip 内容宽度覆盖值（0=自然宽度）</td></tr>
- *   <tr><td>shift_hint_color</td><td>enum</td><td>CUSTOM</td><td>Shift 提示颜色预设</td></tr>
- *   <tr><td>shift_hint_color_value</td><td>string</td><td>#FF888888</td><td>自定义 Shift 提示颜色</td></tr>
- *   <tr><td>scroll_hint_color</td><td>enum</td><td>CUSTOM</td><td>滚动提示颜色预设</td></tr>
- *   <tr><td>scroll_hint_color_value</td><td>string</td><td>#FF888888</td><td>自定义滚动提示颜色</td></tr>
- * </table>
+ * <p>配置选项</p>
+ * <pre>{@code
+ *   选项 | 类型 | 默认值 | 说明
+ *   enabled | boolean | true | 启用/禁用 DataTip
+ *   default_color | enum | GRAY | 默认文本颜色预设
+ *   default_color_value | string | #FFAAAAAA | 自定义默认文本颜色
+ *   default_line_height | int | 0 | 默认行高（0=使用原版字体行高）
+ *   max_width | int | 0 | DataTip 内容宽度覆盖值（0=自然宽度）
+ *   shift_hint_color | enum | CUSTOM | Shift 提示颜色预设
+ *   shift_hint_color_value | string | #FF888888 | 自定义 Shift 提示颜色
+ *   scroll_hint_color | enum | CUSTOM | 滚动提示颜色预设
+ *   scroll_hint_color_value | string | #FF888888 | 自定义滚动提示颜色
+ * }</pre>
  *
- * <h3>配置文件示例</h3>
+ * <p>配置文件示例</p>
  * <pre>{@code
  * # DataTip 配置文件
  *

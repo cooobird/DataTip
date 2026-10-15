@@ -13,7 +13,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * 水平布局容器。
+ * 水平布局容器。<br>
  * 子元素从左到右水平排列。
  *
  * @author cooobird
@@ -22,7 +22,9 @@ import java.util.List;
 public record HBoxContent(List<TipContent> children, int gap, int padding,
                           VerticalAlign verticalAlign) implements ContainerContent {
 
-    // 创建水平布局容器
+    /**
+     * 创建水平布局容器
+     */
     public HBoxContent(List<TipContent> children, int gap, int padding, VerticalAlign verticalAlign) {
         this.children = new ArrayList<>(List.copyOf(children != null ? children : List.of()));
         this.gap = ContentBounds.spacing(gap);
@@ -30,22 +32,30 @@ public record HBoxContent(List<TipContent> children, int gap, int padding,
         this.verticalAlign = verticalAlign != null ? verticalAlign : VerticalAlign.TOP;
     }
 
-    // 创建默认水平布局
+    /**
+     * 创建默认水平布局
+     */
     public static HBoxContent create() {
         return new HBoxContent(List.of(), 0, 0, VerticalAlign.TOP);
     }
 
-    // 创建带间距的水平布局
+    /**
+     * 创建带间距的水平布局
+     */
     public static HBoxContent withGap(int gap) {
         return new HBoxContent(List.of(), gap, 0, VerticalAlign.TOP);
     }
 
-    // 创建带内边距的水平布局
+    /**
+     * 创建带内边距的水平布局
+     */
     public static HBoxContent withPadding(int padding) {
         return new HBoxContent(List.of(), 0, padding, VerticalAlign.TOP);
     }
 
-    // 创建垂直居中对齐的水平布局
+    /**
+     * 创建垂直居中对齐的水平布局
+     */
     public static HBoxContent centered() {
         return new HBoxContent(List.of(), 0, 0, VerticalAlign.CENTER);
     }
@@ -163,7 +173,9 @@ public record HBoxContent(List<TipContent> children, int gap, int padding,
         }
     }
 
-    // 垂直对齐方式
+    /**
+     * 垂直对齐方式
+     */
     public enum VerticalAlign {
         TOP, CENTER, BOTTOM
     }

@@ -13,11 +13,11 @@ import java.util.Locale;
 /**
  * CarouselContent 解析器。
  * <p>
- * 负责将 JSON 对象解析为 {@link CarouselContent} 实例。
+ * 负责将 JSON 对象解析为 {@link CarouselContent} 实例。<br>
  * 轮播容器会在多个内容帧之间自动切换。
  * </p>
  *
- * <h3>支持的 JSON 格式</h3>
+ * <p>支持的 JSON 格式</p>
  * <pre>{@code
  * // 基础轮播
  * {
@@ -39,13 +39,13 @@ import java.util.Locale;
  * }
  * }</pre>
  *
- * <h3>字段说明</h3>
- * <table border="1">
- *   <tr><th>字段</th><th>类型</th><th>默认值</th><th>说明</th></tr>
- *   <tr><td>intervalSeconds</td><td>int</td><td>3</td><td>帧切换间隔（秒）</td></tr>
- *   <tr><td>transition</td><td>String</td><td>"fade"</td><td>过渡效果（fade/slide/none）</td></tr>
- *   <tr><td>frames</td><td>Array</td><td>[]</td><td>内容帧数组</td></tr>
- * </table>
+ * <p>字段说明</p>
+ * <pre>{@code
+ *   字段 | 类型 | 默认值 | 说明
+ *   intervalSeconds | int | 3 | 帧切换间隔（秒）
+ *   transition | String | "fade" | 过渡效果（fade/slide/none）
+ *   frames | Array | [] | 内容帧数组
+ * }</pre>
  *
  * @author cooobird
  * @see CarouselContent 轮播内容类

@@ -8,11 +8,11 @@ import com.google.gson.JsonObject;
 /**
  * SpacerContent 解析器。
  * <p>
- * 负责将 JSON 对象解析为 {@link SpacerContent} 实例。
+ * 负责将 JSON 对象解析为 {@link SpacerContent} 实例。<br>
  * 间距内容用于在 tooltip 中添加空白间距。
  * </p>
  *
- * <h3>支持的 JSON 格式</h3>
+ * <p>支持的 JSON 格式</p>
  * <pre>{@code
  * // 基础间距
  * {
@@ -27,11 +27,11 @@ import com.google.gson.JsonObject;
  * }
  * }</pre>
  *
- * <h3>字段说明</h3>
- * <table border="1">
- *   <tr><th>字段</th><th>类型</th><th>默认值</th><th>说明</th></tr>
- *   <tr><td>height</td><td>int</td><td>4</td><td>间距高度（像素）</td></tr>
- * </table>
+ * <p>字段说明</p>
+ * <pre>{@code
+ *   字段 | 类型 | 默认值 | 说明
+ *   height | int | 4 | 间距高度（像素）
+ * }</pre>
  *
  * @author cooobird
  * @see SpacerContent 间距内容类

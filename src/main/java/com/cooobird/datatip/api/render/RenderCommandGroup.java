@@ -220,7 +220,7 @@ public final class RenderCommandGroup implements RenderCommandNode {
     }
 
     /**
-     * 按最终视觉 AABB 裁剪命令树，同时保留每层局部变换和透明度。
+     * 按最终视觉 AABB 裁剪命令树，同时保留每层局部变换和透明度。<br>
      * 使用显式栈处理深层 JSON，避免递归溢出。
      */
     public RenderCommandGroup visibleWithin(TipRect viewport) {

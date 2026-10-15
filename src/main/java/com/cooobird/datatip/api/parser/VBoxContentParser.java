@@ -13,11 +13,11 @@ import java.util.Locale;
 /**
  * VBoxContent 解析器。
  * <p>
- * 负责将 JSON 对象解析为 {@link VBoxContent} 实例。
+ * 负责将 JSON 对象解析为 {@link VBoxContent} 实例。<br>
  * 垂直布局容器将子元素从上到下排列。
  * </p>
  *
- * <h3>支持的 JSON 格式</h3>
+ * <p>支持的 JSON 格式</p>
  * <pre>{@code
  * // 基础垂直布局
  * {
@@ -44,14 +44,14 @@ import java.util.Locale;
  * }
  * }</pre>
  *
- * <h3>字段说明</h3>
- * <table border="1">
- *   <tr><th>字段</th><th>类型</th><th>默认值</th><th>说明</th></tr>
- *   <tr><td>gap</td><td>int</td><td>0</td><td>子元素间距（像素）</td></tr>
- *   <tr><td>padding</td><td>int</td><td>0</td><td>内边距（像素）</td></tr>
- *   <tr><td>align</td><td>String</td><td>"left"</td><td>子元素水平对齐（left/center/right）</td></tr>
- *   <tr><td>children</td><td>Array</td><td>[]</td><td>子元素数组</td></tr>
- * </table>
+ * <p>字段说明</p>
+ * <pre>{@code
+ *   字段 | 类型 | 默认值 | 说明
+ *   gap | int | 0 | 子元素间距（像素）
+ *   padding | int | 0 | 内边距（像素）
+ *   align | String | "left" | 子元素水平对齐（left/center/right）
+ *   children | Array | [] | 子元素数组
+ * }</pre>
  *
  * @author cooobird
  * @see VBoxContent 垂直布局内容类

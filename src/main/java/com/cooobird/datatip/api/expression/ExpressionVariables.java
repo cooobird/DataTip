@@ -12,7 +12,7 @@ final class ExpressionVariables {
     }
 
     /**
-     * 替换表达式中的变量。
+     * 替换表达式中的变量。<br>
      * 支持两种格式：{variable} 和 variable（不带大括号）。
      *
      * @param expression 表达式字符串

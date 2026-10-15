@@ -17,7 +17,7 @@ import java.util.ArrayDeque;
 /**
  * 执行已经完成测量、分层和裁剪计算的图片阶段命令。
  *
- * <p>轮播等动态容器也通过这里执行子布局，避免重新退回旧的直接
+ * <p>轮播等动态容器也通过这里执行子布局，避免重新退回旧的直接<br>
  * {@code TipContent.render} 路径。</p>
  */
 public final class PreparedPlanRenderer {
@@ -742,7 +742,7 @@ public final class PreparedPlanRenderer {
     }
 
     /**
-     * 用原版 Tooltip 的宿主平面覆盖当前模型留下的局部三维深度。
+     * 用原版 Tooltip 的宿主平面覆盖当前模型留下的局部三维深度。<br>
      * 该屏障只写深度，不清理共享缓冲，也不改变已经完成的颜色结果。
      */
     private static void finishDepthIsolatedCommand(

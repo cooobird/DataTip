@@ -10,11 +10,11 @@ import net.minecraft.resources.ResourceLocation;
 /**
  * AtlasContent 解析器。
  * <p>
- * 负责将 JSON 对象解析为 {@link AtlasContent} 实例。
+ * 负责将 JSON 对象解析为 {@link AtlasContent} 实例。<br>
  * 支持三种方式指定纹理：直接路径、方块 ID、物品 ID。
  * </p>
  *
- * <h3>支持的 JSON 格式</h3>
+ * <p>支持的 JSON 格式</p>
  * <pre>{@code
  * // 直接指定纹理路径
  * {
@@ -47,19 +47,19 @@ import net.minecraft.resources.ResourceLocation;
  * }
  * }</pre>
  *
- * <h3>字段说明</h3>
- * <table border="1">
- *   <tr><th>字段</th><th>类型</th><th>默认值</th><th>说明</th></tr>
- *   <tr><td>texture</td><td>String</td><td>-</td><td>完整纹理路径</td></tr>
- *   <tr><td>block</td><td>String</td><td>-</td><td>方块 ID</td></tr>
- *   <tr><td>item</td><td>String</td><td>-</td><td>物品 ID</td></tr>
- *   <tr><td>size</td><td>int</td><td>16</td><td>渲染大小</td></tr>
- *   <tr><td>width</td><td>int</td><td>16</td><td>渲染宽度</td></tr>
- *   <tr><td>height</td><td>int</td><td>16</td><td>渲染高度</td></tr>
- *   <tr><td>label</td><td>String</td><td>null</td><td>标签文本</td></tr>
- *   <tr><td>offsetX</td><td>int</td><td>0</td><td>X 轴偏移量</td></tr>
- *   <tr><td>offsetY</td><td>int</td><td>0</td><td>Y 轴偏移量</td></tr>
- * </table>
+ * <p>字段说明</p>
+ * <pre>{@code
+ *   字段 | 类型 | 默认值 | 说明
+ *   texture | String | - | 完整纹理路径
+ *   block | String | - | 方块 ID
+ *   item | String | - | 物品 ID
+ *   size | int | 16 | 渲染大小
+ *   width | int | 16 | 渲染宽度
+ *   height | int | 16 | 渲染高度
+ *   label | String | null | 标签文本
+ *   offsetX | int | 0 | X 轴偏移量
+ *   offsetY | int | 0 | Y 轴偏移量
+ * }</pre>
  *
  * @author cooobird
  * @see AtlasContent 纹理内容类

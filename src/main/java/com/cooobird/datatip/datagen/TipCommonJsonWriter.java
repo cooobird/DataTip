@@ -27,8 +27,8 @@ final class TipCommonJsonWriter {
         json.addProperty("color", DatagenJsonUtils.colorToHex(color));
         if (thickness != 1) json.addProperty("thickness", thickness);
         if (width > 0) json.addProperty("width", width);
-        if (marginTop > 0) json.addProperty("marginTop", marginTop);
-        if (marginBottom > 0) json.addProperty("marginBottom", marginBottom);
+        if (marginTop != 2) json.addProperty("marginTop", marginTop);
+        if (marginBottom != 2) json.addProperty("marginBottom", marginBottom);
         if (style != DividerContent.DividerStyle.SOLID)
             json.addProperty("style", style.toString().toLowerCase(Locale.ROOT));
         if (widthMode != DividerContent.WidthMode.FILL)
@@ -38,9 +38,10 @@ final class TipCommonJsonWriter {
     static void writeItem(JsonObject json, ItemContent item) {
         json.addProperty("type", "item");
         json.addProperty("item", item.getStack().getItem().toString());
+        if (item.getStack().getCount() != 1) json.addProperty("count", item.getStack().getCount());
         if (item.size() != 16) json.addProperty("size", item.size());
-        if (item.showCount()) json.addProperty("showCount", true);
-        if (item.showDurability()) json.addProperty("showDurability", true);
+        json.addProperty("showCount", item.showCount());
+        json.addProperty("showDurability", item.showDurability());
         if (item.showLabel()) json.addProperty("showLabel", true);
         LocalizedTextJsonWriter.add(json, "label", item.label());
         if (item.labelColor() != null)
@@ -58,17 +59,21 @@ final class TipCommonJsonWriter {
             json.addProperty("colorFg", DatagenJsonUtils.colorToHex(progress.colorFg()));
         if (progress.colorBg() != 0xFF333333)
             json.addProperty("colorBg", DatagenJsonUtils.colorToHex(progress.colorBg()));
+        if (progress.colorFgLight() != null)
+            json.addProperty("colorFgLight", DatagenJsonUtils.colorToHex(progress.colorFgLight()));
+        if (progress.colorBgDark() != null)
+            json.addProperty("colorBgDark", DatagenJsonUtils.colorToHex(progress.colorBgDark()));
         if (progress.style() != ProgressContent.ProgressStyle.GRADIENT)
             json.addProperty("style", progress.style().toString().toLowerCase(Locale.ROOT));
         if (progress.showLabel()) {
             json.addProperty("showLabel", true);
             LocalizedTextJsonWriter.add(json, "label", progress.customLabel());
-            if (progress.labelAlign() != ProgressContent.LabelAlign.LEFT)
-                json.addProperty("labelAlign", progress.labelAlign().toString().toLowerCase(Locale.ROOT));
         }
+        if (progress.labelAlign() != ProgressContent.LabelAlign.LEFT)
+            json.addProperty("labelAlign", progress.labelAlign().toString().toLowerCase(Locale.ROOT));
+        json.addProperty("animSpeed", progress.animSpeed());
         if (progress.animated()) {
             json.addProperty("animated", true);
-            json.addProperty("animSpeed", progress.animSpeed());
         }
     }
 
@@ -107,7 +112,9 @@ final class TipCommonJsonWriter {
         json.addProperty("charsPerSecond", typewriter.getCharsPerSecond());
         json.addProperty("pauseSeconds", typewriter.getPauseSeconds());
         json.addProperty("loop", typewriter.isLoop());
-        if (typewriter.color() != 0xFFFFFF)
+        if (typewriter.colorExpression() != null)
+            json.addProperty("color", typewriter.colorExpression());
+        else if (typewriter.color() != 0xFFFFFF)
             json.addProperty("color", DatagenJsonUtils.colorToHex(typewriter.color()));
         if (typewriter.font() != null) json.addProperty("font", typewriter.font().toString());
         if (typewriter.bold()) json.addProperty("bold", true);

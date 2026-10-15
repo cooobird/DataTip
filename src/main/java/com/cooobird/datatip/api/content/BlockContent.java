@@ -19,7 +19,7 @@ import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * 方块渲染内容类。
+ * 方块渲染内容类。<br>
  * 在 tooltip 中渲染 3D 方块模型。
  */
 public class BlockContent
@@ -50,7 +50,9 @@ public class BlockContent
         this.renderStack = new ItemStack(block);
     }
 
-    // Getter 方法
+    /**
+     * Getter 方法
+     */
     public Block block() {
         return block;
     }
@@ -80,22 +82,30 @@ public class BlockContent
         return offsetY;
     }
 
-    // 创建方块内容
+    /**
+     * 创建方块内容
+     */
     public static BlockContent of(Block block) {
         return new BlockContent(block, 32, 0.5f, true, null, 0, 0);
     }
 
-    // 创建带标签的方块内容
+    /**
+     * 创建带标签的方块内容
+     */
     public static BlockContent withLabel(Block block, Component label) {
         return new BlockContent(block, 32, 0.5f, true, label, 0, 0);
     }
 
-    // 创建指定尺寸的方块内容
+    /**
+     * 创建指定尺寸的方块内容
+     */
     public static BlockContent of(Block block, int size) {
         return new BlockContent(block, size, 0.5f, true, null, 0, 0);
     }
 
-    // 创建带偏移的方块内容
+    /**
+     * 创建带偏移的方块内容
+     */
     public static BlockContent withOffset(Block block, int size, int offsetX, int offsetY) {
         return new BlockContent(block, size, 0.5f, true, null, offsetX, offsetY);
     }

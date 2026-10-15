@@ -8,7 +8,7 @@ import com.google.gson.JsonObject;
 /**
  * TextContent 解析器。
  * <p>
- * 负责将 JSON 对象解析为 {@link TextContent} 实例。
+ * 负责将 JSON 对象解析为 {@link TextContent} 实例。<br>
  * 支持多种文本格式和样式选项。
  * </p>
  *

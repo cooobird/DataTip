@@ -19,13 +19,13 @@ import java.util.Map;
 /**
  * 文本内容类。
  * <p>
- * 这是 DataTip 中最基础也是最常用的内容类型，用于在 tooltip 中显示文本。
+ * 这是 DataTip 中最基础也是最常用的内容类型，用于在 tooltip 中显示文本。<br>
  * 支持多种文本来源和丰富的样式控制。
  * </p>
  *
- * <h3>继承自 BaseTextContent</h3>
+ * <p>继承自 BaseTextContent</p>
  * <p>
- * 通用样式属性（color、font、bold、italic、underlined、strikethrough、align、shadow、lineHeight、shift）
+ * 通用样式属性（color、font、bold、italic、underlined、strikethrough、align、shadow、lineHeight、shift）<br>
  * 和方法（resolveColor、buildStyle、parseColorString）由基类提供。
  * </p>
  *
@@ -42,7 +42,9 @@ public class TextContent extends BaseTextContent implements PreparedContent {
     private final @Nullable Map<String, LangStyle> langStyledText;
     private final int maxWidth;
 
-    // 构造函数
+    /**
+     * 构造函数
+     */
     public TextContent(@Nullable String text, @Nullable Component component, @Nullable FormattedText formattedText,
                        @Nullable Map<String, String> langText, @Nullable Map<String, LangStyle> langStyledText,
                        @Nullable ResourceLocation font, int color, @Nullable String colorExpression,

@@ -15,14 +15,14 @@ import org.jetbrains.annotations.Nullable;
  * 纹理渲染内容类。
  * <p>
  * 用于在 tooltip 中渲染纹理图片。支持三种方式指定纹理：
- * <ul>
- *   <li><b>直接路径</b>：指定完整的纹理路径</li>
- *   <li><b>方块 ID</b>：自动转换为方块纹理路径</li>
- *   <li><b>物品 ID</b>：自动转换为物品纹理路径</li>
- * </ul>
+ *
+ *   - 直接路径：指定完整的纹理路径<br>
+ *   - 方块 ID：自动转换为方块纹理路径<br>
+ *   - 物品 ID：自动转换为物品纹理路径<br>
+ *
  * </p>
  *
- * <h3>JSON 示例</h3>
+ * <p>JSON 示例</p>
  * <pre>{@code
  * // 直接指定纹理路径
  * {"type": "atlas", "texture": "minecraft:textures/block/stone.png", "width": 32, "height": 32}
@@ -94,34 +94,46 @@ public record AtlasContent(
         return labelText != null ? labelText.resolve() : null;
     }
 
-    // 创建纹理内容
+    /**
+     * 创建纹理内容
+     */
     public static AtlasContent of(ResourceLocation texturePath, int width, int height) {
         return new AtlasContent(texturePath, width, height, (LocalizedText) null, 0, 0);
     }
 
-    // 创建正方形纹理内容
+    /**
+     * 创建正方形纹理内容
+     */
     public static AtlasContent of(ResourceLocation texturePath, int size) {
         return new AtlasContent(texturePath, size, size, (LocalizedText) null, 0, 0);
     }
 
-    // 创建带标签的纹理内容
+    /**
+     * 创建带标签的纹理内容
+     */
     public static AtlasContent withLabel(ResourceLocation texturePath, int width, int height, String label) {
         return new AtlasContent(texturePath, width, height, label, 0, 0);
     }
 
-    // 从方块 ID 创建，自动转换路径
+    /**
+     * 从方块 ID 创建，自动转换路径
+     */
     public static AtlasContent fromBlock(ResourceLocation blockId, int size) {
         String path = blockId.getNamespace() + ":textures/block/" + blockId.getPath() + ".png";
         return new AtlasContent(ResourceLocation.parse(path), size, size, (LocalizedText) null, 0, 0);
     }
 
-    // 从物品 ID 创建，自动转换路径
+    /**
+     * 从物品 ID 创建，自动转换路径
+     */
     public static AtlasContent fromItem(ResourceLocation itemId, int size) {
         String path = itemId.getNamespace() + ":textures/item/" + itemId.getPath() + ".png";
         return new AtlasContent(ResourceLocation.parse(path), size, size, (LocalizedText) null, 0, 0);
     }
 
-    // 创建带偏移的纹理内容
+    /**
+     * 创建带偏移的纹理内容
+     */
     public static AtlasContent withOffset(ResourceLocation texturePath, int size, int offsetX, int offsetY) {
         return new AtlasContent(texturePath, size, size, (LocalizedText) null, offsetX, offsetY);
     }
