@@ -15,8 +15,8 @@ import net.minecraftforge.fml.common.Mod;
 public class DatatipDataGen {
     @SubscribeEvent
     static void gatherData(GatherDataEvent event) {
-        var generator = event.getGenerator();
-        var output = generator.getPackOutput();
-        generator.addProvider(event.includeClient(), new ExampleTooltipProvider(output));
+//        var generator = event.getGenerator();
+//        var output = generator.getPackOutput();
+//        generator.addProvider(event.includeClient(), new ExampleTooltipProvider(output));
     }
 }
