@@ -67,8 +67,6 @@ repositories {
 }
 
 dependencies {
-    runtimeOnly "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
-    runtimeOnly "curse.maven:staticlogistics-1555698:8162453"
 }
 
 tasks.named('processResources', ProcessResources) {
