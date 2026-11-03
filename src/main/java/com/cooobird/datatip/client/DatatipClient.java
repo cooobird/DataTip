@@ -7,14 +7,18 @@ import com.cooobird.datatip.event.TipRenderEventHandler;
 import com.cooobird.datatip.internal.loader.TipContentLoader;
 import com.cooobird.datatip.internal.util.SchemaExporter;
 import com.mojang.logging.LogUtils;
+import net.minecraft.commands.Commands;
+import net.minecraft.network.chat.Component;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.client.event.RegisterClientCommandsEvent;
 import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
 import net.neoforged.neoforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
+import net.neoforged.neoforge.common.NeoForge;
 import org.slf4j.Logger;
 
 import java.util.concurrent.CompletableFuture;
@@ -25,7 +29,7 @@ public class DatatipClient {
     private static final TipContentLoader CONTENT_LOADER = new TipContentLoader();
 
     public DatatipClient(IEventBus modEventBus, ModContainer modContainer) {
-        SchemaExporter.exportDefaultSchema();
+        NeoForge.EVENT_BUS.addListener(DatatipClient::registerClientCommands);
         modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
         modEventBus.addListener(TipRenderEventHandler::registerKeyMapping);
         modEventBus.addListener(
@@ -33,6 +37,20 @@ public class DatatipClient {
             DatatipClient::registerTooltipComponents
         );
         modEventBus.addListener(RegisterClientReloadListenersEvent.class, this::registerReloadListeners);
+    }
+
+    private static void registerClientCommands(RegisterClientCommandsEvent event) {
+        event.getDispatcher().register(Commands.literal("datatip")
+            .then(Commands.literal("export_schema").executes(context -> {
+                var output = SchemaExporter.exportDefaultSchema();
+                if (output == null) {
+                    context.getSource().sendFailure(Component.translatable("command.datatip.export_schema.failed"));
+                    return 0;
+                }
+                context.getSource().sendSuccess(
+                    () -> Component.translatable("command.datatip.export_schema.success", output.toString()), false);
+                return 1;
+            })));
     }
 
     private static void registerTooltipComponents(

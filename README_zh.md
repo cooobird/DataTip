@@ -533,7 +533,8 @@ Shift 折叠内容也遵循此规则。
 
 ## JSON Schema
 
-DataTip 启动时会导出 `.minecraft/datatip.schema.json`。建议在编辑器中将它映射到：
+在游戏中执行客户端指令 `/datatip export_schema`，即可将 `datatip.schema.json` 导出到游戏目录（通常为 `.minecraft/`
+），启动时不再自动导出。建议在编辑器中将它映射到：
 
 ```text
 assets/*/datatip/**/*.json

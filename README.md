@@ -558,7 +558,8 @@ content has `prepend: true`; otherwise it is appended. This also applies to nest
 
 ## JSON Schema
 
-DataTip exports `.minecraft/datatip.schema.json` on startup. Map it in your editor to:
+Run the client command `/datatip export_schema` in game to export `datatip.schema.json` to the game directory (usually
+`.minecraft/`). It is no longer exported automatically on startup. Map it in your editor to:
 
 ```text
 assets/*/datatip/**/*.json

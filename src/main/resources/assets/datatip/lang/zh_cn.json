@@ -1,4 +1,6 @@
 {
+    "command.datatip.export_schema.success": "已将 DataTip JSON Schema 导出到 %s",
+    "command.datatip.export_schema.failed": "DataTip JSON Schema 导出失败，请查看日志。",
     "tooltip.datatip.hold_shift": "按住%s查看详细信息",
     "tooltip.datatip.scroll_hint": "按住%s并滚动鼠标滚轮查看更多内容",
     "key.categories.datatip": "DataTip",
