@@ -3,7 +3,6 @@ package com.cooobird.datatip;
 import com.cooobird.datatip.api.TipContentRegistry;
 import com.cooobird.datatip.api.parser.*;
 import com.cooobird.datatip.config.DatatipConfig;
-import com.cooobird.datatip.internal.util.SchemaExporter;
 import com.mojang.logging.LogUtils;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -19,7 +18,6 @@ public class Datatip {
     public Datatip() {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, DatatipConfig.SPEC);
         registerContentParsers();
-        SchemaExporter.exportDefaultSchema();
 
         LOGGER.info("DataTip loaded");
     }

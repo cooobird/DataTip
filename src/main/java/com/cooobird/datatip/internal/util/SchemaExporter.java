@@ -22,23 +22,26 @@ public final class SchemaExporter {
     private SchemaExporter() {
     }
 
-    public static void exportDefaultSchema() {
-        Path output = FMLPaths.GAMEDIR.get().resolve(SCHEMA_FILE_NAME);
+    @org.jetbrains.annotations.Nullable
+    public static Path exportDefaultSchema() {
+        Path output = FMLPaths.GAMEDIR.get().resolve(SCHEMA_FILE_NAME).toAbsolutePath();
         try (InputStream stream = Datatip.class.getResourceAsStream(SCHEMA_RESOURCE)) {
             if (stream == null) {
                 LOGGER.warn("DataTip schema resource was not found in the mod jar");
-                return;
+                return null;
             }
 
             byte[] schemaBytes = stream.readAllBytes();
             if (Files.exists(output) && Arrays.equals(Files.readAllBytes(output), schemaBytes)) {
-                return;
+                return output;
             }
 
             Files.write(output, schemaBytes);
             LOGGER.info("Exported DataTip JSON schema to {}", output.toAbsolutePath());
+            return output;
         } catch (IOException e) {
             LOGGER.warn("Failed to export DataTip JSON schema to {}", output.toAbsolutePath(), e);
+            return null;
         }
     }
 }
